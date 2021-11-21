@@ -10,19 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "phone.hpp"
 
 /*PhoneBook must be represented as an instance of a class(Contact)
  * must contain an array of contacts*/
-
-class	Contact{
-	public:
-		std::string	Name;
-		std::string Surname;
-		std::string Nickname;
-		std::string	Number;
-		std::string	Secret;
-};
 
 int main(void)
 {
