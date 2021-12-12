@@ -1,3 +1,11 @@
+/**
+ * "Any function implemented in a header
+ *  (except in the case of templates), and anyunprotected header means 0 to the exercise."
+ * 
+ * "Each of your includes must be able to be included 
+ * independently from others.Includes must contain every other includes they are depending on."
+*/
+
 #ifndef PHONE_HPP
 #define PHONE_HPP
 
@@ -20,18 +28,7 @@ class	Contact{
 	public:
 		Contact(void);
 		~Contact(void);
-		void	add(void) {
-			cout << "Name:" <<endl;
-			cin >> Name;
-			cout << "Surname:" <<endl;
-			cin >> Surname;
-			cout << "Nickname:" <<endl;
-			cin >> Nickname;
-			cout << "Number:" <<endl;
-			cin >> Number;
-			cout << "Secret:" <<endl;
-			cin >> Secret;
-		};
+		void	add(void);
 };
 
 #endif

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "phone.hpp"
+#include "Contact.hpp"
 
 /*PhoneBook must be represented as an instance of a class(Contact)
  * must contain an array of contacts*/
@@ -22,16 +22,20 @@ int main(void)
 	static int	i;
 
 	std::cout << "ADD, SEARCH or EXIT" << std::endl;
-	while (in != "EXIT" && in != "SEARCH" && in != "ADD")
+	while (in != "EXIT")
+	{
 		std::cin >> in;
-	if (in == "EXIT")
-		return (0);
-	else if (in == "ADD")
-	{
-		PhoneBook[i].add();
-	}
-	else if (in == "SEARCH")
-	{
+		if (in == "ADD")
+		{
+			PhoneBook[i++].add();
+			if (i == 8)
+				i = 0;
+		}
+		else if (in == "SEARCH")
+		{
 
+		}
 	}
+	// call destructor ?
+	return (0);
 }

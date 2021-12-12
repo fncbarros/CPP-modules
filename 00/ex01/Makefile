@@ -17,8 +17,8 @@ NAME = phonebook
 
 all: ${NAME}
 
-${NAME}: ${OBJDIR}
-	${CC} ${CFLAGS} ${OBJDIR}/${OBJ} -o ${NAME}
+${NAME}: ${OBJDIR} ${OBJ}
+	${CC} ${CFLAGS} ${OBJDIR}/*.o -o ${NAME}
 
 ${OBJDIR}: ${OBJ}
 	mkdir ${OBJDIR}
