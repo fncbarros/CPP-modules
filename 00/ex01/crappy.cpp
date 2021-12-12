@@ -19,18 +19,16 @@ int main(void)
 {
 	std::string	in;
 	Contact	PhoneBook[8];
+	static int	i;
 
 	std::cout << "ADD, SEARCH or EXIT" << std::endl;
 	while (in != "EXIT" && in != "SEARCH" && in != "ADD")
 		std::cin >> in;
 	if (in == "EXIT")
-	{
-		std::cout << "Phonebook destroyed" << std::endl;
 		return (0);
-	}
 	else if (in == "ADD")
 	{
-		// call constructor ??
+		PhoneBook[i].add();
 	}
 	else if (in == "SEARCH")
 	{
