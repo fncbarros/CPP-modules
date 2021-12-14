@@ -29,6 +29,7 @@ class	Contact{
 		Contact(void);
 		~Contact(void);
 		void	add(void);
+		void	print_list(void);
 };
 
 #endif

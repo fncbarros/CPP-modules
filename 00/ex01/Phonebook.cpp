@@ -21,10 +21,10 @@ int main(void)
 	Contact	PhoneBook[8];
 	static int	i;
 
-	std::cout << "ADD, SEARCH or EXIT" << std::endl;
+	cout << "ADD, SEARCH or EXIT" << std::endl;
 	while (in != "EXIT")
 	{
-		std::cin >> in;
+		cin >> in;
 		if (in == "ADD")
 		{
 			PhoneBook[i++].add();
@@ -33,7 +33,10 @@ int main(void)
 		}
 		else if (in == "SEARCH")
 		{
+			for (int j = 0; j < 8; j++){
+				PhoneBook[j].print_list();
 
+			}
 		}
 	}
 	// call destructor ?

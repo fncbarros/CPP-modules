@@ -20,3 +20,11 @@ void	Contact::add(void) {
 	cout << "Secret:" <<endl;
 	cin >> Secret;
 };
+
+void	Contact::print_list(void){
+	cout << "Name: " << this->Name << endl;
+	cout << "Surname: " << this->Surname << endl;
+	cout << "Nickname: " << this->Nickname << endl;
+	cout << "Number: " << this->Number << endl;
+	cout << "Secret: " << this->Secret << endl;
+}
