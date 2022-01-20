@@ -1,8 +1,8 @@
 /**
  * "Any function implemented in a header
  *  (except in the case of templates), and anyunprotected header means 0 to the exercise."
- * 
- * "Each of your includes must be able to be included 
+ *
+ * "Each of your includes must be able to be included
  * independently from others.Includes must contain every other includes they are depending on."
 */
 
@@ -17,18 +17,22 @@ using std::string;
 using std::cin;
 using std::cout;
 using std::endl;
+using std::setw;
+using std::setfill;
 
 class	Contact{
 	private:
+		int		index; // ??
 		string	Name;
-		string Surname;
-		string Nickname;
+		string	Surname;
+		string	Nickname;
 		string	Number;
 		string	Secret;
 	public:
 		Contact(void);
 		~Contact(void);
 		void	add(void);
+		void	options(int index);
 };
 
 #endif

@@ -20,3 +20,17 @@ void	Contact::add(void) {
 	cout << "Secret:" <<endl;
 	cin >> Secret;
 };
+
+
+/* Any output longer than the columns’ width is truncated and the
+last displayable character is replaced by a dot (’.’).*/
+void	Contact::options(int index) {
+	cout << setfill(' ') << setw(10);
+	cout << index + 1 << " | " ;
+	cout << setfill(' ') << setw(10);
+	cout << this->Name << " | " ;
+	cout << setfill(' ') << setw(10);
+	cout << this->Surname << " | " ;
+	cout << setfill(' ') << setw(10);
+	cout << Nickname << " | " << endl;
+};

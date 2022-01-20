@@ -17,23 +17,27 @@
 
 int main(void)
 {
-	std::string	in;
+	std::string	input;
 	Contact	PhoneBook[8];
 	static int	i;
 
 	std::cout << "ADD, SEARCH or EXIT" << std::endl;
-	while (in != "EXIT")
+	while (input != "EXIT")
 	{
-		std::cin >> in;
-		if (in == "ADD")
+		getline(std::cin, input); // gets full line from stdin
+		//std::cin >> in;
+		if (input == "ADD")
 		{
 			PhoneBook[i++].add();
 			if (i == 8)
 				i = 0;
 		}
-		else if (in == "SEARCH")
+		else if (input == "SEARCH")
 		{
-
+			for (int j = 0; j < 8; j++)
+			{
+				PhoneBook[j].options(j);
+			}
 		}
 	}
 	// call destructor ?
