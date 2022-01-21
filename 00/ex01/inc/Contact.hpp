@@ -22,7 +22,8 @@ using std::setfill;
 
 class	Contact{
 	private:
-		int		index; // ??
+//		int		index; // ??
+		bool	exists;
 		string	Name;
 		string	Surname;
 		string	Nickname;
@@ -33,6 +34,7 @@ class	Contact{
 		~Contact(void);
 		void	add(void);
 		void	options(int index);
+		bool	show(void);
 };
 
 #endif

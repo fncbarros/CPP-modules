@@ -2,6 +2,7 @@
 
 Contact::Contact(void) {
 	// cout << "Constructor called." << endl;
+	exists = 0;
 }
 
 Contact::~Contact(void) {
@@ -9,22 +10,30 @@ Contact::~Contact(void) {
 }
 
 void	Contact::add(void) {
+	exists = 1;
 	cout << "Name:" <<endl;
-	cin >> Name;
+	getline(cin, Name);
+//	cin >> Name;
 	cout << "Surname:" <<endl;
-	cin >> Surname;
+	getline(cin, Surname);
+//	cin >> Surname;
 	cout << "Nickname:" <<endl;
-	cin >> Nickname;
+	getline(cin, Nickname);
+//	cin >> Nickname;
 	cout << "Number:" <<endl;
-	cin >> Number;
+	getline(cin, Number);
+//	cin >> Number;
 	cout << "Secret:" <<endl;
-	cin >> Secret;
+	getline(cin, Secret);
+//	cin >> Secret;
 };
 
 
 /* Any output longer than the columns’ width is truncated and the
 last displayable character is replaced by a dot (’.’).*/
 void	Contact::options(int index) {
+	if (!exists)
+		return ;
 	cout << setfill(' ') << setw(10);
 	cout << index + 1 << " | " ;
 	cout << setfill(' ') << setw(10);
@@ -34,3 +43,14 @@ void	Contact::options(int index) {
 	cout << setfill(' ') << setw(10);
 	cout << Nickname << " | " << endl;
 };
+
+bool	Contact::show(void) {
+	if (!exists)
+		return (false);
+	cout << "Name: " << Name << endl;
+	cout << "Surname: " << Surname << endl;
+	cout << "Nickname: " << Nickname << endl;
+	cout << "Number: " << Number << endl;
+	cout << "Secret: " << Secret << endl;
+	return (true);
+}

@@ -17,14 +17,14 @@
 
 int main(void)
 {
-	std::string	input;
+	string	input;
 	Contact	PhoneBook[8];
 	static int	i;
 
-	std::cout << "ADD, SEARCH or EXIT" << std::endl;
+	cout << "ADD, SEARCH or EXIT" << endl;
 	while (input != "EXIT")
 	{
-		getline(std::cin, input); // gets full line from stdin
+		getline(cin, input); // gets full line from stdin
 		//std::cin >> in;
 		if (input == "ADD")
 		{
@@ -35,8 +35,20 @@ int main(void)
 		else if (input == "SEARCH")
 		{
 			for (int j = 0; j < 8; j++)
-			{
 				PhoneBook[j].options(j);
+			// prompt for index
+			// display contact info (If the input makes no
+			// sense, define a relevant behavior.)
+			i = 0;
+			while (!i)
+			{
+				cout << "Please specify contact index: ";
+				cin >> i;
+				if (i > 8 || !PhoneBook[i - 1].show())
+				{
+					cout << endl << "Contact unavailable" << endl;
+					i = 0;
+				}
 			}
 		}
 	}
