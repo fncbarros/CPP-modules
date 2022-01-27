@@ -12,6 +12,7 @@
 # include <iostream>
 # include <string>
 # include <iomanip>
+# include <sstream>
 
 using std::string;
 using std::cin;
@@ -19,6 +20,7 @@ using std::cout;
 using std::endl;
 using std::setw;
 using std::setfill;
+using std::stringstream;
 
 class	Contact{
 	private:
@@ -34,7 +36,7 @@ class	Contact{
 		~Contact(void);
 		void	add(void);
 		bool	options(int index);
-		bool	show(void);
+		void	show(void);
 };
 
 #endif

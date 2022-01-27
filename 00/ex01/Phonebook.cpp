@@ -19,29 +19,35 @@ int main(void)
 {
 	string	input;
 	Contact	PhoneBook[8];
-	static int	i, j;
+	static int	i, j, k;
+//	stringstream ss;
 
 	cout << "ADD, SEARCH or EXIT" << endl;
-	while (input != "EXIT")
-	{
+	while (input != "EXIT") {
 		getline(cin, input); // gets full line from stdin
 		//std::cin >> in;
-		if (input == "ADD")
-		{
+		if (input == "ADD") {
 			PhoneBook[i++].add();
 			if (i == 8)
 				i = 0;
 		}
-		else if (input == "SEARCH")
-		{
+		else if (input == "SEARCH") {
 			j = 0;
 			while (PhoneBook[j].options(j))	{
 				j++;
 			}
+			if (!j) {
+				cout << "No Contacts available." << endl;
+				continue ;
+			}
 			cout << "Please specify contact index: ";
-			cin >> i;
-			if (i > j || i < 1 || !PhoneBook[i - 1].show())
-				cout << endl << "Contact unavailable" << endl;
+			getline(cin, input);
+			stringstream ss(input);
+			ss >> k;
+			if (k < 1 || k > j)
+				cout << "Contact does not exist." << endl;
+			else
+				PhoneBook[k - 1].show();
 		}
 	}
 	return (0);

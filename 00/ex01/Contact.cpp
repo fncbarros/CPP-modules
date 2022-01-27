@@ -35,23 +35,24 @@ bool	Contact::options(int index) {
 	if (!exists)
 		return (false);
 	cout << setfill(' ') << setw(10);
-	cout << index + 1 << " | " ;
+	cout << index + 1 << "|" ;
 	cout << setfill(' ') << setw(10);
-	cout << Name << " | " ;
+	Name.length() > 10 ? cout << Name.substr(0, 9) + "." << "|" :
+	cout << Name << "|" ;
 	cout << setfill(' ') << setw(10);
-	cout << Surname << " | " ;
+	Surname.length() > 10 ? cout << Surname.substr(0, 9) + "." << "|" :
+	cout << Surname << "|" ;
 	cout << setfill(' ') << setw(10);
-	cout << Nickname << " | " << endl;
+	Nickname.length() > 10 ? cout << Nickname.substr(0, 9) + "." << "|" :
+	cout << Nickname << "|";
+	cout << endl;
 	return (true);
 };
 
-bool	Contact::show(void) {
-	if (!exists)
-		return (false);
+void	Contact::show(void) {
 	cout << "Name: " << Name << endl;
 	cout << "Surname: " << Surname << endl;
 	cout << "Nickname: " << Nickname << endl;
 	cout << "Number: " << Number << endl;
 	cout << "Secret: " << Secret << endl;
-	return (true);
 }
