@@ -1,18 +1,18 @@
 SRC = ${wildcard *.cpp}
 
-OBJ = ${SRC:%.cpp=%.o}
+OBJ = ${SRC:%.cpp=obj/%.o}
 
 CC = g++
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
-OBJDIR = obj
+OBJDIR = obj/
 
 INC = -I inc/
 
 NAME = phonebook
 
-%.o: %.cpp
+${OBJDIR}%.o: %.cpp
 	${CC} ${CFLAGS} ${INC} -c $< -o $@
 
 all: ${NAME}
@@ -20,9 +20,8 @@ all: ${NAME}
 ${NAME}: ${OBJDIR} ${OBJ}
 	${CC} ${CFLAGS} ${OBJDIR}/*.o -o ${NAME}
 
-${OBJDIR}: ${OBJ}
+${OBJDIR}:
 	mkdir ${OBJDIR}
-	mv ${OBJ} ${OBJDIR}
 
 clean:
 	@rm -rf ${OBJDIR}

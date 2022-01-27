@@ -31,17 +31,18 @@ void	Contact::add(void) {
 
 /* Any output longer than the columns’ width is truncated and the
 last displayable character is replaced by a dot (’.’).*/
-void	Contact::options(int index) {
+bool	Contact::options(int index) {
 	if (!exists)
-		return ;
+		return (false);
 	cout << setfill(' ') << setw(10);
 	cout << index + 1 << " | " ;
 	cout << setfill(' ') << setw(10);
-	cout << this->Name << " | " ;
+	cout << Name << " | " ;
 	cout << setfill(' ') << setw(10);
-	cout << this->Surname << " | " ;
+	cout << Surname << " | " ;
 	cout << setfill(' ') << setw(10);
 	cout << Nickname << " | " << endl;
+	return (true);
 };
 
 bool	Contact::show(void) {

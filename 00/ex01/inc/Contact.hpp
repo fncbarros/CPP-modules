@@ -33,7 +33,7 @@ class	Contact{
 		Contact(void);
 		~Contact(void);
 		void	add(void);
-		void	options(int index);
+		bool	options(int index);
 		bool	show(void);
 };
 

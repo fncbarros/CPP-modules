@@ -19,7 +19,7 @@ int main(void)
 {
 	string	input;
 	Contact	PhoneBook[8];
-	static int	i;
+	static int	i, j;
 
 	cout << "ADD, SEARCH or EXIT" << endl;
 	while (input != "EXIT")
@@ -34,24 +34,16 @@ int main(void)
 		}
 		else if (input == "SEARCH")
 		{
-			for (int j = 0; j < 8; j++)
-				PhoneBook[j].options(j);
-			// prompt for index
-			// display contact info (If the input makes no
-			// sense, define a relevant behavior.)
-			i = 0;
-			while (!i)
-			{
-				cout << "Please specify contact index: ";
-				cin >> i;
-				if (i > 8 || !PhoneBook[i - 1].show())
-				{
-					cout << endl << "Contact unavailable" << endl;
-					i = 0;
-				}
+			j = 0;
+			while (PhoneBook[j].options(j))	{
+				j++;
 			}
+			cout << "Please specify contact index: ";
+			cin >> i;
+			if (i > j || i < 1 || !PhoneBook[i - 1].show())
+				cout << endl << "Contact unavailable" << endl;
 		}
 	}
-	// call destructor ?
 	return (0);
 }
+
