@@ -12,6 +12,7 @@
 
 #include "Account.hpp"
 # include <iostream>
+# include <iomanip>
 # include <ctime>
 
 /*Constructors*/
@@ -51,9 +52,13 @@ int	Account::getNbWithdrawals( void ) {
 } ;
 
 void	Account::displayAccountsInfos( void ) {
+	/*[19920104_091532] accounts:8;total:20049;deposits:0;withdrawals:0*/
 	_displayTimestamp();
-	std::cout << " index:" << _accountIndex; // must be relative to specific object (class instance ??)
-	std::cout <<
+	std::cout << " accounts:" << getNbAccounts(); // must be relative to specific object (class instance ??)
+	std::cout << ";total:" << getTotalAmount();
+//	std::cout << _totalNbWithdrawals;
+	std::cout << ";deposits:" << getNbDeposits();
+	std::cout << ";withdrawals:" << getNbWithdrawals() << std::endl;
 } ;
 
 void	Account::makeDeposit( int deposit ) {
@@ -79,9 +84,17 @@ void	Account::displayStatus ( void ) const {
 	_displayTimestamp();
 	std::cout << " index:" << _accountIndex;
 	std::cout << ";amount:" << _amount;
-	std::cout << ";"
+	std::cout << ";";
 } ;
 
 void	Account::_displayTimestamp( void ) {
-	
+	time_t	now = std::time(0);
+	struct tm	*ps_time = localtime(&now);
+	ps_time = std::gmtime(&now);
+	std::cout << "[" << 1900 + ps_time->tm_year; // year since 1900
+	std::cout << std::setfill('0') << std::setw(2); // padding with '0' and setting width
+	std::cout << 1 + ps_time->tm_mon;
+	std::cout << std::setfill('0') << std::setw(2);
+	std::cout << ps_time->tm_mday << "_";
+	std::cout << ps_time->tm_hour << ps_time->tm_min << ps_time->tm_sec << "] ";
 } ;
