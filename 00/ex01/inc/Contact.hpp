@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbarros   <fbarros@student.42lisboa.c      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 12:51:28 by fbarros           #+#    #+#             */
+/*   Updated: 2022/01/27 20:56:43 by fbarros          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /**
  * "Any function implemented in a header
  *  (except in the case of templates), and anyunprotected header means 0 to the exercise."
