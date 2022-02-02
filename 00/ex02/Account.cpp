@@ -17,7 +17,7 @@
 
 /*static Members*/
 
-int	Account::_nbAccounts = 0; // need initialize?
+int	Account::_nbAccounts = 0;
 int	Account::_totalAmount = 0;
 int	Account::_totalNbDeposits = 0;
 int	Account::_totalNbWithdrawals = 0;
@@ -25,7 +25,7 @@ int	Account::_totalNbWithdrawals = 0;
 /*Constructors*/
 
 Account::Account( void ) {
-	this->_accountIndex = _nbAccounts++;
+	_accountIndex = _nbAccounts++;
 	this->_amount = 0;
 	this->_nbDeposits = 0;
 	this->_nbWithdrawals = 0;
@@ -36,23 +36,18 @@ Account::Account( void ) {
 } ;
 
 Account::Account( int initial_deposit) {
-	//Account(); // applied no difference to indexes (??)
-	this->_accountIndex = _nbAccounts++;
+	/* calling default Constructor from here applied no difference to indexes (??)*/
+	_accountIndex = _nbAccounts++;
 	this->_amount = 0;
 	this->_nbDeposits = 0;
 	this->_nbWithdrawals = 0;
-	this->_amount = initial_deposit; // ??
+	this->_amount = initial_deposit;
+	_totalAmount += initial_deposit;
 	_displayTimestamp();
 	std::cout << "index:" << _accountIndex;
 	std::cout << ";amount:" << _amount;
 	std::cout << ";created" << std::endl;
 } ;
-
-/*Account::Account( int initial_deposit): amount(initial_deposit)*/ /*??*/
-/*{
-	// cout << "Constructor called." << endl;
-	this->_amount = initial_deposit;
-} ;*/
 
 /*Destructor*/
 
@@ -67,7 +62,6 @@ Account::~Account( void ) {
 
 /*Functions members*/
 int	Account::getNbAccounts( void ) {
-//	static int nbAccounts = this->_nbAccounts;
 	return (_nbAccounts);
 } ;
 
@@ -84,13 +78,11 @@ int	Account::getNbWithdrawals( void ) {
 } ;
 
 void	Account::displayAccountsInfos( void ) {
-	/*[display_time] accounts:n;total:n;deposits:n;withdrawals:n*/
 	_displayTimestamp();
-	std::cout << " accounts:" << getNbAccounts();
-	std::cout << ";total:" << getTotalAmount();
-//	std::cout << _totalNbWithdrawals; // valid ?? <------------------- [!]
-	std::cout << ";deposits:" << getNbDeposits();
-	std::cout << ";withdrawals:" << getNbWithdrawals() << std::endl;
+	std::cout << "accounts:" << _nbAccounts;
+	std::cout << ";total:" << _totalAmount;
+	std::cout << ";deposits:" << _totalNbDeposits;
+	std::cout << ";withdrawals:" << _totalNbWithdrawals << std::endl;
 } ;
 
 void	Account::makeDeposit( int deposit ) {
@@ -99,8 +91,9 @@ void	Account::makeDeposit( int deposit ) {
 	std::cout << ";p_amount:" << _amount;
 	std::cout << ";deposit:" << deposit;
 	this->_amount += deposit;
-	this->_totalAmount += deposit;
-	this->_nbDeposits++;
+	_totalAmount += deposit;
+	_nbDeposits++;
+	_totalNbDeposits++;
 	std::cout << ";amount:" << _amount;
 	std::cout << ";nb_deposits:" << _nbDeposits << std::endl;
 } ;
@@ -114,11 +107,11 @@ bool	Account::makeWithdrawal( int withdrawal ) {
 		return (false);
 	}
 	this->_amount -= withdrawal;
-	this->_totalAmount -= withdrawal;
-	this->_nbWithdrawals++;
+	_totalAmount -= withdrawal;
+	_nbWithdrawals++;
+	_totalNbWithdrawals++;
 	std::cout << ";withdrawal:" << withdrawal;
 	std::cout << ";amount:" << _amount;
-	std::cout << ";nb_withdrawals:" << _nbWithdrawals << std::endl;
 	std::cout << ";nb_withdrawals:" << _nbWithdrawals << std::endl;
 	return (true);
 } ;
@@ -131,19 +124,18 @@ void	Account::displayStatus ( void ) const {
 	_displayTimestamp();
 	std::cout << "index:" << _accountIndex;
 	std::cout << ";amount:" << _amount;
-	std::cout << ";deposit:" << _nbDeposits;
+	std::cout << ";deposits:" << _nbDeposits;
 	std::cout << ";withdrawals:" << _nbWithdrawals << std::endl;
 } ;
 
 void	Account::_displayTimestamp( void ) {
-	/**format to include "[] ;"
-	 *
-	*/
 	time_t	now = std::time(0);
 	struct tm	*ps_time = localtime(&now);
 	ps_time = std::gmtime(&now);
-	std::cout << "[" << 1900 + ps_time->tm_year; // year since 1900
-	std::cout << std::setfill('0') << std::setw(2); // padding with '0' and setting width
+	/*year since 1900*/
+	std::cout << "[" << 1900 + ps_time->tm_year;
+	std::cout << std::setfill('0') << std::setw(2);
+	/*tm_mon starts at month 0*/
 	std::cout << 1 + ps_time->tm_mon;
 	std::cout << std::setfill('0') << std::setw(2);
 	std::cout << ps_time->tm_mday << "_";

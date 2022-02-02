@@ -10,7 +10,7 @@ OBJDIR = obj/
 
 INC = -I inc/
 
-NAME = Account
+NAME = ledger
 
 ${OBJDIR}%.o: %.cpp
 	${CC} ${CFLAGS} ${INC} -c $< -o $@
