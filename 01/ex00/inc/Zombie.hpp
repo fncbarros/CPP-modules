@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Class.hpp                                          :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarros   <fbarros@student.42lisboa.c      +#+  +:+       +#+        */
+/*   By: fbarros   <fbarros@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:48:59 by fbarros           #+#    #+#             */
 /*   Updated: 2022/02/02 12:48:59 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #pragma once
-#ifndef CLASS_H
-#define CLASS_H
+#ifndef ZOMBIE_H
+#define ZOMBIE_H
+
+# include <iostream>
+# include <iomanip>
+# include <string>
+
+using	std::string;
+using	std::cout;
+using	std::endl;
 
 // ************************************************************************** //
 //                                 Class                                      //
 // ************************************************************************** //
 
-class Class {
+class Zombie {
 
 
 public:
@@ -39,14 +45,16 @@ public:
 //                         Constructors/Destructors                           //
 // ************************************************************************** //
 
-	Class( void );
-	~Class( void );
+	Zombie( void );
+	~Zombie( void );
 
 // ************************************************************************** //
 //                              Public Members                                //
 // ************************************************************************** //
 
-
+void	announce( void );
+Zombie* newZombie( std::string name );
+void randomChump( std::string name );
 
 private:
 
@@ -59,6 +67,7 @@ private:
 //                              Private Members                               //
 // ************************************************************************** //
 
+	string	name;
 
 };
 
@@ -72,4 +81,4 @@ private:
 // ************************************************************************** //
 
 
-#endif /* CLASS_H */
+#endif /* ZOMBIE_H */

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Class.cpp                                          :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarros <fbarros@student.42lisboa.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,30 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Class.hpp"
-// # include <iostream>
-// # include <iomanip>
-// # include <string>
-// # include <vector>
+#include "Zombie.hpp"
 
-/*static Members*/
-
-static // ...
-
-/*Constructors*/
-
-Class::Class( void ) {
-
-} ;
-
-/*Destructor*/
-
-Class::~Class( void ) {
-} ;
-
-/*Functions members*/
-
-
+void Zombie::randomChump( std::string name ) {
+	Zombie *zombie = Zombie::newZombie(name);
+	zombie->announce();
+};
 
 // ************************************************************************** //
 // vim: set ts=4 sw=4 tw=80 noexpandtab:                                      //
