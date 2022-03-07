@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarros   <fbarros@student.42lisboa.c      +#+  +:+       +#+        */
+/*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:51:28 by fbarros           #+#    #+#             */
-/*   Updated: 2022/01/27 20:56:43 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/03/07 18:02:31 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,22 @@ using std::stringstream;
 
 class	Contact{
 	private:
-//		int		index; // ??
-		bool	exists;
-		string	Name;
-		string	Surname;
-		string	Nickname;
-		string	Number;
-		string	Secret;
+
+		bool		exists;
+		string		Name;
+		string		Surname;
+		string		Nickname;
+		string		Number;
+		string		Secret;
+		
 	public:
+	
 		Contact(void);
 		~Contact(void);
-		void	add(void);
-		bool	options(int index);
-		void	show(void);
+		
+		// void	add(void);
+		// bool	options(int index);
+		// void	show(void);
 };
 
 #endif

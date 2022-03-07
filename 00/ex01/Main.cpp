@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   crappy.cpp                                         :+:      :+:    :+:   */
+/*   Main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 14:49:32 by fbarros           #+#    #+#             */
-/*   Updated: 2021/11/21 14:57:04 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/03/07 17:52:41 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ int main(void)
 		getline(cin, input); // gets full line from stdin
 		//std::cin >> in;
 		if (input == "ADD") {
-			Phonebook.getContact(i++).add();
-			if (i == 8)
-				i = 0;
+			Phonebook.add();
 		}
 		else if (input == "SEARCH") {
 			j = 0;
