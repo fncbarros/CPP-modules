@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:51:28 by fbarros           #+#    #+#             */
-/*   Updated: 2022/03/07 18:28:02 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:52:21 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,25 @@ string	Contact::getSecret(void) {
 
 
 
-// void	Contact::add(void) {
-// 	exists = true;
-// 	cout << "Name:" <<endl;
-// 	getline(cin, Name);
-// //	cin >> Name;
-// 	cout << "Surname:" <<endl;
-// 	getline(cin, Surname);
-// //	cin >> Surname;
-// 	cout << "Nickname:" <<endl;
-// 	getline(cin, Nickname);
-// //	cin >> Nickname;
-// 	cout << "Number:" <<endl;
-// 	getline(cin, Number);
-// //	cin >> Number;
-// 	cout << "Secret:" <<endl;
-// 	getline(cin, Secret);
-// //	cin >> Secret;
-// } ;
+class Contact	Contact::add(void) {
+	exists = true;
+	cout << "Name:" <<endl;
+	getline(cin, Name);
+//	cin >> Name;
+	cout << "Surname:" <<endl;
+	getline(cin, Surname);
+//	cin >> Surname;
+	cout << "Nickname:" <<endl;
+	getline(cin, Nickname);
+//	cin >> Nickname;
+	cout << "Number:" <<endl;
+	getline(cin, Number);
+//	cin >> Number;
+	cout << "Secret:" <<endl;
+	getline(cin, Secret);
+//	cin >> Secret;
+	return (this);
+} ;
 
 
 /* Any output longer than the columns’ width is truncated and the

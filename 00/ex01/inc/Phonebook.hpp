@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:34:04 by fbarros           #+#    #+#             */
-/*   Updated: 2022/03/07 18:12:03 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:08:05 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #define PHONEBOOK_HPP
 
 # include "Contact.hpp"
-
-using std::getline;
 
 class Phonebook{
 	private:

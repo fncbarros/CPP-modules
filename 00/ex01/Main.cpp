@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 14:49:32 by fbarros           #+#    #+#             */
-/*   Updated: 2022/03/07 18:28:19 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:10:26 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 
 int main(void)
 {
-	string	input;
+	string		input;
 	Phonebook	Phonebook;
 	static int	j, k;
-//	stringstream ss;
+	// stringstream ss;
 
 	cout << "ADD, SEARCH or EXIT" << endl;
 	while (input != "EXIT") {
@@ -53,4 +53,3 @@ int main(void)
 	}
 	return (0);
 }
-
