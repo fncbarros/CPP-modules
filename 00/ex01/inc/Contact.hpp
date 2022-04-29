@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:51:28 by fbarros           #+#    #+#             */
-/*   Updated: 2022/03/08 16:44:41 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/04/29 21:01:07 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ using std::setw;
 using std::setfill;
 using std::stringstream;
 
-class	Contact{
+class	Contact {
 	private:
 
 		bool		exists;
@@ -43,9 +43,9 @@ class	Contact{
 		string		Nickname;
 		string		Number;
 		string		Secret;
-		
+
 	public:
-	
+
 		Contact(void);
 		~Contact(void);
 		string	getName(void);
@@ -53,9 +53,15 @@ class	Contact{
 		string	getNickname(void);
 		string	getNumber(void);
 		string	getSecret(void);
-		class Contact	add(void);
+		void	setName(string _Name);
+		void	setSurname(string _Surname);
+		void	setNickname(string _Nickname);
+		void	setNumber(string _Number);
+		void	setSecret(string _Secret);
+		void	add(void);
 		bool	options(int index);
 		void	show(void);
+
 };
 
-#endif
+#endif	/* PHONE_HPP */

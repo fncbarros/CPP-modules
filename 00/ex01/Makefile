@@ -1,5 +1,7 @@
 SRC = ${wildcard *.cpp}
 
+HEADER = ${wildcard inc/*.hpp}
+
 OBJ = ${SRC:%.cpp=obj/%.o}
 
 CC = g++
@@ -17,7 +19,7 @@ ${OBJDIR}%.o: %.cpp
 
 all: ${NAME}
 
-${NAME}: ${OBJDIR} ${OBJ}
+${NAME}: ${OBJDIR} ${OBJ} ${HEADER}
 	${CC} ${CFLAGS} ${OBJDIR}/*.o -o ${NAME}
 
 ${OBJDIR}:

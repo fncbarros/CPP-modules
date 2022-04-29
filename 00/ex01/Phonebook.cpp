@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:34:14 by fbarros           #+#    #+#             */
-/*   Updated: 2022/03/08 16:44:22 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/04/29 20:40:22 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,12 @@ Phonebook::~Phonebook(void) {
 	// cout << "Destructor called." << endl;
 } ;
 
-class Contact	Phonebook::getContact(int index) {
-	return (list[index]);
+class Contact	Phonebook::getContact(int i) {
+	return (list[i]);
 };
 
-void			Phonebook::add(void) {
-	Contact	newContact;
-	
-	list[index] = newContact.add();
+void			Phonebook::addContact(void) {
+	list[index].add();
 	if (index == 8)
 		index = 0;
 	else

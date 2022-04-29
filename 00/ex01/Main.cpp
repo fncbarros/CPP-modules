@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 14:49:32 by fbarros           #+#    #+#             */
-/*   Updated: 2022/03/08 16:10:26 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/04/29 18:47:24 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int main(void)
 	static int	j, k;
 	// stringstream ss;
 
-	cout << "ADD, SEARCH or EXIT" << endl;
+	cout << "type ADD, SEARCH or EXIT:" << endl;
 	while (input != "EXIT") {
 		getline(cin, input); // gets full line from stdin
 		//std::cin >> in;
 		if (input == "ADD") {
-			Phonebook.add();
+			Phonebook.addContact();
 		}
 		else if (input == "SEARCH") {
 			j = 0;
