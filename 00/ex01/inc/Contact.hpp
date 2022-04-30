@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:51:28 by fbarros           #+#    #+#             */
-/*   Updated: 2022/04/29 21:01:07 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/04/30 19:50:08 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ class	Contact {
 		void	setNumber(string _Number);
 		void	setSecret(string _Secret);
 		void	add(void);
-		bool	options(int index);
+		string	getAlpha(string prompt);
+		string	getNum(string prompt);
+		void	printInfo(int index); 
 		void	show(void);
 
 };

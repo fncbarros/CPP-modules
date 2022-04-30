@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:34:04 by fbarros           #+#    #+#             */
-/*   Updated: 2022/04/29 19:03:28 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/04/30 19:54:56 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ class Phonebook{
 
 		class Contact	list[8];
 		int	index;
+		size_t size;
 
 	public:
 	
@@ -27,6 +28,9 @@ class Phonebook{
 		~Phonebook(void);
 		void			addContact(void);
 		class Contact	getContact(int index);
+		void			options(void);
 };
+
+
 
 #endif

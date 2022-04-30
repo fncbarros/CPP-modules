@@ -6,19 +6,19 @@
 /*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:51:28 by fbarros           #+#    #+#             */
-/*   Updated: 2022/04/29 20:59:21 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/04/30 20:01:47 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 
 Contact::Contact(void) {
-	cout << "Constructor called." << endl;
+	// cout << "Contact: Constructor called.\n";
 	exists = false;
 } ;
 
 Contact::~Contact(void) {
-	cout << "Destructor called." << endl;
+	// cout << "Contact: Destructor called.\n";
 } ;
 
 string	Contact::getName(void) {
@@ -44,8 +44,6 @@ string	Contact::getSecret(void) {
 void	Contact::setName(string _Name) {
 	
 	Name = _Name;
-	// or this->Name = _Name;
-	// or ...setName(_Name) : Name(_Name)
 } ;
 
 void	Contact::setSurname(string _Surname) {
@@ -64,51 +62,72 @@ void	Contact::setSecret(string _Secret) {
 	Secret = _Secret;
 } ;
 
-void	Contact::add(void) {
-	string	in;
+string	Contact::getNum(string prompt) {
+	string	input;
 
+	cout << prompt;
+	while (input.empty()) {
+		getline(cin, input);
+		for (int i = 0; input[i]; i++) {
+			if (!std::isdigit(input[i])) {
+				cout << prompt;
+				input.clear();
+				break ;
+			}
+		}
+	}
+	return (input);
+} ;
+
+string	Contact::getAlpha(string prompt) {
+	string	input;
+
+	cout << prompt;
+	while (input.empty()) {
+		getline(cin, input);
+		for (int i = 0; input[i]; i++) {
+			if (!std::isalpha(input[i])) {
+				cout << prompt;
+				input.clear();
+				break ;
+			}
+		}
+	}
+	return (input);
+} ;
+
+void	Contact::add(void) {
+	setName(getAlpha("Name:\n"));
+	setSurname(getAlpha("Surname:\n"));
+	setNickname(getAlpha("Nickname:\n"));
+	setNumber(getNum("Number:\n"));
+	setSecret(getAlpha("Secret:\n"));
 	exists = true;
-	cout << "Name:\n";
-	getline(cin, in);
-	setName(in);
-	cout << "Surname:\n";
-	getline(cin, in);
-	setSurname(in);
-	cout << "Nickname:\n";
-	getline(cin, in);
-	setNickname(in);
-	cout << "Number:\n";
-	getline(cin, in);
-	setNumber(in);
-	cout << "Secret:\n";
-	getline(cin, in);
-	setSecret(in);
 } ;
 
 
 /* Any output longer than the columns’ width is truncated and the
 last displayable character is replaced by a dot (’.’).*/
-bool	Contact::options(int index) {
+void	Contact::printInfo(int index) {
 	if (!exists)
-		return (false);
-	
+		return ;
+
 	cout << setfill(' ') << setw(10);
 	cout << index + 1 << "|" ;
 	cout << setfill(' ') << setw(10);
-	Name.length() > 10 ? cout << Name.substr(0, 9) + "." << "|" :
+	Name.length() > 10 ? cout << Name.substr(0, 9) + "." << "|" : \
 	cout << Name << "|" ;
 	cout << setfill(' ') << setw(10);
-	Surname.length() > 10 ? cout << Surname.substr(0, 9) + "." << "|" :
+	Surname.length() > 10 ? cout << Surname.substr(0, 9) + "." << "|" : \
 	cout << Surname << "|" ;
 	cout << setfill(' ') << setw(10);
-	Nickname.length() > 10 ? cout << Nickname.substr(0, 9) + "." << "|" :
+	Nickname.length() > 10 ? cout << Nickname.substr(0, 9) + "." << "|" : \
 	cout << Nickname << "|";
 	cout << endl;
-	return (true);
 } ;
 
 void	Contact::show(void) {
-	cout << "Name: " << Name << endl;
+	cout << "\nName: " << Name << endl;
 	cout << "Surname: " << Surname << endl;
 	cout << "Nickname: " << Nickname << endl;
 	cout << "Number: " << Number << endl;
