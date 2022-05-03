@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:34:14 by fbarros           #+#    #+#             */
-/*   Updated: 2022/04/30 20:16:45 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/05/03 18:07:48 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void			Phonebook::addContact(void) {
 };
 
 void	Phonebook::options(void) {
-	int	input;
+	int	i;
+	string	input;
 	stringstream	ss;
 
 	if (size == 0) {
@@ -56,13 +57,17 @@ void	Phonebook::options(void) {
 	for (int i = 0; i < int(size); i++) {
 		list[i].printInfo(i);
 	}
+	i = 0;
+	while (i < 1 || i > int(size)) {
 	cout << "\nPlease specify contact index: ";
-	cin >> input;
-	if (input > int(size) || input < 0) {
-		cout << "\nNo such contact.\n";
+	getline(cin, input);
+	ss << input;
+	ss >> i;
+	if (i > int(size) || i < 0) {
+		cout << "No such contact.\n";
 		ss.clear();
-		return ;
+	}
 	}
 	ss.clear();
-	list[input - 1].show();
+	list[i - 1].show();
 } ;
