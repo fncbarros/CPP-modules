@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   randomChump.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarros <fbarros@student.42lisboa.com      +#+  +:+       +#+        */
+/*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 11:59:25 by fbarros           #+#    #+#             */
-/*   Updated: 2022/01/28 11:59:50 by fbarros          ###   ########.fr       */
+/*   Created: 2022/05/04 12:47:28 by fbarros           #+#    #+#             */
+/*   Updated: 2022/05/04 13:51:52 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+# include "Zombie.hpp"
 
-void Zombie::randomChump( std::string name ) {
-	Zombie *zombie = Zombie::newZombie(name);
-	zombie->announce();
+void randomChump( std::string name ) {
+	Zombie newZ(name);
+
+	newZ.announce();
 };
-
-// ************************************************************************** //
-// vim: set ts=4 sw=4 tw=80 noexpandtab:                                      //
-// -*- indent-tabs-mode:t;                                                   -*-
-// -*- mode: c++-mode;                                                       -*-
-// -*- fill-column: 75; comment-column: 75;                                  -*-
-// ************************************************************************** //

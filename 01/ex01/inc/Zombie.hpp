@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:48:59 by fbarros           #+#    #+#             */
-/*   Updated: 2022/05/04 13:25:41 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/05/04 14:33:35 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ Zombie(string _name);
 void	announce( void );
 } ;
 
-Zombie* newZombie( std::string name );
-void randomChump( std::string name );
+Zombie*	zombieHorde(int N, string name);
 
 // ************************************************************************** //
 // vim: set ts=4 sw=4 tw=80 noexpandtab:                                      //
