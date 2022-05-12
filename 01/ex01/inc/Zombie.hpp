@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:48:59 by fbarros           #+#    #+#             */
-/*   Updated: 2022/05/04 14:33:35 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/05/12 19:46:52 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,19 @@ class Zombie {
 
 private:
 
-	string	name;
+	string	_name;
 
 public:
 
-Zombie( void );
-Zombie(string _name);
-~Zombie( void );
+	Zombie(void);
+	Zombie(string name);
+	~Zombie( void );
+	void	setName(string name);
 
 void	announce( void );
 } ;
 
 Zombie*	zombieHorde(int N, string name);
-
-// ************************************************************************** //
-// vim: set ts=4 sw=4 tw=80 noexpandtab:                                      //
-// -*- indent-tabs-mode:t;                                                   -*-
-// -*- mode: c++-mode;                                                       -*-
-// -*- fill-column: 75; comment-column: 75;                                  -*-
-// ************************************************************************** //
 
 
 #endif /* ZOMBIE_H */

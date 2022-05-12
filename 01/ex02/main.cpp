@@ -5,21 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 19:12:51 by fbarros           #+#    #+#             */
-/*   Updated: 2022/05/12 19:38:44 by fbarros          ###   ########.fr       */
+/*   Created: 2022/05/12 20:06:11 by fbarros           #+#    #+#             */
+/*   Updated: 2022/05/12 20:18:17 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include <iostream>
+#include <iomanip>
+#include <string>
+
+using	std::string;
+using	std::cout;
+using	std::endl;
 
 int	main(void)
 {
-	Zombie	*ZHorde;
+	string str = "HI THIS IS BRAIN";
+	string	*stringPTR = &str;
+	string	&stringREF = str;
 
-	ZHorde = zombieHorde(5, "Lester");
-	for (int i = 0; i < 5; i++) {
-		ZHorde[i].announce();
-	}
-	
-	delete[] ZHorde;
+	cout << "Address of str:            " << &str << endl;
+	cout << "Address held by stringPTR: " << stringPTR << endl;
+	cout << "Address held by stringREF: " << &stringREF << endl;
+
+	cout << "Value of str:                  " << str << endl;
+	cout << "Value pointed to by stringPTR: " << *stringPTR << endl;
+	cout << "Value pointed to by stringREF: " << stringREF << endl;
 }
