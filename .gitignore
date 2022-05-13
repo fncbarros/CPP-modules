@@ -1,4 +1,6 @@
 00/ex01/phonebook
+*.~
+*~
 *.log
 
 # Prerequisites

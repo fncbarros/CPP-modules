@@ -10,7 +10,7 @@ OBJDIR = obj/
 
 INC = -I inc/
 
-NAME = #...
+NAME = unnecessary_violence
 
 ${OBJDIR}%.o: %.cpp
 	${CC} ${CFLAGS} ${INC} -c $< -o $@
