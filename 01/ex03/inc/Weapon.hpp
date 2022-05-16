@@ -16,7 +16,7 @@
 
 #include <string>
 #include <iostream>
-// # include <iomanip>
+# include <iomanip>
 
 using	std::string;
 using	std::cout;
@@ -27,13 +27,16 @@ class Weapon {
 
 private:
 
-	std::string _type;
+	string type;
 
 public:
 
 	Weapon( void );
 	~Weapon( void );
+	Weapon( string _type );
 //	Weapon( std::string type );
+const string&	getType( void );
+void	setType( string _type );
 
 };
 

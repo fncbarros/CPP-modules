@@ -13,14 +13,15 @@
 
 #include "HumanA.hpp"
 
-HumanA::HumanA( void ) {
-	// ...
-} ;
-
 HumanA::~HumanA( void ) {
 	// ...
 } ;
 
-void	HumanA( std::string name ) {
-	_name = name;
+HumanA::HumanA( std::string _name, Weapon _weapon ) {
+	name = _name;
+	weapon = _weapon;
+} ;
+
+void	HumanA::attack( void ) {
+	cout << name << " attacks with their " << weapon.getType() << endl; 
 } ;

@@ -1,23 +1,25 @@
-SRC = ${wildcard *.cpp}
+SRC := ${wildcard *.cpp}
 
-OBJ = ${SRC:%.cpp=obj/%.o}
+OBJ := ${SRC:%.cpp=obj/%.o}
 
-CC = g++
+CC := g++
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS := -Wall -Wextra -Werror -std=c++98
 
-OBJDIR = obj/
+OBJDIR := obj/
 
-INC = -I inc/
+HDIR := inc/
 
-NAME = #...
+INC := -I ${HDIR}
+
+NAME := #...
 
 ${OBJDIR}%.o: %.cpp
 	${CC} ${CFLAGS} ${INC} -c $< -o $@
 
 all: ${NAME}
 
-${NAME}: ${OBJDIR} ${OBJ} ${INC}
+${NAME}: ${OBJDIR} ${OBJ} ${HDIR}
 	${CC} ${CFLAGS} ${OBJDIR}/*.o -o ${NAME}
 
 ${OBJDIR}:

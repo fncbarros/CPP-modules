@@ -21,4 +21,13 @@ Weapon::~Weapon( void ) {
 	// ...
 } ;
 
+Weapon::Weapon( string _type ) : type(_type) {} ;
 
+const string&	Weapon::getType( void ) {
+	string&	_type = type;
+	return (_type);
+} ;
+
+void	Weapon::setType( string _type ) {
+	type = _type;
+} ;

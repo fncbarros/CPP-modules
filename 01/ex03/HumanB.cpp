@@ -13,14 +13,18 @@
 
 #include "HumanB.hpp"
 
-HumanB::HumanB( void ) {
-	// ...
+HumanB::HumanB( string _name ) {
+	name = _name;
 } ;
 
 HumanB::~HumanB( void ) {
 	// ...
 } ;
 
-void	HumanB( std::string name ) {
-	_name = name;
+void	HumanB::setWeapon( Weapon _weapon ) {
+	weapon = _weapon;
+} ;
+
+void	HumanB::attack( void ) {
+	cout << name << " attacks with their " << weapon.getType() << endl;
 } ;

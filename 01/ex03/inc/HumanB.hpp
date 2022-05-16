@@ -14,25 +14,22 @@
 #ifndef HUMAN_B_H
 #define HUMAN_B_H
 
-#include <string>
-#include <iostream>
-// # include <iomanip>
-
-using	std::string;
-using	std::cout;
-using	std::cin;
-using	std::endl;
+#include "Weapon.hpp"
 
 class HumanB {
 
 private:
-	std::string _name;
+
+	string name;
+	Weapon weapon;
 
 public:
 
-	HumanB( void );
-	HumanB( std::string name );
+	HumanB( std::string _name );
+	HumanB( std::string _name, Weapon _weapon );
 	~HumanB( void );
+void	setWeapon(Weapon _weapon);
+void	attack( void );
 
 };
 

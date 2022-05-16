@@ -15,25 +15,19 @@
 #ifndef HUMAN_A_H
 #define HUMAN_A_H
 
-#include <string>
-#include <iostream>
-// # include <iomanip>
-
-using	std::string;
-using	std::cout;
-using	std::cin;
-using	std::endl;
+#include "Weapon.hpp"
 
 class HumanA {
 
 private:
-	std::string	_name;
+	string	name;
+	Weapon	weapon;
 
 public:
 
-	HumanA( void );
-	HumanA( std::string name );
+	HumanA( std::string _name, Weapon _weapon );
 	~HumanA( void );
+void	attack( void );
 
 };
 
