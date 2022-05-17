@@ -15,13 +15,13 @@
 
 HumanA::~HumanA( void ) {
 	// ...
-} ;
+}
 
-HumanA::HumanA( std::string _name, Weapon _weapon ) {
-	name = _name;
-	weapon = _weapon;
-} ;
+// reference needs to be initialized when declared
+HumanA::HumanA( std::string _name, Weapon& _weapon ) : name(_name), weapon(_weapon) {
+	// weapon = _weapon; // will throw a compiler error for reason mentioned above 
+}
 
 void	HumanA::attack( void ) {
 	cout << name << " attacks with their " << weapon.getType() << endl; 
-} ;
+}

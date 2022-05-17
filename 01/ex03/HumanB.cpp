@@ -15,16 +15,21 @@
 
 HumanB::HumanB( string _name ) {
 	name = _name;
-} ;
+}
+
+HumanB::HumanB( void ) {
+	// ...
+}
 
 HumanB::~HumanB( void ) {
 	// ...
-} ;
+}
 
-void	HumanB::setWeapon( Weapon _weapon ) {
-	weapon = _weapon;
-} ;
+// stores garbage if not passed by reference because it would keep a copy
+void	HumanB::setWeapon( Weapon& _weapon ) {
+	weapon = &_weapon;
+}
 
 void	HumanB::attack( void ) {
-	cout << name << " attacks with their " << weapon.getType() << endl;
-} ;
+	cout << name << " attacks with their " << weapon->getType() << endl;
+}

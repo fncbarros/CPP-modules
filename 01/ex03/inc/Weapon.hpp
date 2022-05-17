@@ -35,7 +35,7 @@ public:
 	~Weapon( void );
 	Weapon( string _type );
 //	Weapon( std::string type );
-const string&	getType( void );
+const string&	getType( void ) const;
 void	setType( string _type );
 
 };

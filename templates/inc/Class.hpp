@@ -23,7 +23,7 @@ public:
 	Class( std::string name );
 	~Class( void );
 
-std::string	getName( void );
+std::string	getName( void ) const;
 
 };
 

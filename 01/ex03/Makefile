@@ -14,7 +14,7 @@ INC := -I ${HDIR}
 
 NAME := unnecessary_violence
 
-${OBJDIR}%.o: %.cpp
+${OBJDIR}%.o: %.cpp ${HDIR}
 	${CC} ${CFLAGS} ${INC} -c $< -o $@
 
 all: ${NAME}

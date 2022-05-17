@@ -21,11 +21,11 @@ class HumanA {
 
 private:
 	string	name;
-	Weapon	weapon;
+	Weapon&	weapon;
 
 public:
 
-	HumanA( std::string _name, Weapon _weapon );
+	HumanA( std::string _name, Weapon& _weapon );
 	~HumanA( void );
 void	attack( void );
 
