@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 19:21:37 by fbarros           #+#    #+#             */
-/*   Updated: 2022/05/25 14:27:53 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/05/25 17:40:36 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,35 +21,35 @@ using	std::cout;
 using	std::cin;
 using	std::endl;
 
-string    strReplace(string& dest, const string& src, size_t index)
-{
-    
-}
-
 std::string search(string& line, const string& original, const string& replace)
+/* substr() & find() */
 {
-    // loop through line
-    size_t i = tmp.find(original, 0);
-    buffer += tmp.substr(0, i);
-    if (i != tmp.npos)
-        tmp = strReplace(tmp, replace, i);
-    else
-        i = tmp.length();
-    buffer += tmp + "\n";
+    string  buffer;
+    size_t  orig_pos = 0;
+    size_t  last_orig_pos;
+
+    while (orig_pos != line.npos) {
+        last_orig_pos = orig_pos;
+        orig_pos = line.find(original, orig_pos);
+        buffer += line.substr(last_orig_pos, orig_pos);
+        if (orig_pos != line.npos) {
+            buffer += replace;
+            orig_pos += original.length();
+        }
+    }
+    buffer += "\n";
+    return buffer;
 }
 
 /* Return buffer */
-std::string    scan(std::ifstream& fin, std::ofstream& fout, const string& original, const string& replace)
+void    scan(std::ifstream& fin, std::ofstream& fout, const string& original, const string& replace)
 {
     string  buffer;
-    string  tmp;
 
     while(!fin.eof()) {
-        getline(fin, tmp);
-        fout << search();
+        getline(fin, buffer);
+        fout << search(buffer, original, replace);
     }
-    // fout << scan(fin, s1, s2);
-    return buffer;
 }
 
 int main(int argc, char **argv)
