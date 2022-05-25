@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 19:57:39 by fbarros           #+#    #+#             */
-/*   Updated: 2022/05/13 20:08:35 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/05/25 14:58:27 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ private:
 
 public:
 
-	Weapon( void );
-	~Weapon( void );
-	Weapon( string _type );
-//	Weapon( std::string type );
+Weapon( string _type );
 const string&	getType( void ) const;
 void	setType( string _type );
 

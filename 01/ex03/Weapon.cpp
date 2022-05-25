@@ -3,23 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   Weapon.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 19:57:42 by fbarros           #+#    #+#             */
-/*   Updated: 2022/05/13 20:08:53 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/05/25 14:58:43 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "Weapon.hpp"
-
-Weapon::Weapon( void ) {
-	// ...
-}
-
-Weapon::~Weapon( void ) {
-	// ...
-}
 
 Weapon::Weapon( string _type ) : type(_type) {} ;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 19:45:28 by fbarros           #+#    #+#             */
-/*   Updated: 2022/05/13 20:03:02 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/05/25 14:58:47 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,6 @@
 
 HumanB::HumanB( string _name ) {
 	name = _name;
-}
-
-HumanB::HumanB( void ) {
-	// ...
-}
-
-HumanB::~HumanB( void ) {
-	// ...
 }
 
 // stores garbage if not passed by reference because it would keep a copy
