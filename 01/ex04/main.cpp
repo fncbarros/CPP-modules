@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 19:21:37 by fbarros           #+#    #+#             */
-/*   Updated: 2022/05/25 17:40:36 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/05/25 17:41:24 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ using	std::cin;
 using	std::endl;
 
 std::string search(string& line, const string& original, const string& replace)
-/* substr() & find() */
 {
     string  buffer;
     size_t  orig_pos = 0;
@@ -41,7 +40,6 @@ std::string search(string& line, const string& original, const string& replace)
     return buffer;
 }
 
-/* Return buffer */
 void    scan(std::ifstream& fin, std::ofstream& fout, const string& original, const string& replace)
 {
     string  buffer;
