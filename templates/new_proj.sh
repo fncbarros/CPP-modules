@@ -23,5 +23,8 @@ sed -i '{s/Class/'$name'/g}' $name.cpp
 sed -i '{s/Class/'$name'/g}' inc/$name.hpp
 sed -i '{s/CLASS/'$name_upper'/g}' inc/$name.hpp
 
+cd --
+
+echo $name >> ../.gitignore
 
 ##idea: prompt for exe name number of classes and name them individually
