@@ -23,7 +23,7 @@ sed -i '{s/Class/'$name'/g}' $name.cpp
 sed -i '{s/Class/'$name'/g}' inc/$name.hpp
 sed -i '{s/CLASS/'$name_upper'/g}' inc/$name.hpp
 
-cd --
+cd $0
 
 echo $name >> ../.gitignore
 
