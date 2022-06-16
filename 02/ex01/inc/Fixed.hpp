@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 12:24:12 by fbarros           #+#    #+#             */
-/*   Updated: 2022/06/16 16:10:26 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/06/16 17:03:06 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 
 # include <iostream>
 # include <cmath>
-// # include <iomanip>
-// # include <memory>
 
 class Fixed {
 public:
@@ -34,7 +32,7 @@ public:
 	int	toInt( void ) const;
 
 private:
-	int	_value;
+	int	_rawValue;
 	static const int	_fractional = 8;
 
 };

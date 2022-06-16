@@ -4,7 +4,7 @@ OBJ := ${SRC:%.cpp=obj/%.o}
 
 CC := g++
 
-CFLAGS := -Wall -Wextra -Werror -std=c++98
+CFLAGS := -Wall -Wextra -Werror -std=c++98 -lm
 
 OBJDIR := obj/
 
