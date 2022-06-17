@@ -1,5 +1,6 @@
 new_folder=$1
 name=$2
+script_location="$(pwd)"
 #from Erick:
 name_upper="$(tr '[:lower:]' '[:upper:]' <<< ${name})"
 
@@ -8,22 +9,25 @@ cp Makefile $new_folder
 cp Class.cpp $new_folder/$name.cpp
 cp ./inc/Class.hpp $new_folder/inc/$name.hpp
 cd $new_folder
-<< EOF >> main.cpp \
-\
-#include "Class.hpp"\
-\
-int main()\
-{\
-	return (0);\
-}\
-\
-EOF
 
-sed -i '{s/Class/'$name'/g}' $name.cpp
-sed -i '{s/Class/'$name'/g}' inc/$name.hpp
-sed -i '{s/CLASS/'$name_upper'/g}' inc/$name.hpp
+cat << eof >> main.cpp
 
-cd $0
+#include "Class.hpp"
+
+int main()
+{
+	return (0);
+}
+
+eof
+
+sed -i '{s/Class/'$name'/g}' $name.cpp;
+sed -i '{s/Class/'$name'/g}' main.cpp;
+sed -i '{s/Class/'$name'/g}' inc/$name.hpp;
+sed -i '{s/CLASS/'$name_upper'/g}' inc/$name.hpp;
+sed -i '{s/#placeholder/'$name'/g}' Makefile
+
+cd $script_location
 
 echo $name >> ../.gitignore
 

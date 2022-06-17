@@ -12,7 +12,7 @@ HDIR := inc/
 
 INC := -I ${HDIR}
 
-NAME := #...
+NAME := #placeholder
 
 ${OBJDIR}%.o: %.cpp
 	${CC} ${CFLAGS} ${INC} -c $< -o $@

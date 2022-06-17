@@ -2,15 +2,24 @@
 #include "Class.hpp"
 
 Class::Class( void ) {
-	// ...
-} ;
 
-Class::Class( std::string name ) : _name(name) {} ;
+}
+
+Class::Class(const Class& other) {
+	if (this != &other)
+	{
+		*this = other;
+	}
+}
+
+Class& Class::operator=(const Class& other) {
+	if (this != &other)
+	{
+		*this = Class(other);
+	}
+	return *this;
+}
 
 Class::~Class( void ) {
-	// ...
-} ;
 
-std::string	Class::getName( void ) const {
-	return (_name);
 } ;
