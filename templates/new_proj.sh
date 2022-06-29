@@ -5,12 +5,13 @@ script_location="$(pwd)"
 name_upper="$(tr '[:lower:]' '[:upper:]' <<< ${name})"
 
 mkdir $new_folder/inc/
+mkdir $new_folder/src/
 cp Makefile $new_folder
-cp Class.cpp $new_folder/$name.cpp
+cp ./src/Class.cpp $new_folder/src/$name.cpp
 cp ./inc/Class.hpp $new_folder/inc/$name.hpp
 cd $new_folder
 
-cat << eof >> main.cpp
+cat << eof >> src/main.cpp
 
 #include "Class.hpp"
 
@@ -21,8 +22,8 @@ int main()
 
 eof
 
-sed -i '{s/Class/'$name'/g}' $name.cpp;
-sed -i '{s/Class/'$name'/g}' main.cpp;
+sed -i '{s/Class/'$name'/g}' src/$name.cpp;
+sed -i '{s/Class/'$name'/g}' src/main.cpp;
 sed -i '{s/Class/'$name'/g}' inc/$name.hpp;
 sed -i '{s/CLASS/'$name_upper'/g}' inc/$name.hpp;
 sed -i '{s/#placeholder/'$name'/g}' Makefile

@@ -1,6 +1,6 @@
-SRC := ${wildcard *.cpp}
+SRC := ${wildcard src/*.cpp}
 
-OBJ := ${SRC:%.cpp=obj/%.o}
+OBJ := ${SRC:src/%.cpp=obj/%.o}
 
 CC := g++
 
@@ -8,13 +8,15 @@ CFLAGS := -Wall -Wextra -Werror -std=c++98
 
 OBJDIR := obj/
 
+SRCDIR := src/
+
 HDIR := inc/
 
 INC := -I ${HDIR}
 
 NAME := #placeholder
 
-${OBJDIR}%.o: %.cpp
+${OBJDIR}%.o: ${SRCDIR}%.cpp
 	${CC} ${CFLAGS} ${INC} -c $< -o $@
 
 all: ${NAME}

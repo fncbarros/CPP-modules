@@ -37,6 +37,12 @@
 *~
 *.log
 *.swp
+*.vscode/
 Harl
 Fixed
+ClapTrap
+ScavTrap
+FragTrap
+DiamondTrap
+Animal
 
