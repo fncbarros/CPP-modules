@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 18:51:40 by fbarros           #+#    #+#             */
-/*   Updated: 2022/07/01 09:36:20 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/07/01 13:09:36 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include "Animal.hpp"
 
 Animal::Animal( ) : type("Animal") {
-	std::cout << type << " default constructer called.\n";
+	std::cout << type << " default constructor called.\n";
 }
 
 Animal::Animal(const Animal& other) {
-	std::cout << type << " copy constructer called.\n";
+	std::cout << type << " copy constructor called.\n";
 
 	if (this != &other)
 	{

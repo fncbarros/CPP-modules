@@ -6,10 +6,9 @@
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 18:51:31 by fbarros           #+#    #+#             */
-/*   Updated: 2022/07/01 13:09:35 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/07/01 13:33:16 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "Cat.hpp"
 
@@ -20,7 +19,7 @@ Cat::Cat() {
 }
 
 Cat::Cat(const Cat& other)
-: Animal(),
+: AAnimal(),
 brain(NULL) {
 	if (this != &other)
 	{

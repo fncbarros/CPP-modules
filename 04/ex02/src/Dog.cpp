@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/25 18:51:31 by fbarros           #+#    #+#             */
-/*   Updated: 2022/07/01 13:09:35 by fbarros          ###   ########.fr       */
+/*   Created: 2022/06/25 18:51:09 by fbarros           #+#    #+#             */
+/*   Updated: 2022/07/01 13:33:35 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "Cat.hpp"
+#include "Dog.hpp"
 
-Cat::Cat() {
-	type = "Cat";
+Dog::Dog() {
+	type ="Dog";
 	brain = new Brain();
 	std::cout << type << " default constructor called.\n";
 }
 
-Cat::Cat(const Cat& other)
-: Animal(),
+Dog::Dog(const Dog& other)
+: AAnimal(),
 brain(NULL) {
 	if (this != &other)
 	{
@@ -29,7 +29,7 @@ brain(NULL) {
 	std::cout << type << " copy constructor called.\n";
 }
 
-Cat& Cat::operator=(const Cat& other) {
+Dog& Dog::operator=(const Dog& other) {
 	if (this != &other)
 	{
 		this->type = other.type;
@@ -42,16 +42,16 @@ Cat& Cat::operator=(const Cat& other) {
 	return *this;
 }
 
-Cat::~Cat( ) {
+Dog::~Dog( ) {
 	delete brain;
 	brain = NULL;
-	std::cout << type << " destructor called.\n";
-} ;
-
-void Cat::makeSound(void) const {
-	std::cout << "Meow\n"; 
+	std::cout << type << " destructer called.\n";
 }
 
-Brain*	Cat::getBrain(void) const {
+void Dog::makeSound(void) const {
+	std::cout << "Oof\n"; 
+}
+
+Brain*	Dog::getBrain(void) {
 	return brain;
 }

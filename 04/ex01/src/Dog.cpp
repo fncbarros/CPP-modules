@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 18:51:09 by fbarros           #+#    #+#             */
-/*   Updated: 2022/07/01 12:20:53 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/07/01 13:09:34 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 Dog::Dog() {
 	type ="Dog";
 	brain = new Brain();
-	std::cout << type << " default constructer called.\n";
+	std::cout << type << " default constructor called.\n";
 }
 
 Dog::Dog(const Dog& other)
@@ -26,7 +26,7 @@ brain(NULL) {
 	{
 		*this = other;
 	}
-	std::cout << type << " copy constructer called.\n";
+	std::cout << type << " copy constructor called.\n";
 }
 
 Dog& Dog::operator=(const Dog& other) {
