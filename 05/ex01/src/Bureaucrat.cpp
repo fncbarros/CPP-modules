@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:16:40 by fbarros           #+#    #+#             */
-/*   Updated: 2022/07/11 12:53:04 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/07/12 17:45:06 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
 }
 
 Bureaucrat::~Bureaucrat() {
-	// std::cout << _name << " destructor called.\n";
+	std::cout << _name << " destructor called.\n";
 } ;
 
 std::string	Bureaucrat::getName() const {
@@ -72,16 +72,24 @@ Bureaucrat&	Bureaucrat::operator--() {
 
 Bureaucrat	Bureaucrat::operator++(int) {
 	Bureaucrat	result(*this);
-	// will call overloaded prefix operator
 	++(*this);
 	return result;
 }
 
 Bureaucrat	Bureaucrat::operator--(int){
 	Bureaucrat	result(*this);
-	// will call overloaded prefix operator
 	--(*this);
 	return result;
+}
+
+void	Bureaucrat::signForm(Form& form) {
+	try {
+		form.beSigned(*this);
+		std::cout << this->_name << " signed " << form.getName() << std::endl;
+	} catch (std::exception& e) {
+		std::cout << this->_name << " couldn't sign " << form.getName()
+		<< " because " << e.what() << std::endl;
+	}
 }
 
 std::ostream&	operator<<(std::ostream& out, Bureaucrat& bureaucrat) {

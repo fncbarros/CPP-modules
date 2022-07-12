@@ -1,7 +1,7 @@
 
 #pragma once
-#ifndef CLASS_H
-#define CLASS_H
+#ifndef CLASS_HPP
+#define CLASS_HPP
 
 class Class {
 public:
@@ -14,4 +14,4 @@ private:
 
 };
 
-#endif /* CLASS_H */
+#endif /* CLASS_HPP */

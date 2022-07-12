@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:16:42 by fbarros           #+#    #+#             */
-/*   Updated: 2022/07/11 12:52:51 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/07/12 16:48:35 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 #include <string>
 #include <iostream>
 #include <exception>
+
+#include "Form.hpp"
+class Form;
 
 class Bureaucrat {
 public:
@@ -39,19 +42,18 @@ public:
 		}
 	};
 
-	std::string		getName() const;
+	std::string	getName() const;
 	unsigned int	getGrade() const;
 
-	// prefix
 	Bureaucrat&	operator++();
 	Bureaucrat&	operator--();
-	// postfix
 	Bureaucrat	operator++(int);
 	Bureaucrat	operator--(int);
 
+	void	signForm(Form & form);
 
 private:
-	const std::string _name;
+	const std::string	_name;
 	unsigned int	_grade;
 
 };
