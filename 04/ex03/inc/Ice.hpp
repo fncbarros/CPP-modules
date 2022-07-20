@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Ice.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/11 13:15:25 by fbarros           #+#    #+#             */
-/*   Updated: 2022/07/20 22:17:14 by fbarros          ###   ########.fr       */
+/*   Created: 2022/07/07 16:07:14 by fbarros           #+#    #+#             */
+/*   Updated: 2022/07/08 17:02:08 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ShrubberyCreationForm.hpp"
+#pragma once
+#ifndef ICE_H
+#define ICE_H
 
-int main()
-{
-	// Form f("test", 1, 1); // should not compile
-	ShrubberyCreationForm shrubbery("the larch");
+#include "AMateria.hpp"
 
-}
+class Ice : public AMateria {
+public:
+    Ice();
+    Ice(const Ice& other);
+    Ice& operator=(const Ice& other);
+    ~Ice();
+
+    AMateria* clone() const;
+    void    use(ICharacter& target);
+
+};
+
+#endif /* ICE_H */

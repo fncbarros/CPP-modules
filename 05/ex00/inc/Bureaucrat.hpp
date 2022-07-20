@@ -6,7 +6,7 @@
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:16:42 by fbarros           #+#    #+#             */
-/*   Updated: 2022/07/11 12:52:51 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/07/12 16:44:38 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ public:
 	std::string		getName() const;
 	unsigned int	getGrade() const;
 
-	// prefix
 	Bureaucrat&	operator++();
 	Bureaucrat&	operator--();
-	// postfix
 	Bureaucrat	operator++(int);
 	Bureaucrat	operator--(int);
 

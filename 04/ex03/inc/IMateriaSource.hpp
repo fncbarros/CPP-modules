@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   IMateriaSource.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/11 13:15:25 by fbarros           #+#    #+#             */
-/*   Updated: 2022/07/20 22:17:14 by fbarros          ###   ########.fr       */
+/*   Created: 2022/07/07 18:23:17 by fbarros           #+#    #+#             */
+/*   Updated: 2022/07/08 16:03:00 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ShrubberyCreationForm.hpp"
+#pragma once
+#ifndef I_MATERIA_SOURCE_H
+#define I_MATERIA_SOURCE_H
 
-int main()
-{
-	// Form f("test", 1, 1); // should not compile
-	ShrubberyCreationForm shrubbery("the larch");
+#include <string>
+#include "AMateria.hpp"
 
-}
+class IMateriaSource {
+public:
+    virtual ~IMateriaSource() {}
+    virtual void learnMateria(AMateria* m) = 0;
+    virtual AMateria* createMateria(std::string const & type) = 0;
+};
+
+
+#endif /* I_MATERIA_SOURCE_H */

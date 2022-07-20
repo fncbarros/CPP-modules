@@ -5,16 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/11 13:15:25 by fbarros           #+#    #+#             */
-/*   Updated: 2022/07/20 22:17:14 by fbarros          ###   ########.fr       */
+/*   Created: 2022/07/07 16:47:08 by fbarros           #+#    #+#             */
+/*   Updated: 2022/07/08 16:35:07 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ShrubberyCreationForm.hpp"
+#include "Ice.hpp"
+#include "Cure.hpp"
+#include "MateriaSource.hpp"
+#include "Character.hpp"
 
 int main()
 {
-	// Form f("test", 1, 1); // should not compile
-	ShrubberyCreationForm shrubbery("the larch");
+	IMateriaSource* src = new MateriaSource();
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
+	ICharacter* me = new Character("me");
+	AMateria* tmp;
+	tmp = src->createMateria("ice");
+	me->equip(tmp);
+	tmp = src->createMateria("cure");
+	me->equip(tmp);
+	ICharacter* bob = new Character("bob");
+	me->use(0, *bob);
+	me->use(1, *bob);
+	delete bob;
+	delete me;
+	delete src;
 
+	return (0);
 }
+
