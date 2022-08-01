@@ -51,6 +51,7 @@ public:
 	Bureaucrat	operator--(int);
 
 	void	signForm(Form & form);
+    void	executeForm(Form & form);
 
 private:
 	const std::string	_name;

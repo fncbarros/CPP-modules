@@ -30,23 +30,37 @@ public:
 	virtual ~Form();
 
 	class GradeTooHighException : public std::exception {
+    private:
 		const char *what() const throw() {
 			return "Grade too high!";
 		}
 	};
 
 	class GradeTooLowException : public std::exception {
+    private:
 		const char *what() const throw() {
 			return "Grade too low!";
 		}
 	};
 
+    class NotSignedException : public std::exception {
+    private:
+        const char *what() const throw() {
+            return "Form not Signed!";
+        }
+    };
+
 	std::string	getName() const;
 	bool		isSigned() const;
-	int			getSignGrade() const;
-	int			getExecGrade() const;
+	unsigned int			getSignGrade() const;
+	unsigned int			getExecGrade() const;
 
 	void	beSigned(Bureaucrat& bureaucrat);
+
+    void    execute(Bureaucrat const& executor) const;
+
+protected:
+    virtual void    process() const = 0;
 
 private:
 	const std::string	_name;
@@ -55,6 +69,6 @@ private:
 	const unsigned int	_exec_grade;
 };
 
-	std::ostream&	operator<<(std::ostream& out, Form& form);
+std::ostream&	operator<<(std::ostream& out, Form& form);
 
 #endif /* FORM_HPP */

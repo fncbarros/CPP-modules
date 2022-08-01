@@ -89,7 +89,17 @@ void	Bureaucrat::signForm(Form& form) {
 	} catch (std::exception& e) {
 		std::cout << this->_name << " couldn't sign " << form.getName()
 		<< " because " << e.what() << std::endl;
+        std::cout << "bureaucrat grade: " << this->_grade << " SIGNING GRADE: " << form.getSignGrade() << std::endl;
 	}
+}
+
+void	Bureaucrat::executeForm(Form& form) {
+    try {
+        form.execute(*this);
+    } catch (std::exception& e) {
+        std::cout << this->_name << " couldn't execute " << form.getName()
+                  << " because " << e.what() << std::endl;
+    }
 }
 
 std::ostream&	operator<<(std::ostream& out, Bureaucrat& bureaucrat) {

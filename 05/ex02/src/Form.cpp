@@ -54,19 +54,28 @@ bool		Form::isSigned() const {
 	return _signed;
 }
 
-int			Form::getSignGrade() const {
+unsigned int			Form::getSignGrade() const {
 	return _sign_grade;
 }
 
-int			Form::getExecGrade() const {
+unsigned int			Form::getExecGrade() const {
 	return _exec_grade;
 }
 
 void	Form::beSigned(Bureaucrat& bureaucrat) {
-	if (bureaucrat.getGrade() <= this->_sign_grade)
+	if (bureaucrat.getGrade() >= this->_sign_grade)
 		this->_signed = true;
 	else
 		throw GradeTooLowException();
+}
+
+void    Form::execute(Bureaucrat const & executor) const {
+    if (this->isSigned() == false) {
+        throw NotSignedException();
+    } else if (executor.getGrade() <= this->getExecGrade()) {
+        throw Bureaucrat::GradeTooLowException();
+    }
+    process();
 }
 
 std::ostream&	operator<<(std::ostream& out, Form& form) {

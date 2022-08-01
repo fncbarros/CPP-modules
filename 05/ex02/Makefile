@@ -34,7 +34,7 @@ clean:
 	@rm -rf ${OBJDIR}
 
 fclean: clean
-	@rm -f ${NAME} *.dSYM
+	@rm -f ${NAME} *_shrubbery *.dSYM
 
 re: fclean all
 

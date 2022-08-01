@@ -10,17 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm() :
-Form("Tree", 145, 137) {
+/**
+ * ShrubberyCreationForm: Required grades: sign 145, exec 137
+ * Create a file <target>_shrubbery in the working directory, and writes ASCII trees
+ * inside it.*/
 
+ShrubberyCreationForm::ShrubberyCreationForm() :
+Form("Shrubbery", 145, 137) {
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string name) :
-Form(name, 145, 137) {
-
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string target) :
+Form(target, 145, 137),
+_target(target) {
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) :
@@ -28,29 +31,36 @@ Form(other.getName(), other.getSignGrade(), other.getExecGrade()) {
 }
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other) {
-    if (this != &other)
-    {
-        this->
-    }
+    (void)other;
+    return *this;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {
-    // ...
 }
 
-void ShrubberyCreationForm::drawTree(std::string target) {
-    std::ofstream   file(target + "_shrubery");
-    file << "                   # #### ####\n \
-                    ### \\/#|### |/####\n \
-                    ##\\/#/ \\||/##/_/##/_#\n \
-                    ###  \\/###|/ \\/ # ###\n \
-                ##_\\_#\\_\\## | #/###_/_####\n \
-                ## #### # \\ #| /  #### ##/##\n \
-                __#_--###`  |{,###---###-~\n \
-                            \\ }{\n \
-                            }}{\n \
-                            }}{\n \
-                        ejm  {{}\n \
-                    , -=-~{ .-^- _";
+void    ShrubberyCreationForm::setTarget(std::string target) {
+    this->_target = target;
+}
+
+void ShrubberyCreationForm::process() const {
+    std::string path(_target + "_shrubbery");
+    std::ofstream   file;
+    file.open(path.c_str());
+    if (!file) {
+        std::cerr << "Failed to create shrubbery file\n";
+        return ;
+    }
+    file << "                   # #### ####\n"
+    << "                ### \\/#|### |/####\n"
+    << "                ##\\/#/ \\||/##/_/##/_#\n"
+    << "                ###  \\/###|/ \\/ # ###\n"
+    << "            ##_\\_#\\_\\## | #/###_/_####\n"
+    << "           ## #### # \\ #| /  #### ##/##\n"
+    << "           __#_--###`  |{,###---###-~\n"
+    << "                       \\ }{\n"
+    << "                       }}{\n"
+    << "                       }}{\n"
+    << "                   ejm  {{}\n"
+    << "               , -=-~{ .-^- _" << std::endl;
     file.close();
 }
