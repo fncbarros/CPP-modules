@@ -18,11 +18,11 @@
  * inside it.*/
 
 ShrubberyCreationForm::ShrubberyCreationForm() :
-Form("Shrubbery", 145, 137) {
+Form("Shrubbery Creation", 145, 137) {
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string target) :
-Form(target, 145, 137),
+Form("Shrubbery Creation", 145, 137),
 _target(target) {
 }
 

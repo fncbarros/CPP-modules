@@ -18,11 +18,11 @@
  * successfully 50% of the time. Otherwise, informs that the robotomy failed.*/
 
 RobotomyRequestForm::RobotomyRequestForm() :
-Form("Shrubbery", 72, 45) {
+Form("Robotomy Request", 72, 45) {
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string target) :
-Form(target, 72, 45),
+Form("Robotomy Request", 72, 45),
 _target(target) {
 }
 

@@ -17,11 +17,11 @@
  * Informs that <target> has been pardoned by Zaphod Beeblebrox.*/
 
 PresidentialPardonForm::PresidentialPardonForm() :
-Form("Shrubbery", 25, 5) {
+Form("\"Presidential Pardon\"", 25, 5) {
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string target) :
-Form(target, 25, 5),
+Form("Presidential Pardon", 25, 5),
 _target(target) {
 }
 
