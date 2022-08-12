@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   randomChump.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:47:28 by fbarros           #+#    #+#             */
-/*   Updated: 2022/05/04 13:51:52 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/08/12 19:13:05 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "Zombie.hpp"
 
 void randomChump( std::string name ) {
-	Zombie newZ(name);
+	Zombie chump(name);
 
-	newZ.announce();
+	chump.announce();
 };

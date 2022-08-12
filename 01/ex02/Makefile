@@ -3,6 +3,6 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 main:
 
 fclean: 
-	rm -f main
+	rm -f reference
 
 .PHONY: fclean

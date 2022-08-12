@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:48:59 by fbarros           #+#    #+#             */
-/*   Updated: 2022/05/04 13:25:41 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/08/12 19:18:18 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
 #ifndef ZOMBIE_H
 #define ZOMBIE_H
 
@@ -23,29 +22,16 @@ using	std::cout;
 using	std::endl;
 
 class Zombie {
+public:
+	Zombie();
+	Zombie(string name);
+	~Zombie( void );
+
+	void	announce( void );
 
 private:
+	string	_name;
 
-	string	name;
-
-public:
-
-Zombie( void );
-Zombie(string _name);
-~Zombie( void );
-
-void	announce( void );
-} ;
-
-Zombie* newZombie( std::string name );
-void randomChump( std::string name );
-
-// ************************************************************************** //
-// vim: set ts=4 sw=4 tw=80 noexpandtab:                                      //
-// -*- indent-tabs-mode:t;                                                   -*-
-// -*- mode: c++-mode;                                                       -*-
-// -*- fill-column: 75; comment-column: 75;                                  -*-
-// ************************************************************************** //
-
+};
 
 #endif /* ZOMBIE_H */
