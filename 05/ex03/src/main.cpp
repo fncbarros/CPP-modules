@@ -19,8 +19,20 @@
 int main()
 {
     Intern  someRandomIntern;
-    Form*   rrf;
+    Bureaucrat  hal("HAL2000", 80);
+    Bureaucrat  greta("Greta", 150);
+    Bureaucrat  zaphod("Zaphod", 30);
 
-    rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+    Form*   rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+    Form*   scf = someRandomIntern.makeForm("shrubbery creation form", "Root");
+    Form*   ppr = someRandomIntern.makeForm("presidential", "NOXIN");
+
+    hal.signForm(*rrf);
+    hal.executeForm(*rrf);
+    greta.signForm(*scf);
+    greta.executeForm(*scf);
+    zaphod.signForm(*ppr);
+    zaphod.executeForm(*ppr);
+
     delete rrf;
 }

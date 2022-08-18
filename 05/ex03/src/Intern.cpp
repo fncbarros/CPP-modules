@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "Intern.hpp"
 
 Intern::Intern() {
@@ -36,33 +35,34 @@ Intern::~Intern() {
 
 Form    *Intern::makeForm(std::string form,const std::string& target) {
     for (int i = 0; i < 3; i++) {
-        if (form_table[i].form.find(stoLower(form))) {
-            std::cout << "Intern creates " << form << std::endl;
+        if (form_table[i].form.find(stoLower(form)) != std::string::npos)
             return form_table[i].func(target);
-        }
     }
     std::cerr << "Could not find form!\n";
     return NULL;
 }
 
 void    Intern::initTable() {
-    form_table[0].form = "shrubbery creation";
+    form_table[0].form = "shrubbery creation form";
     form_table[0].func = makeShrubbery;
-    form_table[1].form = "robotomy request";
+    form_table[1].form = "robotomy request form";
     form_table[1].func = makeRobotomy;
-    form_table[2].form = "presidential pardon";
+    form_table[2].form = "presidential pardon form";
     form_table[2].func = makePardon;
 }
 
-Form    *Intern::makeShrubbery(const std::string target) {
+Form    *Intern::makeShrubbery(std::string target) {
+    std::cout << "Intern creates ShrubberyCreationForm" << std::endl;
     return new ShrubberyCreationForm(target);
 }
 
 Form    *Intern::makeRobotomy(const std::string target) {
+    std::cout << "Intern creates RobotomyRequestForm" << std::endl;
     return new RobotomyRequestForm(target);
 }
 
 Form    *Intern::makePardon(const std::string target) {
+    std::cout << "Intern creates PresidentialPardonForm" << std::endl;
     return new PresidentialPardonForm(target);
 }
 

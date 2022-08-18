@@ -18,10 +18,9 @@
 #include <iostream>
 #include <exception>
 
-class ShrubberyCreationForm;
-class RobotomyRequestForm;
-class PresidentialPardonForm;
-class Form;
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 class Intern {
 public:

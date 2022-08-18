@@ -27,7 +27,7 @@ _target(target) {
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other) :
 Form(other.getName(), other.getSignGrade(), other.getExecGrade()),
-_target(other.get){
+_target(other._target){
 }
 
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& other) {
