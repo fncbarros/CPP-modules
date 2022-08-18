@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:48:59 by fbarros           #+#    #+#             */
-/*   Updated: 2022/05/12 19:46:52 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/08/12 19:32:20 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,17 @@ using	std::cout;
 using	std::endl;
 
 class Zombie {
-
-private:
-
-	string	_name;
-
 public:
-
-	Zombie(void);
+	Zombie();
 	Zombie(string name);
 	~Zombie( void );
 	void	setName(string name);
 
 void	announce( void );
+
+private:
+	string	_name;
+
 } ;
-
-Zombie*	zombieHorde(int N, string name);
-
 
 #endif /* ZOMBIE_H */
