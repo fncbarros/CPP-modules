@@ -15,6 +15,11 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
+/**
+ * Shrubbery form: sign 145, exec 137
+ * Robotomy form: sign72, exec 5
+ * Pardon form: sign 25, exec 5*/
+
 void    test_shrubbery() {
     std::cout << "\n***SHRUBBERY CREATION TEST***" <<std::endl;
 
@@ -37,10 +42,10 @@ void    test_robotomy() {
 
     Bureaucrat  hal("HAL2000", 80);
     Bureaucrat  jessica("Jessica", 46);
-    RobotomyRequestForm f0("f0rm");
-    RobotomyRequestForm f1("f1rm");
-    RobotomyRequestForm f2("f2rm");
-    RobotomyRequestForm f3("f3rm");
+    RobotomyRequestForm f0("form0");
+    RobotomyRequestForm f1("form1");
+    RobotomyRequestForm f2("form2");
+    RobotomyRequestForm f3("form3");
     std::cout << std::endl;
 
     hal.executeForm(f0);

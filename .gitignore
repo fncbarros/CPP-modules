@@ -38,6 +38,7 @@
 *.log
 *.swp
 *.vscode/
+.idea/
 Harl
 Fixed
 ClapTrap
@@ -50,3 +51,5 @@ Interface
 Bureaucrat
 Form
 Intern
+*_shrubbery
+Scalar
