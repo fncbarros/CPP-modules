@@ -3,25 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   HumanA.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarros <fbarros@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 19:45:31 by fbarros           #+#    #+#             */
-/*   Updated: 2022/05/13 20:02:56 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/08/19 19:13:09 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "HumanA.hpp"
 
-HumanA::~HumanA( void ) {
-	// ...
-}
-
-// reference needs to be initialized when declared
-HumanA::HumanA( std::string _name, Weapon& _weapon ) : name(_name), weapon(_weapon) {
-	// weapon = _weapon; // will throw a compiler error for reason mentioned above 
+HumanA::HumanA( std::string _name, Weapon& _weapon ) : 
+name(_name),
+weapon(_weapon) {
+	std::cout << "HumanA Constructor called.\n";
 }
 
 void	HumanA::attack( void ) {
-	cout << name << " attacks with their " << weapon.getType() << endl; 
+	std::cout << name << " attacks with their " << weapon.getType() << std::endl; 
 }

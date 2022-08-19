@@ -6,22 +6,21 @@
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 19:45:28 by fbarros           #+#    #+#             */
-/*   Updated: 2022/05/25 14:58:47 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/08/19 19:13:53 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "HumanB.hpp"
 
-HumanB::HumanB( string _name ) {
-	name = _name;
+HumanB::HumanB( std::string _name ) :
+name(_name) {
+	std::cout << "HumanB Constructor constructor called.\n";
 }
 
-// stores garbage if not passed by reference because it would keep a copy
 void	HumanB::setWeapon( Weapon& _weapon ) {
 	weapon = &_weapon;
 }
 
 void	HumanB::attack( void ) {
-	cout << name << " attacks with their " << weapon->getType() << endl;
+	std::cout << name << " attacks with their " << weapon->getType() << std::endl;
 }

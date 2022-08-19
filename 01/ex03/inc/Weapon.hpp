@@ -6,34 +6,25 @@
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 19:57:39 by fbarros           #+#    #+#             */
-/*   Updated: 2022/05/25 14:58:27 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/08/19 19:16:42 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
 #ifndef WEAPON_H
 #define WEAPON_H
 
 #include <string>
 #include <iostream>
-# include <iomanip>
-
-using	std::string;
-using	std::cout;
-using	std::cin;
-using	std::endl;
+#include <iomanip>
 
 class Weapon {
+public:
+Weapon( std::string type );
+const std::string&	getType() const;
+void	setType( std::string type );
 
 private:
-
-	string type;
-
-public:
-
-Weapon( string _type );
-const string&	getType( void ) const;
-void	setType( string _type );
+	std::string type;
 
 };
 

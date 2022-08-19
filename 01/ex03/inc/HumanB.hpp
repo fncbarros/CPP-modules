@@ -6,29 +6,25 @@
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 12:40:58 by fbarros           #+#    #+#             */
-/*   Updated: 2022/05/25 14:58:45 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/08/19 19:06:46 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#ifndef HUMAN_B_H
-#define HUMAN_B_H
+#ifndef HUMANB_H
+#define HUMANB_H
 
 #include "Weapon.hpp"
 
 class HumanB {
+public:
+	HumanB( std::string _name );
+	void	setWeapon(Weapon& _weapon);
+	void	attack( void );
 
 private:
-
-	string name;
+	std::string name;
 	Weapon *weapon;
-
-public:
-
-HumanB( std::string _name );
-void	setWeapon(Weapon& _weapon);
-void	attack( void );
 
 };
 
-#endif /* HUMAN_B_H */
+#endif /* HUMANB_H */

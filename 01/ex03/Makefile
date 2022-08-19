@@ -12,7 +12,7 @@ HDIR := inc/
 
 INC := -I ${HDIR}
 
-NAME := unnecessary_violence
+NAME := Violence
 
 ${OBJDIR}%.o: %.cpp ${HDIR}
 	${CC} ${CFLAGS} ${INC} -c $< -o $@

@@ -6,28 +6,24 @@
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 19:50:18 by fbarros           #+#    #+#             */
-/*   Updated: 2022/05/25 14:58:48 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/08/19 19:12:47 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#pragma once
-#ifndef HUMAN_A_H
-#define HUMAN_A_H
+#ifndef HUMANA_H
+#define HUMANA_H
 
 #include "Weapon.hpp"
 
 class HumanA {
+public:
+	HumanA( std::string _name, Weapon& _weapon );
+	void	attack( void );
 
 private:
-	string	name;
+	std::string	name;
 	Weapon&	weapon;
-
-public:
-
-HumanA( std::string _name, Weapon& _weapon );
-void	attack( void );
 
 };
 
-#endif /* HUMAN_A_H */
+#endif /* HUMANA_H */
