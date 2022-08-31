@@ -36,7 +36,6 @@ std::string search(string& line, const string& original, const string& replace)
             orig_pos += original.length();
         }
     }
-    buffer += "\n";
     return buffer;
 }
 
@@ -44,7 +43,9 @@ void    scan(std::ifstream& fin, std::ofstream& fout, const string& original, co
 {
     string  buffer;
 
-    while(!fin.eof()) {
+    while(fin.eof() == false) {
+        if (fout.tellp() != 0)
+            fout << "\n";
         getline(fin, buffer);
         fout << search(buffer, original, replace);
     }
@@ -53,7 +54,8 @@ void    scan(std::ifstream& fin, std::ofstream& fout, const string& original, co
 int main(int argc, char **argv)
 {
     if (argc != 4) {
-        std::cerr << "Not enough arguments\n";
+        std::cout << "Wrong number of arguments.\n";
+        std::cout << "Usage: ./fake_sed <in_file> <replace_this_string> <with_this_string>\n";
         return 1;
     }
     string filename = argv[1], s1 = argv[2], s2 = argv[3];
@@ -62,13 +64,13 @@ int main(int argc, char **argv)
 
     fin.open(filename.c_str(), std::ios::in);
     if (!fin) {
-        std::cerr << "File error.\n";
+        std::cout << "Failed to open " << filename << std::endl;
         return 1;
     }
     string outfile = filename + ".replace";
-    fout.open(outfile.c_str(), std::ios::out | std::ios::app);
+    fout.open(outfile.c_str(), std::ios::out);
     if (!fout) {
-        std::cerr << "File error.\n";
+        std::cout << "Failed to create file.\n";
         fin.close();
         return 1;
     }
