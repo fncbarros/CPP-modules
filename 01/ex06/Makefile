@@ -10,7 +10,7 @@ OBJDIR := obj/
 
 INC := -I inc/
 
-NAME := Harl
+NAME := harlFilter
 
 ${OBJDIR}%.o: %.cpp
 	${CC} ${CFLAGS} -c $< -o $@ ${INC}

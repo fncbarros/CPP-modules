@@ -22,7 +22,7 @@ ${OBJDIR}%.o: ${SRCDIR}%.cpp
 all: ${NAME}
 
 ${NAME}: ${OBJDIR} ${OBJ} ${HDIR}
-	${CC} ${CFLAGS} ${OBJDIR}/*.o -o ${NAME}
+	${CC} ${CFLAGS} ${OBJ}*.o -o ${NAME}
 
 ${OBJDIR}:
 	mkdir ${OBJDIR}
