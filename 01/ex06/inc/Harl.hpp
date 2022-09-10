@@ -29,11 +29,7 @@ public:
 	void	complain( std::string level );
 
 private:
-	struct _lut
-	{
-		string		level;
-		void	(Harl::*f)( void );
-	}	lut[4];
+	string	lvl[4];
 	void	debug( void );
 	void	info( void );
 	void	warning( void );

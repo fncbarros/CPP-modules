@@ -13,36 +13,51 @@
 #include "Harl.hpp"
 
 Harl::Harl() {
-	lut[0].level = "DEBUG";
-	lut[0].f = &Harl::debug;
-	lut[1].level = "INFO";
-	lut[1].f = &Harl::info;
-	lut[2].level = "WARNING";
-	lut[2].f = &Harl::warning;
-	lut[3].level = "ERROR";
-	lut[3].f = &Harl::error;
+	lvl[0] = "DEBUG";
+	lvl[1] = "INFO";
+	lvl[2] = "WARNING";
+	lvl[3] = "ERROR";
 }
 
 void	Harl::debug( void ) {
-	cout << "[DEBUG] I love having extra bacon for my 7XL-double-cheese-triple-pickle-special ketchup burger. I really do!\n";
+	cout << "[DEBUG] I love having extra bacon for my 7XL-double-cheese-triple-pickle-special ketchup burger.\nI really do!\n\n";
 }
 
 void	Harl::info( void ) {
-	cout << "[INFO] I cannot believe adding extra bacon costs more money. You didn't put enough bacon in my burger! If you did, I wouldn't be asking for more!\n";
+	cout << "[INFO] I cannot believe adding extra bacon costs more money.\nYou didn't put enough bacon in my burger!\nIf you did, I wouldn't be asking for more!\n\n";
 }
 
 void	Harl::warning( void ) {
-	cout << "[WARNING] I think I deserve to have some extra bacon for free. I've been coming for years whereas you started working here since last month.\n";
+	cout << "[WARNING] I think I deserve to have some extra bacon for free.\nI've been coming for years whereas you started working here since last month.\n\n";
 }
 
 void	Harl::error( void ) {
-	cout << "[ERROR] This is unacceptable! I want to speak to the manager now.\n";
+	cout << "[ERROR] This is unacceptable, I want to speak to the manager now.\n";
 }
 
 void	Harl::complain( std::string level ) {
-	static int i = -1;
-	if (i <= 3)
-		level == lut[++i].level ? (this->*lut[i].f)() : complain(level) ;
-	i = -1;
+	int i = -1;
+	while (++i < 4) {
+		if (level == lvl[i])
+			break ;
+	}
+	
+	switch (i)
+	{
+	case 0:
+		debug();
+		// fallthrough
+	case 1:
+		info();
+		// fallthrough
+	case 2:
+		warning();
+		// fallthrough
+	case 3:
+		error();
+		break;
+	default:
+		cout << "[ Probably complaining about insignificant problems ]" << endl;
+	}
 }
 
