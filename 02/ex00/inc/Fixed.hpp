@@ -15,7 +15,6 @@
 #define FIXED_H
 
 # include <iostream>
-// # include <memory>
 
 class Fixed {
 public:

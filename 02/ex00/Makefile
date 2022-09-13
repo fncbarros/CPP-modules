@@ -14,13 +14,13 @@ INC := -I ${HDIR}
 
 NAME := Fixed
 
-${OBJDIR}%.o: %.cpp
+${OBJDIR}%.o: %.cpp ${OBJDIR}
 	${CC} ${CFLAGS} ${INC} -c $< -o $@
 
 all: ${NAME}
 
-${NAME}: ${OBJDIR} ${OBJ} ${HDIR}
-	${CC} ${CFLAGS} ${OBJDIR}/*.o -o ${NAME}
+${NAME}: ${OBJ} ${HDIR}
+	${CC} ${CFLAGS} ${OBJ} -o ${NAME}
 
 ${OBJDIR}:
 	mkdir ${OBJDIR}
