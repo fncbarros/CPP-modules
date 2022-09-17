@@ -64,7 +64,11 @@ float	Fixed::toFloat( void ) const {
 }
 
 int	Fixed::toInt( void ) const {
-	return (getRawBits() >> _fractional);
+    int conversion = getRawBits();
+
+    if (conversion < 0) { conversion *= -1;}
+    conversion >>= _fractional;
+	return (_rawValue >= 0 ? conversion : conversion *= -1);
 }
 
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed) {

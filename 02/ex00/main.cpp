@@ -13,7 +13,7 @@
 #include "Fixed.hpp"
 #include <iostream>
 
-namespace noValue
+namespace subjectTest
 {
    void run()
     {
@@ -30,7 +30,7 @@ namespace noValue
 
 } // namespace noValue
 
-namespace Value
+namespace myTest
 {
     void run()
     {
@@ -51,8 +51,8 @@ namespace Value
 
 int main()
 {
-    noValue::run();
-    Value::run();
+    subjectTest::run();
+    myTest::run();
 
     return 0;
 }

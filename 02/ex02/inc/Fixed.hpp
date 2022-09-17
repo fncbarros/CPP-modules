@@ -21,8 +21,8 @@ class Fixed {
 public:
 	Fixed();
 	Fixed(const Fixed& other);
-	Fixed(const int natural);
-	Fixed(const float real);
+	explicit Fixed(const int natural);
+	explicit Fixed(const float real);
 	Fixed& operator=(const Fixed& other);
 	~Fixed ();
 
@@ -44,8 +44,8 @@ public:
 	Fixed	operator/(const Fixed& other);
 
 	// post
-	Fixed	operator++( int increment );
-	Fixed	operator--( int decrement );
+	Fixed	operator++( int );
+	Fixed	operator--( int );
 	// pre
 	Fixed&	operator++( );
 	Fixed&	operator--( );

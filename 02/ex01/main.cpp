@@ -18,7 +18,7 @@ int main( void )
     Fixed const b( 10 );
     Fixed const c( 42.42f );
     Fixed const d( b );
-    Fixed const e(-66.6f);
+    Fixed const e(-66.7f);
 
     a = Fixed( 1234.4321f );
 
