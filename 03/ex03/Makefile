@@ -4,7 +4,7 @@ OBJ := ${SRC:src/%.cpp=obj/%.o}
 
 CC := c++
 
-CFLAGS := -Wall -Wextra -Werror -std=c++98
+CFLAGS := -Wall -Wextra -Werror -std=c++98 -Wshadow -Wno-shadow
 
 OBJDIR := obj/
 
@@ -14,7 +14,7 @@ HDIR := inc/
 
 INC := -I ${HDIR}
 
-NAME := Interface
+NAME := DiamondTrap
 
 ${OBJDIR}%.o: ${SRCDIR}%.cpp
 	${CC} ${CFLAGS} ${INC} -c $< -o $@
@@ -22,15 +22,13 @@ ${OBJDIR}%.o: ${SRCDIR}%.cpp
 all: ${NAME}
 
 ${NAME}: ${OBJDIR} ${OBJ} ${HDIR}
-	${CC} ${CFLAGS} ${OBJDIR}*.o -o ${NAME}
+	${CC} ${CFLAGS} ${OBJDIR}/*.o -o ${NAME}
 
 ${OBJDIR}:
 	mkdir ${OBJDIR}
 
 debug:	CFLAGS += -g
 debug:	re
-sanitizer: CFLAGS += -fsanitize=address
-sanitizer: re
 
 clean:
 	@rm -rf ${OBJDIR}

@@ -2,7 +2,7 @@ SRC := ${wildcard *.cpp}
 
 OBJ := ${SRC:%.cpp=obj/%.o}
 
-CC := g++
+CC := c++
 
 CFLAGS := -Wall -Wextra -Werror -std=c++98
 
