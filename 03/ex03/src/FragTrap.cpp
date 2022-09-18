@@ -50,6 +50,18 @@ FragTrap::~FragTrap( ) {
 	std::cout << "FragTrap " << _name << ": [DESTRUCTED]\n";
 }
 
+void	FragTrap::attack(const std::string& target) {
+	if (hit_points > 0 || energy_points > 0) {
+		std::cout << "FragTrap " << _name << ": Attacks " << target << "\n";
+		energy_points--;
+		return ;
+	}
+	else if (energy_points == 0)
+		std::cout << "FragTrap " << _name << ": energy = 0.\n";
+	if (hit_points == 0)
+		std::cout << "FragTrap " << _name << ": hitpoints = 0.\n";
+}
+
 void	FragTrap::highFivesGuys( void ) {
-	std::cout << "HIGH FIVE!\n";
+	std::cout << "FragTrap " << _name << ": [HIGH FIVE!]\n";
 }

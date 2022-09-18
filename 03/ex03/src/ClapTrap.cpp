@@ -58,13 +58,14 @@ ClapTrap::~ClapTrap( void ) {
 }
 
 void	ClapTrap::attack(const std::string& target) {
-	std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << damage << " points of damage.\n";
-
-	if (hit_points > 0 || energy_points > 0)
+	if (hit_points > 0 || energy_points > 0) {
+		std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << damage << " points of damage.\n";
 		energy_points--;
+		return ;
+	}
 	else if (energy_points == 0)
 		std::cout << "ClapTrap " << _name << " has no energy left.\n";
-	else if (hit_points == 0)
+	if (hit_points == 0)
 		std::cout << "ClapTrap " << _name << " is dead.\n";
 }
 

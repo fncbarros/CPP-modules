@@ -30,7 +30,6 @@ void	test1() {
 	std::cout << "**TEST1**\n";
 	ScavTrap	def;
 	ScavTrap	marvin("Marvin");
-	ScavTrap	marvin2(marvin);
 
 	std::cout << "\n";
 
@@ -41,10 +40,21 @@ void	test1() {
 
 	std::cout << "\n";
 
-	marvin2.takeDamage(100);
-	marvin2.attack("nobody");
-	marvin2.guardGate();
+	marvin.takeDamage(100);
+	marvin.attack("nobody");
+	marvin.guardGate();
 
+	std::cout << "\n";
+	{
+		std::cout << "\n**TEST3**\n";
+
+		ScavTrap	marvin2(marvin);
+		ClapTrap wall_e("Wall-E");
+		ClapTrap	*p_marvin = &marvin;
+		Attack(*p_marvin, wall_e);
+
+		std::cout << "\n";
+	}
 	std::cout << "\n";
 }
 
@@ -55,4 +65,3 @@ int main()
 
 	return (0);
 }
-

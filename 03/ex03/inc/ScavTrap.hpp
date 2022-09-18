@@ -24,7 +24,7 @@ public:
 	ScavTrap( std::string name);
 	virtual ~ScavTrap();
 
-	void	attack(const std::string& target);
+	virtual void	attack(const std::string& target);
 	void	guardGate();
 
 private:
