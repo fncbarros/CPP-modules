@@ -28,6 +28,9 @@ ${OBJDIR}:
 debug:	CFLAGS += -g
 debug:	re
 
+ASAN:	CFLAGS += -fsanitize=address
+ASAN:	re
+
 clean:
 	@rm -rf ${OBJDIR}
 
@@ -36,4 +39,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re debug ASAN

@@ -11,55 +11,47 @@
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
-void	moreCompleteAttack(ClapTrap& attacker, ClapTrap& victim)
+void	Attack(ClapTrap& attacker, ClapTrap& victim)
 {
 	attacker.attack(victim.getName());
 	victim.takeDamage(attacker.getDamage());
 }
 
-int main()
-{
-	ScavTrap	def;
-	ScavTrap	marvin("Marvin");
-
-	std::cout << "\n";
-
-	marvin.attack("Default");
-	def.takeDamage(marvin.getDamage());
-	def.attack("Marvin");
-	marvin.takeDamage(def.getDamage());
-	marvin.attack("Default");
-	def.takeDamage(marvin.getDamage() + 60);
-
-	std::cout << "\n";
-
-	std::cout << "Marvin hit points: " << marvin.getHitPoints() << "\n";
-	std::cout << "Marvin energy points: " << marvin.getEnergyPoints() << "\n";
-	marvin.beRepaired(20);
-	std::cout << "Marvin hit points: " << marvin.getHitPoints() << "\n";
-	std::cout << "Marvin energy points: " << marvin.getEnergyPoints() << "\n";
-
-	std::cout << "\n";
-
-	ScavTrap	clone2(marvin);
-	ScavTrap	clone3 = clone2;
-	
-	std::cout << "\n";
-
-	marvin.guardGate();
-	clone2.guardGate();
-	clone3.guardGate();
-	def.guardGate();
-
-	std::cout << "\n";
-
-	ClapTrap wall_e("Wall-E");
-	ClapTrap	*p_marvin = &marvin;
-	moreCompleteAttack(*p_marvin, wall_e);
-
-	std::cout << "\n";
-
-	return (0);
+void	showStatus(ClapTrap	*robot) {
+	std::cout << robot->getName() << " status\n";
+	std::cout << "Hit points: " << robot->getHitPoints() << std::endl;
+	std::cout << "Energy points: " << robot->getEnergyPoints() << std::endl;
+	std::cout << "Damage: " << robot->getDamage() << std::endl;
+	std::cout << std::endl;
 }
 
+int	main()
+{
+	std::cout << "**TEST1**\n";
+	FragTrap	frag("Frag");
+	ScavTrap	scav("Scav");
+	ClapTrap	clap("Clap");
+
+	showStatus(&frag);
+	showStatus(&scav);
+	showStatus(&clap);
+
+	std::cout << "\n";
+
+	Attack(frag, scav);
+	Attack(scav, clap);
+	Attack(clap, frag);
+
+	std::cout << "\n";
+
+	showStatus(&frag);
+	showStatus(&scav);
+	showStatus(&clap);
+
+	std::cout << "\n";
+
+	frag.highFivesGuys();
+	std::cout << "\n";
+}

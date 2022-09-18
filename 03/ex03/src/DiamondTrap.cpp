@@ -13,7 +13,7 @@
 #include "DiamondTrap.hpp"
 
 DiamondTrap::DiamondTrap( ) {
-	_name = "Default";
+	this->_name = "Default";
 	std::cout << "DiamondTrap" << _name << "called\n";
 	ClapTrap::_name = _name + "_clap_name";
 	this->hit_points = FragTrap::hit_points;

@@ -12,53 +12,46 @@
 
 #include "ScavTrap.hpp"
 
-void	moreCompleteAttack(ClapTrap& attacker, ClapTrap& victim)
+void	Attack(ClapTrap& attacker, ClapTrap& victim)
 {
 	attacker.attack(victim.getName());
 	victim.takeDamage(attacker.getDamage());
 }
 
-int main()
-{
+void    test2() {
+	std::cout << "\n**TEST2**\n";
+    ClapTrap    *CTPtr = new ScavTrap("VIRTUAL_DESTRUCTOR_EXAMPLE");
+    CTPtr->attack("**test attack**");
+    delete CTPtr;
+    std::cout << std::endl;
+}
+
+void	test1() {
+	std::cout << "**TEST1**\n";
 	ScavTrap	def;
 	ScavTrap	marvin("Marvin");
+	ScavTrap	marvin2(marvin);
 
 	std::cout << "\n";
 
-	marvin.attack("Default");
-	def.takeDamage(marvin.getDamage());
-	def.attack("Marvin");
-	marvin.takeDamage(def.getDamage());
-	marvin.attack("Default");
-	def.takeDamage(marvin.getDamage() + 60);
-
-	std::cout << "\n";
-
-	std::cout << "Marvin hit points: " << marvin.getHitPoints() << "\n";
-	std::cout << "Marvin energy points: " << marvin.getEnergyPoints() << "\n";
-	marvin.beRepaired(20);
-	std::cout << "Marvin hit points: " << marvin.getHitPoints() << "\n";
-	std::cout << "Marvin energy points: " << marvin.getEnergyPoints() << "\n";
-
-	std::cout << "\n";
-
-	ScavTrap	clone2(marvin);
-	ScavTrap	clone3 = clone2;
-	
-	std::cout << "\n";
-
+	Attack(marvin, def);
+	Attack(def, marvin);
 	marvin.guardGate();
-	clone2.guardGate();
-	clone3.guardGate();
 	def.guardGate();
 
 	std::cout << "\n";
 
-	ClapTrap wall_e("Wall-E");
-	ClapTrap	*p_marvin = &marvin;
-	moreCompleteAttack(*p_marvin, wall_e);
+	marvin2.takeDamage(100);
+	marvin2.attack("nobody");
+	marvin2.guardGate();
 
 	std::cout << "\n";
+}
+
+int main()
+{
+	test1();
+    test2();
 
 	return (0);
 }
