@@ -60,11 +60,6 @@ int main()
 
 		std::cout << "\n";
 
-		delete diamondPtr;
-	}
-
-
-
 	return (0);
 }
 

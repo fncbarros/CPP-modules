@@ -12,13 +12,24 @@
 
 #include "DiamondTrap.hpp"
 
+// • Name, which is passed as parameter to a constructor
+// • ClapTrap::name (parameter of the constructor + "_clap_name" suffix)
+// • Hit points (FragTrap)
+// • Energy points (ScavTrap)
+// • Attack damage (FragTrap)
+// • attack() (Scavtrap)
+
 DiamondTrap::DiamondTrap( ) {
+	FragTrap ftmp();
+	ScavTrap stmp();
+
 	this->_name = "Default";
-	std::cout << "DiamondTrap" << _name << "called\n";
 	ClapTrap::_name = _name + "_clap_name";
-	this->hit_points = FragTrap::hit_points;
+	this->hit_points =  getHitPoints();
 	this->energy_points = ScavTrap::energy_points;
 	this->damage = FragTrap::damage;
+
+	std::cout << "DiamondTrap" << _name << "called\n";
 
 }
 
@@ -27,16 +38,14 @@ ClapTrap(other.ClapTrap::_name),
 ScavTrap(),
 FragTrap()
 {
-	if (this != &other)
-	{
 		*this = other;
-	}
 }
 
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other) {
 	if (this != &other)
 	{
 		this->_name = other._name;
+		this->ClapTrap::_name = other.ClapTrap::_name;
 		this->_name = other.hit_points;
 		this->_name = other.energy_points;
 		this->_name = other.damage;
