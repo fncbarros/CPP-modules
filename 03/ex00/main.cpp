@@ -13,10 +13,11 @@
 
 #include "ClapTrap.hpp"
 
-void	moreCompleteAttack(ClapTrap& attacker, ClapTrap& victim)
+void	Attack(ClapTrap& attacker, ClapTrap& victim)
 {
 	attacker.attack(victim.getName());
-	victim.takeDamage(attacker.getDamage());
+    if (attacker.getHitPoints() > 0 && attacker.getEnergyPoints() > 0)
+	    victim.takeDamage(attacker.getDamage());
 }
 
 int main()
@@ -26,8 +27,8 @@ int main()
 	
 	std::cout << "\n";
 
-	moreCompleteAttack(def, wall_e);
-	moreCompleteAttack(wall_e, def);
+	Attack(def, wall_e);
+	Attack(wall_e, def);
 
 	std::cout << "\n";
 	
@@ -40,6 +41,16 @@ int main()
 	clone1 = clone2;
 
 	std::cout << "\n";
+
+    def.takeDamage(11);
+    std::cout << "Testing post-mortem attack\n";
+    def.attack("Wall-E");
+
+    std::cout << "\n";
+
+    for (int i = 0; i < 7; i++)
+        wall_e.attack("nobody");
+    wall_e.attack(" ");
 	
 	return (0);
 }

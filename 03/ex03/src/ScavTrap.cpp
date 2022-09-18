@@ -13,7 +13,6 @@
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap( ) {
-	this->_name = "Default";
 	this->hit_points = 100;
 	this->energy_points = 50;
 	this->damage = 20;
@@ -21,7 +20,6 @@ ScavTrap::ScavTrap( ) {
 	std::cout << "ScavTrap " << _name << ": [CONSTRUCTED]\n";
 }
 
-// Base class initialization mandatory here
 ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other._name)
 {
 
@@ -50,7 +48,6 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
 
 ScavTrap::ScavTrap( std::string name ) : ClapTrap(name)
 {
-	this->_name = name;
 	this->hit_points = 100;
 	this->energy_points = 50;
 	this->damage = 20;

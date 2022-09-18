@@ -6,10 +6,9 @@
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 20:47:33 by fbarros           #+#    #+#             */
-/*   Updated: 2022/06/24 18:31:41 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/06/20 16:04:49 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #pragma once
 #ifndef SCAVTRAP_H
@@ -29,7 +28,6 @@ public:
 	void	guardGate();
 
 private:
-
 };
 
 #endif /* SCAVTRAP_H */

@@ -29,13 +29,13 @@ public:
 	void	takeDamage(unsigned int amount);
 	void	beRepaired(unsigned int amount);
 
-	std::string	getName( void );
-	int	getHitPoints( void );
-	int	getEnergyPoints( void );
-	int	getDamage( void );
+	std::string	getName( void ) const ;
+	int	getHitPoints( void ) const ;
+	int	getEnergyPoints( void ) const ;
+	int	getDamage( void ) const ;
 
 private:
-	std::string	_name;
+	std::string   _name;
 	unsigned int	hit_points;
 	unsigned int	energy_points;
 	unsigned int	damage;

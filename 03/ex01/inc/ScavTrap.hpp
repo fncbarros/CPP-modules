@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #pragma once
 #ifndef SCAVTRAP_H
 #define SCAVTRAP_H
@@ -29,7 +28,6 @@ public:
 	void	guardGate();
 
 private:
-
 };
 
 #endif /* SCAVTRAP_H */

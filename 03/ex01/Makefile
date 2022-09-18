@@ -20,7 +20,7 @@ ${OBJDIR}%.o: %.cpp
 all: ${NAME}
 
 ${NAME}: ${OBJDIR} ${OBJ} ${HDIR}
-	${CC} ${CFLAGS} ${OBJDIR}/*.o -o ${NAME}
+	${CC} ${CFLAGS} ${OBJDIR}*.o -o ${NAME}
 
 ${OBJDIR}:
 	mkdir ${OBJDIR}

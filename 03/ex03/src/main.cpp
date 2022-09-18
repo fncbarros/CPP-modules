@@ -23,14 +23,13 @@ void	moreCompleteAttack(ClapTrap& attacker, ClapTrap& victim)
 
 int main()
 {
-	// ClapTrap	clappy("Clappy");
-	// ScavTrap	scavy("Scavy");
-	// FragTrap	fraggy("Fraggy");
-	DiamondTrap	diana("Diana");
-	// DiamondTrap	diana_clone(diana);
-	// std::cout << "\n";
-	// ClapTrap	*diana_ptr = &diana;
-	// ClapTrap	diana_clapton(*diana_ptr);
+	// ClapTrap	clap("Clap");
+	// ScavTrap	scav("Scav");
+	// FragTrap	frag("Frag");
+	DiamondTrap	diamond("Diamond");
+	 std::cout << "\n";
+	 ClapTrap	*diamond_ptr = new DiamondTrap("Diamond Clap");
+     delete diamond_ptr;
 
 	std::cout << "\n";
 

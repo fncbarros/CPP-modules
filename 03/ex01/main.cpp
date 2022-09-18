@@ -12,10 +12,17 @@
 
 #include "ScavTrap.hpp"
 
-void	moreCompleteAttack(ClapTrap& attacker, ClapTrap& victim)
+void	Attack(ClapTrap& attacker, ClapTrap& victim)
 {
 	attacker.attack(victim.getName());
 	victim.takeDamage(attacker.getDamage());
+}
+
+void    test2() {
+    ClapTrap    *CTPtr = new ScavTrap("VIRTUAL_DESTRUCTOR_EXAMPLE");
+    CTPtr->attack("**test attack**");
+    delete CTPtr;
+    std::cout << std::endl;
 }
 
 int main()
@@ -44,7 +51,7 @@ int main()
 
 	ScavTrap	clone2(marvin);
 	ScavTrap	clone3 = clone2;
-	
+
 	std::cout << "\n";
 
 	marvin.guardGate();
@@ -56,9 +63,11 @@ int main()
 
 	ClapTrap wall_e("Wall-E");
 	ClapTrap	*p_marvin = &marvin;
-	moreCompleteAttack(*p_marvin, wall_e);
+	Attack(*p_marvin, wall_e);
 
 	std::cout << "\n";
+
+    test2();
 
 	return (0);
 }
