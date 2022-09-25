@@ -10,16 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "Cat.hpp"
 
-Cat::Cat() {
+Cat::Cat()
+{
 	type = "Cat";
 	std::cout << type << " default constructer called.\n";
 }
 
-Cat::Cat(const Cat& other)
-: Animal() {
+Cat::Cat(const Cat &other)
+	: Animal()
+{
 	if (this != &other)
 	{
 		*this = other;
@@ -27,17 +28,20 @@ Cat::Cat(const Cat& other)
 	std::cout << type << " copy constructer called.\n";
 }
 
-Cat& Cat::operator=(const Cat& other) {
+Cat &Cat::operator=(const Cat &other)
+{
 	if (this != &other)
 		this->type = other.type;
 	std::cout << type << " assignment operator called.\n";
 	return *this;
 }
 
-Cat::~Cat( ) {
+Cat::~Cat()
+{
 	std::cout << type << " destructer called.\n";
-} ;
+}
 
-void Cat::makeSound(void) const {
-	std::cout << "Meow\n"; 
+void Cat::makeSound(void) const
+{
+	std::cout << "Meow\n";
 }
