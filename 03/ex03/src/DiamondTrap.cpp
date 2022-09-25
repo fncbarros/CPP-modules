@@ -19,29 +19,29 @@
 // • Attack damage (FragTrap)
 // • attack() (Scavtrap)
 
-DiamondTrap::DiamondTrap( ) {
-	FragTrap ftmp();
-	ScavTrap stmp();
+DiamondTrap::DiamondTrap()
+{
+	FragTrap ftmp;
+	ScavTrap stmp;
 
-	this->_name = "Default";
+	DiamondTrap::_name = "Default";
 	ClapTrap::_name = _name + "_clap_name";
-	this->hit_points =  getHitPoints();
-	this->energy_points = ScavTrap::energy_points;
-	this->damage = FragTrap::damage;
+	this->hit_points = ftmp.getHitPoints();
+	this->energy_points = stmp.getEnergyPoints();
+	this->damage = ftmp.getDamage();
 
 	std::cout << "DiamondTrap" << _name << "called\n";
-
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap& other) :
-ClapTrap(other.ClapTrap::_name),
-ScavTrap(),
-FragTrap()
+DiamondTrap::DiamondTrap(const DiamondTrap &other) : ClapTrap(other.ClapTrap::_name),
+													 ScavTrap(other._name),
+													 FragTrap(other._name)
 {
-		*this = other;
+	*this = other;
 }
 
-DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other) {
+DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other)
+{
 	if (this != &other)
 	{
 		this->_name = other._name;
@@ -53,23 +53,32 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other) {
 	return *this;
 }
 
-DiamondTrap::DiamondTrap( std::string name )
+DiamondTrap::DiamondTrap(std::string name)
 {
-	this->_name = name;
-	this->hit_points = FragTrap::hit_points;
-	this->energy_points = ScavTrap::energy_points;
-	this->damage = FragTrap::damage;
-	ScavTrap::_name = name;
+	FragTrap ftmp(name + "FragTemp");
+	ScavTrap stmp(name + "ScavTemp");
+
 	this->ClapTrap::_name = name + "_clap_name";
+	this->DiamondTrap::_name = name;
+	this->hit_points = ftmp.getHitPoints();
+	this->energy_points = stmp.getEnergyPoints();
+	this->damage = ftmp.getDamage();
 
 	std::cout << "DiamondTrap " << this->_name << ": [CONSTRUCTED]\n";
 }
 
-DiamondTrap::~DiamondTrap() {
+DiamondTrap::~DiamondTrap()
+{
 	std::cout << "DiamondTrap " << this->_name << " destructed.\n";
 }
 
-void	DiamondTrap::whoAmI() {
+void DiamondTrap::attack(const std::string &target)
+{
+	ScavTrap::attack(target);
+}
+
+void DiamondTrap::whoAmI()
+{
 	std::cout << "DiamondTrap name: " << this->_name << std::endl;
 	std::cout << "ClapTrap name: " << this->ClapTrap::_name << std::endl;
 }

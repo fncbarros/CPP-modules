@@ -60,13 +60,14 @@ ScavTrap::~ScavTrap( void ) {
 }
 
 void	ScavTrap::attack(const std::string& target) {
-	std::cout << "ScavTrap " << _name << ": Attacks " << target << "\n";
-
-	if (hit_points > 0 || energy_points > 0)
+	if (hit_points > 0 || energy_points > 0) {
+		std::cout << "ScavTrap " << _name << ": Attacks " << target << "\n";
 		energy_points--;
+		return ;
+	}
 	else if (energy_points == 0)
 		std::cout << "ScavTrap " << _name << ": energy = 0.\n";
-	else if (hit_points == 0)
+	if (hit_points == 0)
 		std::cout << "ScavTrap " << _name << ": hitpoints = 0.\n";
 }
 
