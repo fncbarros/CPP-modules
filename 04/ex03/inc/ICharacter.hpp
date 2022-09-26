@@ -11,12 +11,12 @@
 /* ************************************************************************** */
 
 #pragma once
-#ifndef ICHARACTER_H
-#define ICHARACTER_H
+#ifndef ICHARACTER_HPP
+#define ICHARACTER_HPP
 
 #include <string>
 #include "AMateria.hpp"
-class AMateria; // look it up
+class AMateria;
 
 class ICharacter {
 public:
@@ -27,4 +27,4 @@ public:
     virtual void use(int idx, ICharacter& target) = 0;
 };
 
-#endif /* ICHARACTER_H */
+#endif /* ICHARACTER_HPP */

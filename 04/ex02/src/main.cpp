@@ -24,6 +24,8 @@ int main()
 
 	cat.getBrain()->printIdeas();
 
+	cat.makeSound();
+
 	delete catptr;
 
 	return 0;

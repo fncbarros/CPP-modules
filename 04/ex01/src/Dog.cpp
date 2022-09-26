@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "Dog.hpp"
 
 Dog::Dog() {
@@ -52,6 +51,6 @@ void Dog::makeSound(void) const {
 	std::cout << "Oof\n"; 
 }
 
-Brain*	Dog::getBrain(void) {
+Brain*	Dog::getBrain(void) const {
 	return brain;
 }

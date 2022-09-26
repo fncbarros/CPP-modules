@@ -15,25 +15,26 @@
 
 Character::Character(const std::string name) :
 _name(name){
+    // std::cout << this->getName() << " constructed.\n";
     for (int i = 0; i < 4; i++)
         _slot[i] = 0;
-    // std::cout << this->getName() << " constructed.\n";
 }
 
 Character::Character() :
 _name("Doe") {
+    // std::cout << this->getName() << " default constructor called.\n";
     for (int i = 0; i < 4; i++)
         _slot[i] = 0;
-    // std::cout << this->getName() << " default constructor called.\n";
 }
 
 Character::Character(const Character& other) {
+    // std::cout << this->getName() << " copy constructor called.\n";
     if (this != &other)
         *this = other;
-    // std::cout << this->getName() << " copy constructor called.\n";
 }
 
 Character&    Character::operator=(const Character& other) {
+    // std::cout << this->getName() << " assignment operator called.\n";
     if (this != &other) {
         for (int i; i < 4; i++) {
             if (this->_slot[i] != 0)
@@ -42,18 +43,17 @@ Character&    Character::operator=(const Character& other) {
         }
         this->_name = other.getName();
     }
-    // std::cout << this->getName() << " assignment operator called.\n";
     return *this;
 }
 
 Character::~Character() {
+    // std::cout << this->getName() << " destructor called.\n";
     for (int i; i < 4; i++) {
         if (this->_slot[i] != 0) {
             delete _slot[i];
             this->_slot[i] = 0;
         }
     }
-    // std::cout << this->getName() << " destructor called.\n";
 }
 
 std::string const & Character::getName() const {

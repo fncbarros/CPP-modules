@@ -6,45 +6,47 @@
 /*   By: fbarros <fbarros@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 18:51:31 by fbarros           #+#    #+#             */
-/*   Updated: 2022/07/01 13:33:16 by fbarros          ###   ########.fr       */
+/*   Updated: 2022/07/01 13:09:35 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "Cat.hpp"
 
 Cat::Cat() {
+    std::cout << "Cat default constructor called.\n";
 	type = "Cat";
 	brain = new Brain();
-	std::cout << type << " default constructor called.\n";
 }
 
 Cat::Cat(const Cat& other)
 : AAnimal(),
 brain(NULL) {
-	if (this != &other)
-	{
-		*this = other;
-	}
-	std::cout << type << " copy constructor called.\n";
+    std::cout << "Cat copy constructor called.\n";
+
+    *this = other;
 }
 
 Cat& Cat::operator=(const Cat& other) {
+    std::cout << "Cat assignment operator called.\n";
+
 	if (this != &other)
 	{
 		this->type = other.type;
-		if (brain != NULL)
-			delete brain;
+		if (brain != NULL) {
+            delete brain;
+            brain = NULL;
+        }
 		// deep copy
 		this->brain = new Brain(*(other.brain));
 	}
-	std::cout << type << " assignment operator called.\n";
 	return *this;
 }
 
 Cat::~Cat( ) {
+    std::cout << "Cat destructor called.\n";
 	delete brain;
 	brain = NULL;
-	std::cout << type << " destructor called.\n";
 } ;
 
 void Cat::makeSound(void) const {

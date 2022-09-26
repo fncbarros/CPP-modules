@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #pragma once
-#ifndef CURE_H
-#define CURE_H
+#ifndef CURE_HPP
+#define CURE_HPP
 
 #include "AMateria.hpp"
 
@@ -28,4 +28,4 @@ public:
 
 };
 
-#endif /* CURE_H */
+#endif /* CURE_HPP */

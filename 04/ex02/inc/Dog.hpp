@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #pragma once
-#ifndef DOG_H
-#define DOG_H
+#ifndef DOG_HPP
+#define DOG_HPP
 
 #include "AAnimal.hpp"
 #include "Brain.hpp"
@@ -25,10 +24,10 @@ public:
 	Dog& operator=(const Dog& other);
 	~Dog();
 	void makeSound(void) const;
-	Brain	*getBrain(void);
+	Brain	*getBrain(void) const;
 
 private:
 	Brain	*brain;
 };
 
-#endif /* DOG_H */
+#endif /* DOG_HPP */

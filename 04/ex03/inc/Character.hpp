@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Character.hpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/26 19:05:38 by fbarros           #+#    #+#             */
+/*   Updated: 2022/09/26 19:05:41 by fbarros          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #pragma once
-#ifndef CHARACTER_H
-#define CHARACTER_H
+#ifndef CHARACTER_HPP
+#define CHARACTER_HPP
 
 #include "ICharacter.hpp"
 
@@ -38,4 +50,4 @@ private:
 
 };
 
-#endif /* CHARACTER_H */
+#endif /* CHARACTER_HPP */

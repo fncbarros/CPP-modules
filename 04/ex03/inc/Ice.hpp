@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #pragma once
-#ifndef ICE_H
-#define ICE_H
+#ifndef ICE_HPP
+#define ICE_HPP
 
 #include "AMateria.hpp"
 
@@ -28,4 +28,4 @@ public:
 
 };
 
-#endif /* ICE_H */
+#endif /* ICE_HPP */

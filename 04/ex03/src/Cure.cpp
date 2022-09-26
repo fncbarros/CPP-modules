@@ -31,16 +31,16 @@ AMateria("cure") {
 
 Cure::Cure(const Cure& other) :
 AMateria() {
+    // std::cout << this->getType() << " copy constructor called.\n";
     if (this != &other)
         *this = other;
-    // std::cout << this->getType() << " copy constructor called.\n";
 }
 
 Cure&    Cure::operator=(const Cure& other) {
+    // std::cout << this->getType() << " assignment operator called.\n";
     if (this != &other) {
         this->_type = "cure";
     }
-    // std::cout << this->getType() << " assignment operator called.\n";
     return *this;
 }
 

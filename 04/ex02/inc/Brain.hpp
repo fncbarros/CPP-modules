@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/26 19:02:25 by fbarros           #+#    #+#             */
+/*   Updated: 2022/09/26 19:02:30 by fbarros          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #pragma once
-#ifndef BRAIN_H
-#define BRAIN_H
+#ifndef BRAIN_HPP
+#define BRAIN_HPP
 
 #include <iostream>
 #include <string>
@@ -22,4 +33,4 @@ private:
 	int	index;
 };
 
-#endif /* BRAIN_H */
+#endif /* BRAIN_HPP */

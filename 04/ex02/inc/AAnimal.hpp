@@ -12,8 +12,8 @@
 
 #pragma once
 
-#ifndef AANIMAL_H
-#define AANIMAL_H
+#ifndef AANIMAL_HPP
+#define AANIMAL_HPP
 
 #include <iostream>
 #include <string>
@@ -34,4 +34,4 @@ private:
 
 };
 
-#endif /* AANIMAL_H */
+#endif /* AANIMAL_HPP */

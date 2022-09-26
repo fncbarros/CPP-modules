@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #pragma once
-#ifndef MATERIASOURCE_H
-#define MATERIASOURCE_H
+#ifndef MATERIASOURCE_HPP
+#define MATERIASOURCE_HPP
 
 #include "IMateriaSource.hpp"
 
@@ -30,4 +30,4 @@ private:
     AMateria*   _materias[4];
 };
 
-#endif /* MATERIASOURCE_H */
+#endif /* MATERIASOURCE_HPP */

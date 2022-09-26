@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #pragma once
-#ifndef I_MATERIA_SOURCE_H
-#define I_MATERIA_SOURCE_H
+#ifndef I_MATERIA_SOURCE_HPP
+#define I_MATERIA_SOURCE_HPP
 
 #include <string>
 #include "AMateria.hpp"
@@ -25,4 +25,4 @@ public:
 };
 
 
-#endif /* I_MATERIA_SOURCE_H */
+#endif /* I_MATERIA_SOURCE_HPP */

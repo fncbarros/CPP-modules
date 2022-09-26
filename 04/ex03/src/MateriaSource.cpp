@@ -38,13 +38,13 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& other) {
 }
 
 MateriaSource::~MateriaSource() {
+	// std::cout << "[MateriaSource] Destructor called.\n";
     for (int i = 0; i < 4; i++) {
         if (this->_materias[i] != 0) {
             delete this->_materias[i];
             this->_materias[i] = 0;
         }
     }
-	// std::cout << "[MateriaSource] Destructor called.\n";
 }
 
 void MateriaSource::learnMateria(AMateria* m) {

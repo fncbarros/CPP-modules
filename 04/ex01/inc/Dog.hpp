@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #pragma once
 #ifndef DOG_HPP
 #define DOG_HPP
@@ -25,7 +24,7 @@ public:
 	Dog& operator=(const Dog& other);
 	~Dog();
 	void makeSound(void) const;
-	Brain	*getBrain(void);
+	Brain	*getBrain(void) const;
 
 private:
 	Brain	*brain;

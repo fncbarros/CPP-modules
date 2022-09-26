@@ -10,16 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #pragma once
-#ifndef AMATERIA_H
-#define AMATERIA_H
+#ifndef AMATERIA_HPP
+#define AMATERIA_HPP
 
 #include "ICharacter.hpp"
 #include <string>
 #include <iostream>
 
-class ICharacter; // ??
+class ICharacter;
 
 class AMateria {
 public:
@@ -38,4 +37,4 @@ protected:
 
 };
 
-#endif /* AMATERIA_H */
+#endif /* AMATERIA_HPP */
