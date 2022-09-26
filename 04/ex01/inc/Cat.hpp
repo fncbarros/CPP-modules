@@ -12,8 +12,8 @@
 
 
 #pragma once
-#ifndef CAT_H
-#define CAT_H
+#ifndef CAT_HPP
+#define CAT_HPP
 
 #include "Animal.hpp"
 #include "Brain.hpp"
@@ -31,4 +31,4 @@ private:
 	Brain	*brain;
 };
 
-#endif /* CAT_H */
+#endif /* CAT_HPP */

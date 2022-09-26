@@ -10,53 +10,53 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "Cat.hpp"
 #include "Dog.hpp"
 
 int main()
 {
-	std::cout << "####### Initializing array of Animal * #########\n";
-	Animal	*animals[4];
+	std::cout << "####### Animal *i(pointing at Cat) #########\n";
+	Animal	*i = new Cat();
+	std::cout << "\n####### Animal *j(pointing at Dog) #########\n";
+	Animal	*j = new Dog();
 
-	std::cout << "\n####### animals[0](pointing at Cat) #########\n";
-	animals[0] = new Cat();
-	std::cout << "\n####### animals[1](pointing at Cat copied from animals[0]) #########\n";
-	animals[1] = new Cat(*((Cat *)animals[0]));
 
-	std::cout << "\n####### animals[2](pointing at Dog) #########\n";
-	animals[2] = new Dog();
-	std::cout << "\n####### dog(pointing at animals[2]) #########\n";
-	Dog *dog = (Dog *)animals[2];
-	std::cout << "\n####### animals[3](pointing at Dog copied from dog(animals[2])) #########\n";
-	animals[3] = new Dog(*dog);
+	((Cat *)i)->getBrain()->addIdea("eat");
+	((Cat *)i)->getBrain()->addIdea("sleep");
+	((Cat *)i)->getBrain()->addIdea("stretch");
 
 	std::cout << std::endl;
 
-	// copy constructor called here
-	std::cout << "\n####### dog2 #########\n";
-	Dog	dog2 = *dog;
-	dog2 = *((Dog *)animals[3]);
+	std::cout << "\n####### Cat *x(pointing at *i)#########\n";
+    Cat *x = (Cat *)i;
+	std::cout << "\n####### *x ideas:\n";
+	x->getBrain()->printIdeas();
+    {
+        std::cout << "\n####### building fakeCat from *x #########\n";
+        Cat fakeCat(*x);
+        fakeCat.getBrain()->addIdea("fly");
+		std::cout << "\n####### fakeCat ideas:\n";
+        fakeCat.getBrain()->printIdeas();
+		std::cout << "\n####### *x ideas:\n";
+		x->getBrain()->printIdeas();
+    }
+	std::cout << "\n####### Dog *y(pointing at *j)#########\n";
+    Dog *y = (Dog *)j;
+	y->getBrain()->addIdea("catch tail");
+    y->getBrain()->addIdea("mess with mailman");
+
+    Dog	z = *y;
+    z.getBrain()->addIdea("fetch ball");
+    z.getBrain()->addIdea("return ball");
+    std::cout << "\n####### *y ideas #########\n";
+    y->getBrain()->printIdeas();
+    std::cout << "\n####### z ideas:\n";
+    z.getBrain()->printIdeas();
 
 	std::cout << std::endl;
 
-	((Cat *)animals[2])->getBrain()->addIdea("eat");
-	((Cat *)animals[2])->getBrain()->addIdea("sleep");
-	((Cat *)animals[2])->getBrain()->addIdea("stretch");
-	dog2.getBrain()->addIdea("fetch ball");
-	dog2.getBrain()->addIdea("return ball");
-	std::cout << std::endl;
-	std::cout << "\n####### animals[0](pointing at Cat) ideas #########\n";
-	((Cat *)animals[0])->getBrain()->printIdeas();
-	std::cout << "\n####### dog/animals[2] ideas #########\n";
-	dog->getBrain()->printIdeas();
-
-	std::cout << std::endl;
-
-	delete animals[0];
-	delete animals[1];
-	delete animals[2];
-	delete animals[3];
+	delete j;
+	delete i;
 
 	return 0;
 }
