@@ -14,38 +14,38 @@
 #include "Dog.hpp"
 
 Dog::Dog() {
+    std::cout << "Dog default constructor called.\n";
 	type ="Dog";
 	brain = new Brain();
-	std::cout << type << " default constructor called.\n";
 }
 
 Dog::Dog(const Dog& other)
 : Animal(),
 brain(NULL) {
-	if (this != &other)
-	{
-		*this = other;
-	}
-	std::cout << type << " copy constructor called.\n";
+    std::cout << "Dog copy constructor called.\n";
+
+    *this = other;
 }
 
 Dog& Dog::operator=(const Dog& other) {
+    std::cout << "Dog assignment operator called.\n";
 	if (this != &other)
 	{
 		this->type = other.type;
-		if (brain != NULL)
-			delete brain;
+		if (brain != NULL) {
+            delete brain;
+            brain = NULL;
+        }
 		// deep copy
 		this->brain = new Brain(*(other.brain));
 	}
-	std::cout << type << " assignment operator called.\n";
 	return *this;
 }
 
 Dog::~Dog( ) {
+    std::cout << "Dog destructor called.\n";
 	delete brain;
 	brain = NULL;
-	std::cout << type << " destructer called.\n";
 }
 
 void Dog::makeSound(void) const {

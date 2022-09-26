@@ -1,7 +1,7 @@
 
 #pragma once
-#ifndef BRAIN_H
-#define BRAIN_H
+#ifndef BRAIN_HPP
+#define BRAIN_HPP
 
 #include <iostream>
 #include <string>
@@ -22,4 +22,4 @@ private:
 	int	index;
 };
 
-#endif /* BRAIN_H */
+#endif /* BRAIN_HPP */

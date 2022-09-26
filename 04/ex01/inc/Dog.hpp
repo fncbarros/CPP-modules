@@ -12,8 +12,8 @@
 
 
 #pragma once
-#ifndef DOG_H
-#define DOG_H
+#ifndef DOG_HPP
+#define DOG_HPP
 
 #include "Animal.hpp"
 #include "Brain.hpp"
@@ -31,4 +31,4 @@ private:
 	Brain	*brain;
 };
 
-#endif /* DOG_H */
+#endif /* DOG_HPP */
