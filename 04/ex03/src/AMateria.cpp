@@ -24,10 +24,7 @@ AMateria::AMateria() {
 
 AMateria::AMateria(const AMateria& other) {
 	// std::cout << "Copy constructor called.\n";
-	if (this != &other)
-	{
-		*this = other;
-	}
+    *this = other;
 }
 
 AMateria& AMateria::operator=(const AMateria& other) {
