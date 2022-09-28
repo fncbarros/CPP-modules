@@ -24,34 +24,35 @@
 
 #include "Cure.hpp"
 
-Cure::Cure() :
-AMateria("cure") {
+Cure::Cure() : AMateria("cure")
+{
     // std::cout << this->getType() << " default constructor called.\n";
 }
 
-Cure::Cure(const Cure& other) :
-AMateria() {
+Cure::Cure(const Cure &other) : AMateria()
+{
     // std::cout << this->getType() << " copy constructor called.\n";
-    if (this != &other)
-        *this = other;
+    *this = other;
 }
 
-Cure&    Cure::operator=(const Cure& other) {
-    // std::cout << this->getType() << " assignment operator called.\n";
-    if (this != &other) {
-        this->_type = "cure";
-    }
+Cure &Cure::operator=(const Cure &other)
+{
+    (void)other;
+
     return *this;
 }
 
-Cure::~Cure() {
+Cure::~Cure()
+{
     // std::cout << this->getType() << " destructor called.\n";
 }
 
-AMateria*   Cure::clone() const {
+AMateria *Cure::clone() const
+{
     return new Cure(*this);
 }
 
-void    Cure::use(ICharacter& target) {
+void Cure::use(ICharacter &target)
+{
     std::cout << "* heals " << target.getName() << "'s wounds *\n";
 }
