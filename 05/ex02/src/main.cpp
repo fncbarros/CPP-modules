@@ -25,11 +25,10 @@ void    test_shrubbery() {
 
     Bureaucrat  greta("Greta", 150);
     Bureaucrat  jessica("Jessica", 70);
-    ShrubberyCreationForm No1("theLarch");
+    ShrubberyCreationForm No1("form1");
     std::cout << std::endl;
 
     greta.executeForm(No1);
-    jessica.executeForm(No1);
     greta.signForm(No1);
     jessica.executeForm(No1);
     greta.executeForm(No1);
@@ -41,25 +40,28 @@ void    test_robotomy() {
     std::cout << "\n***ROBOTOMY REQUEST TEST***" <<std::endl;
 
     Bureaucrat  hal("HAL2000", 80);
-    Bureaucrat  jessica("Jessica", 46);
+    Bureaucrat  jessica("Jessica", 44);
+
     RobotomyRequestForm f0("form0");
     RobotomyRequestForm f1("form1");
     RobotomyRequestForm f2("form2");
     RobotomyRequestForm f3("form3");
+
     std::cout << std::endl;
 
     hal.executeForm(f0);
-    hal.executeForm(f0);
+    hal.executeForm(f1);
+    jessica.signForm(f0);
     hal.signForm(f0);
     hal.signForm(f1);
     hal.signForm(f2);
     hal.signForm(f3);
     std::cout << std::endl;
-
     jessica.executeForm(f0);
-    jessica.executeForm(f1);
-    jessica.executeForm(f2);
-    jessica.executeForm(f3);
+    hal.executeForm(f0);
+    hal.executeForm(f1);
+    hal.executeForm(f2);
+    hal.executeForm(f3);
 
     std::cout << std::endl;
 }

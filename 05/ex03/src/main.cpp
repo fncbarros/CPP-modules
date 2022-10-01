@@ -35,4 +35,6 @@ int main()
     zaphod.executeForm(*ppr);
 
     delete rrf;
+    delete scf;
+    delete ppr;
 }
