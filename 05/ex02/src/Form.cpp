@@ -13,7 +13,7 @@
 #include "Form.hpp"
 
 Form::Form() :
-_name("Anmeldung"), _signed(false), _sign_grade(1), _exec_grade(1) {
+_name("Default"), _signed(false), _sign_grade(1), _exec_grade(1) {
 	std::cout << *this << " constructed\n";
 }
 

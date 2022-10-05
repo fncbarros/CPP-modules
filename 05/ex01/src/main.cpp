@@ -39,7 +39,7 @@ int main()
 	/**
 	 * Getters
 	 */
-	std::cout << "\n/**Getters**\\" << std::endl;
+	std::cout << "\n/**Status**\\" << std::endl;
 	std::cout << "name " << f1.getName() << std::endl;
 	std::cout << "is signed " << f1.isSigned() << std::endl;
 	std::cout << "sign grade " << f1.getSignGrade() << std::endl;
@@ -48,7 +48,7 @@ int main()
 	 * Construction tests
 	 */
 	std::cout << "\n/**Constructors**\\" << std::endl;
-	Form f2("Abmeldung", 13, 9);
+	Form f2("Blue", 13, 9);
 	Form f3(f1);
 	std::cout << std::endl;
 

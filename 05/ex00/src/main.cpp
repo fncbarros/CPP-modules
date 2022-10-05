@@ -19,9 +19,17 @@ int main()
 	Bureaucrat	b2("Scott", 149);
 	Bureaucrat	b52;
 
+	std::cout << std::endl;
+
+	std::cout << b1 << std::endl;
 	std::cout << ++b1 << std::endl;
+	std::cout << b2 << std::endl;
 	std::cout << --b2 << std::endl;
+	std::cout << b52 << std::endl;
+	// std::cout << --b52 << std::endl; // throws exception
 	std::cout << (b52 = b2) << std::endl;
+
+	std::cout << std::endl;
 
 	try {
 		b1++;

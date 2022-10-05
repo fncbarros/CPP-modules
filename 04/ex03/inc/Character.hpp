@@ -18,15 +18,6 @@
 
 class ICharacter;
 
-struct Floor {
-    Floor();
-    ~Floor();
-    AMateria**   mptr;
-    int idx;
-};
-
-static Floor    _floor;
-
 class Character : public ICharacter {
 public:
     Character(const std::string name);
@@ -46,7 +37,6 @@ public:
 private:
     AMateria*    _slot[4];
     std::string _name;
-    // static Floor    _floor;
 
 };
 

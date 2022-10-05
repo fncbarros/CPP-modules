@@ -27,7 +27,9 @@ public:
     AMateria* createMateria(std::string const & type);
 
 private:
-    AMateria*   _materias[4];
+    AMateria   *_materias[4];
+    AMateria    *floor[100];
+    size_t      size;
 };
 
 #endif /* MATERIASOURCE_HPP */
