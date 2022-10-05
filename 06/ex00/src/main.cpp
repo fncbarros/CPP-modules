@@ -12,15 +12,23 @@
 
 #include "Conversion.hpp"
 
+// void    checkString(const std::string& str) {
+//     if ()
+// }
+
 int main(int argc, char *argv[])
 {
     if (argc == 2)
     {
-        Conversion  arg(argv[1]);
-        arg.printChar();
-        arg.printInt();
-        arg.printFloat();
-        arg.printDouble();
+        try {
+            Conversion  arg(argv[1]);
+            arg.printChar();
+            arg.printInt();
+            arg.printFloat();
+            arg.printDouble();
+        } catch (std::exception& e) {
+            std::cerr << e.what() << std::endl;
+        }
     }
 	return (0);
 }

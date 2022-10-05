@@ -17,6 +17,10 @@
 #include <sstream>
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
+#include <exception>
+#include <limits.h>
+#include <limits>
 
 class Conversion {
 public:
@@ -32,7 +36,8 @@ public:
 
 private:
     std::string literal;
-    struct s_conversion {
+    struct s_conversion 
+    {
         enum e_type {
             CHAR,
             INT,
@@ -40,16 +45,24 @@ private:
             DOUBLE,
             PSEUDO
         }   type;
+
         union u_value{
             char    c;
             int     i;
             float   f;
             double  d;
         }   value;
+
     }   original;
 
     void    setType();
     void    setValue();
+
+    class FailedToConvert : public std::exception {
+        const char *what() const throw() {
+            return "Failed to convert string";
+        }
+    };
 };
 
 #endif /* CONVERSION_HPP */

@@ -51,13 +51,13 @@ void    Conversion::printChar() const {
             std::cout << original.value.c << std::endl;
             return;
         case 1:
-            value = (unsigned char)original.value.i;
+            value = static_cast<unsigned char>(original.value.i);
             break;
         case 2:
-            value = (unsigned char)original.value.f;
+            value = static_cast<unsigned char>(original.value.f);
             break;
         case 3:
-            value = (unsigned char)original.value.d;
+            value = static_cast<unsigned char>(original.value.d);
             break;
         case 4:
             std::cout << "impossible" << std::endl;
@@ -73,22 +73,27 @@ void    Conversion::printChar() const {
 
 void    Conversion::printInt() const {
     std::cout << "int: ";
+
     switch (original.type) {
         case 0:
-            std::cout << int(original.value.c) << std::endl;
+            std::cout << static_cast<int>(original.value.c) << std::endl;
             return;
         case 1:
             std::cout << original.value.i << std::endl;
             break;
         case 2:
-            std::cout << int(original.value.f) << std::endl;
+            std::cout << static_cast<int>(original.value.f) << std::endl;
             break;
         case 3:
-            std::cout << int(original.value.d) << std::endl;
+            if (original.value.d > INT_MAX || original.value.d < INT_MIN) {
+                std::cout << "number off limits\n";
+                return ;
+            }
+            std::cout << static_cast<int>(original.value.d) << std::endl;
             break;
         case 4:
             std::cout << "impossible" << std::endl;
-            return;
+            return ;
     }
 }
 
@@ -99,16 +104,16 @@ void    Conversion::printFloat() const {
     std::cout << "float: ";
     switch (original.type) {
         case 0:
-            fvalue = float(original.value.c);
+            fvalue = static_cast<float>(original.value.c);
             break;
         case 1:
-            fvalue = float(original.value.i);
+            fvalue = static_cast<float>(original.value.i);
             break;
         case 2:
             fvalue = original.value.f;
             break;
         case 3:
-            fvalue = float(original.value.d);
+            fvalue = static_cast<float>(original.value.d);
             break;
         case 4:
             std::cout << literal << "f\n";
@@ -128,13 +133,13 @@ void    Conversion::printDouble() const {
     std::cout << "double: ";
     switch (original.type) {
         case 0:
-            fvalue = double(original.value.c);
+            fvalue = static_cast<double>(original.value.c);
             break;
         case 1:
-            fvalue = double(original.value.i);
+            fvalue = static_cast<double>(original.value.i);
             break;
         case 2:
-            fvalue = double(original.value.f);
+            fvalue = static_cast<double>(original.value.f);
             break;
         case 3:
             fvalue = original.value.d;
@@ -152,21 +157,38 @@ void    Conversion::printDouble() const {
 void    Conversion::setType() {
     if (literal.length() > 1) {
         if (!literal.compare(1, 3, "inf")) {
+            if (literal.length() > 5 || (literal.length() == 5 && literal[4] != 'f')
+                    || (literal[0] != '-' && literal[0] != '+')) {
+                throw FailedToConvert();
+            }
             literal = literal.substr(0, 4);
             original.type = s_conversion::PSEUDO;
             return ;
         }
         else if (!literal.compare(0, 3, "nan")) {
+            if (literal.length() > 4 || (literal.length() == 4 && literal[3] != 'f')) {
+                throw FailedToConvert();
+            }
             literal = literal.substr(0, 3);
             original.type = s_conversion::PSEUDO;
             return ;
         }
         else if (literal.find('.') != std::string::npos) {
-            if (literal.find('f', 1) != std::string::npos)
+            double d = std::strtod(&literal[0], NULL);
+            if (literal != "0.0" && literal != "0.0f" && d == 0)
+                throw FailedToConvert();
+            size_t pos = literal.find('f', 1); 
+            if (pos != std::string::npos) {
+                if (pos != literal.length() - 1)
+                    throw FailedToConvert();
                 original.type = s_conversion::FLOAT;
+            }
             else
                 original.type = s_conversion::DOUBLE;
             return ;
+        }
+        else if (literal.c_str()[0] < '0' || literal.c_str()[0] > '9') {
+            throw FailedToConvert();
         }
     }
     else if (literal.c_str()[0] < '0' || literal.c_str()[0] > '9') {
@@ -177,6 +199,8 @@ void    Conversion::setType() {
 }
 
 void    Conversion::setValue() {
+    long int n = 0;
+    double d = 0;
     std::stringstream ss(literal);
 
     switch (original.type) {
@@ -184,13 +208,21 @@ void    Conversion::setValue() {
             ss >> original.value.c;
             break ;
         case 1:
-            ss >> original.value.i;
+            ss >> n;
+            if (n > INT_MAX || n < INT_MIN) {
+                    throw FailedToConvert();
+                }
+            original.value.i = static_cast<int>(n);
             break ;
         case 2:
-            ss >> original.value.f;
+            d = std::strtod(literal.c_str(), NULL);
+            if (d > __FLT_MAX__ || d < __FLT_MIN__) {
+                throw FailedToConvert();
+            }
+            original.value.f = float(d);
             break ;
         case 3:
-            ss >> original.value.d;
+            original.value.d = std::strtod(literal.c_str(), NULL);
         case 4:
             break ;
     }
