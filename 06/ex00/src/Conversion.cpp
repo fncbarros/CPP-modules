@@ -12,10 +12,6 @@
 
 #include "Conversion.hpp"
 
-/**
- * TODO: Error handling, check if outside limits
- * */
-
 Conversion::Conversion(const std::string& str) :
 literal(str)
 {
@@ -24,16 +20,17 @@ literal(str)
 }
 
 Conversion::Conversion(const Conversion& other) {
-	if (this != &other)
-	{
-		*this = other;
-	}
+
+    *this = other;
+
 }
 
 Conversion& Conversion::operator=(const Conversion& other) {
 	if (this != &other)
 	{
         literal = other.literal;
+        setType();
+        setValue();
 	}
 	return *this;
 }
@@ -82,11 +79,15 @@ void    Conversion::printInt() const {
             std::cout << original.value.i << std::endl;
             break;
         case 2:
+            if (original.value.f > INT_MAX || original.value.f < INT_MIN) {
+                std::cout << "impossible\n";
+                return ;
+            }
             std::cout << static_cast<int>(original.value.f) << std::endl;
             break;
         case 3:
             if (original.value.d > INT_MAX || original.value.d < INT_MIN) {
-                std::cout << "number off limits\n";
+                std::cout << "impossible\n";
                 return ;
             }
             std::cout << static_cast<int>(original.value.d) << std::endl;
@@ -154,48 +155,105 @@ void    Conversion::printDouble() const {
         std::cout << ".0\n";
 }
 
-void    Conversion::setType() {
+bool    Conversion::isChar() {
+    if (literal.length() == 1) {
+        return !std::isdigit(literal[0]);
+    }
+    return false;
+}
+
+bool    Conversion::isInt() {
+    std::string::size_type pos = 0;
+
+
     if (literal.length() > 1) {
-        if (!literal.compare(1, 3, "inf")) {
-            if (literal.length() > 5 || (literal.length() == 5 && literal[4] != 'f')
-                    || (literal[0] != '-' && literal[0] != '+')) {
-                throw FailedToConvert();
-            }
-            literal = literal.substr(0, 4);
-            original.type = s_conversion::PSEUDO;
-            return ;
-        }
-        else if (!literal.compare(0, 3, "nan")) {
-            if (literal.length() > 4 || (literal.length() == 4 && literal[3] != 'f')) {
-                throw FailedToConvert();
-            }
-            literal = literal.substr(0, 3);
-            original.type = s_conversion::PSEUDO;
-            return ;
-        }
-        else if (literal.find('.') != std::string::npos) {
-            double d = std::strtod(&literal[0], NULL);
-            if (literal != "0.0" && literal != "0.0f" && d == 0)
-                throw FailedToConvert();
-            size_t pos = literal.find('f', 1); 
-            if (pos != std::string::npos) {
-                if (pos != literal.length() - 1)
-                    throw FailedToConvert();
-                original.type = s_conversion::FLOAT;
-            }
-            else
-                original.type = s_conversion::DOUBLE;
-            return ;
-        }
-        else if (literal.c_str()[0] < '0' || literal.c_str()[0] > '9') {
-            throw FailedToConvert();
+        if (literal[0] == '-' || literal[0] == '+')
+            pos++;
+        else if (literal[0] == '.')
+            return false;
+        while (pos < literal.size()) {
+            if (!std::isdigit(literal[pos]))
+                return false;
+            pos++;
         }
     }
-    else if (literal.c_str()[0] < '0' || literal.c_str()[0] > '9') {
+    else if (!std::isdigit(literal[0]))
+        throw FailedToConvert();
+    return true;
+}
+
+bool    Conversion::isPseudo() {
+    if (!literal.compare(1, 3, "inf")) {
+        if (literal.length() > 5 || (literal.length() == 5 && literal[4] != 'f')
+                || (literal[0] != '-' && literal[0] != '+')) {
+            throw FailedToConvert();
+        }
+        literal = literal.substr(0, 4);
+        return true;
+    }
+    else if (!literal.compare(0, 3, "nan")) {
+        if (literal.length() > 4 || (literal.length() == 4 && literal[3] != 'f')) {
+            throw FailedToConvert();
+        }
+        literal = literal.substr(0, 3);
+        return true;
+    }
+    return false;
+}
+
+bool    Conversion::isDouble() {
+    size_t  pos = literal.find('.');
+    size_t  i = (literal[0] == '-' || literal[0] == '+') ? 1 : 0 ;
+
+    while (i < pos) {
+        if (i > 0 && !std::isdigit(literal[i]))
+            throw FailedToConvert();
+        i++;
+    }
+    while (++pos < literal.size()) {
+        if (!std::isdigit(literal[pos])) {
+            if (literal[pos] != 'f')
+                throw FailedToConvert();
+            else if (literal[pos - 1] == '.')
+                throw FailedToConvert();
+            return false;
+        }
+    }
+    return true;
+}
+
+bool    Conversion::isFloat() {
+    size_t pos = literal.find('f', 1);
+
+    if (pos == std::string::npos || pos != literal.length() - 1) {
+        return false;
+    }
+    return true;
+}
+
+void    Conversion::setType() {
+    if (isChar()) {
         original.type = s_conversion::CHAR;
         return ;
     }
-    original.type = s_conversion::INT;
+    else if (isInt()) {
+        original.type = s_conversion::INT;
+        return ;
+    }
+    else if (isPseudo()) {
+        original.type = s_conversion::PSEUDO;
+        return ;
+    }
+    else if (literal.find('.') != std::string::npos) {
+        if (isDouble()) {
+            original.type = s_conversion::DOUBLE;
+            return ;
+        } else if (isFloat()) {
+            original.type = s_conversion::FLOAT;
+            return ;
+        }
+    }
+    throw FailedToConvert();
 }
 
 void    Conversion::setValue() {
@@ -209,19 +267,16 @@ void    Conversion::setValue() {
             break ;
         case 1:
             ss >> n;
-            if (n > INT_MAX || n < INT_MIN) {
-                    throw FailedToConvert();
-                }
+            if (n > INT_MAX || n < INT_MIN)
+                throw FailedToConvert();
             original.value.i = static_cast<int>(n);
             break ;
         case 2:
             d = std::strtod(literal.c_str(), NULL);
-            if (d > __FLT_MAX__ || d < __FLT_MIN__) {
-                throw FailedToConvert();
-            }
             original.value.f = float(d);
             break ;
         case 3:
+            d = std::strtod(literal.c_str(), NULL);
             original.value.d = std::strtod(literal.c_str(), NULL);
         case 4:
             break ;
