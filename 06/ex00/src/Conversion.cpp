@@ -204,6 +204,8 @@ bool    Conversion::isDouble() {
             throw FailedToConvert();
         i++;
     }
+    if (i == 0 || (i == 1 && pos < 3) || pos == literal.size() - 1)
+        throw FailedToConvert();
     while (++pos < literal.size()) {
         if (!std::isdigit(literal[pos])) {
             if (literal[pos] != 'f')
@@ -242,7 +244,8 @@ void    Conversion::setType() {
         if (isDouble()) {
             original.type = s_conversion::DOUBLE;
             return ;
-        } else if (isFloat()) {
+        } 
+        else if (isFloat()) {
             original.type = s_conversion::FLOAT;
             return ;
         }
@@ -270,6 +273,7 @@ void    Conversion::setValue() {
             original.value.f = float(d);
             break ;
         case 3:
+            d = std::strtod(literal.c_str(), NULL);
             d = std::strtod(literal.c_str(), NULL);
             original.value.d = std::strtod(literal.c_str(), NULL);
         case 4:
