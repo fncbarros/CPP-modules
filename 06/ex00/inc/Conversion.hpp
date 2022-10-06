@@ -55,6 +55,11 @@ private:
 
     }   original;
 
+    bool    isPseudo();
+    bool    isFloat();
+    bool    isDouble();
+    bool    isChar();
+    bool    isInt();
     void    setType();
     void    setValue();
 
