@@ -36,10 +36,21 @@ int main()
         sp2.addNumber(1);
         sp2.addNumber(2);
         sp2.addNumber(12);
+        std::cout << sp2.shortestSpan() << std::endl;
         std::cout << sp2.longestSpan() << std::endl;
 
         sp2 = sp;
+        std::cout << sp2.shortestSpan() << std::endl;
         std::cout << sp2.longestSpan() << std::endl;
+    }
+
+    {
+        Span sp3(3);   
+        sp3.addNumber(1);
+        sp3.addNumber(3);
+        sp3.addNumber(12);
+        std::cout << sp3.shortestSpan() << std::endl;
+        std::cout << sp3.longestSpan() << std::endl;
     }
 
     return 0;

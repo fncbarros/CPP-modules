@@ -12,26 +12,27 @@
 
 #include "Span.hpp"
 
-Span::Span() : V() {
-
+Span::Span() :
+N(0)
+{
 }
 
 Span::Span(const unsigned int N) :
-N(N),
-V(N) {
+N(N)
+{
 }
 
 Span::Span(const Span& other) :
-N(N),
-V(other.V) {
+N(other.N),
+S(other.S)
+{
 }
 
 Span Span::operator=(const Span& other) {
     if (this != &other)
     {
-        size_t i = 0; // tmp
-        for (std::vector<int>::const_iterator it = other.V.begin(); it != other.V.end(); it++)
-            V[i] = *it;
+        S.clear();
+        S = other.S;
     }
     return *this;
 }
@@ -41,18 +42,30 @@ Span::~Span() {
 }
 
 void    Span::addNumber(int number) {
-    if (number < N)
+    if (S.size() < N)
     {
-        V.push_back(number);
+        S.insert(number);
+    } else {
+        std::cout << "Container has reached maximum capacity.\n";
     }
 }
 
-int    Span::shortestSpan() {
-    if (V.size() < 2)
+int    Span::shortestSpan() const {
+    int span = S.size();
+
+    if (S.size() < 2)
         throw noSpanFound();
+    for (std::set<int>::const_iterator it = S.begin(); it != S.end();) {
+        int i = *it;
+        if (++it != S.end())
+            i = *it - i;
+        span = span < i ? span : i;
+    }
+    return span;
 }
 
-int    Span::longestSpan() {
-    if (V.size() < 2)
+int    Span::longestSpan() const {
+    if (S.size() < 2)
         throw noSpanFound();
+    return *S.rbegin() - *S.begin();
 }

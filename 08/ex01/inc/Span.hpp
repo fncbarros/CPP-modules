@@ -13,9 +13,10 @@
 #pragma once
 
 #include <algorithm>
-#include <vector>
+#include <set>
 #include <iterator>
 #include <exception>
+#include <iostream>
 
 class Span {
 public:
@@ -26,12 +27,12 @@ public:
     ~Span();
 
     void    addNumber(int number);
-    int    shortestSpan();
-    int    longestSpan();
+    int    shortestSpan() const;
+    int    longestSpan() const;
 
 private:
     unsigned int        N;
-    std::vector<int>    V;
+    std::set<int>       S;
 
     class noSpanFound : public std::exception {
         const char  *what() const throw() {
