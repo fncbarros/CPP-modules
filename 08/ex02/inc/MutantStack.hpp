@@ -20,7 +20,6 @@ template<typename T, typename Container = std::deque<T> >
 class MutantStack : public std::stack<T, Container> {
 public:
     typedef std::stack<T, Container> Stack;
-    using Stack::operator=;
     using Stack::c;
     typedef typename Container::iterator iterator;
     typedef typename Container::const_iterator const_iterator;
@@ -29,11 +28,11 @@ public:
 
 public:
     MutantStack() {}
-    MutantStack(const MutantStack& other) { *this = other;}
+    MutantStack(const MutantStack& other) : Stack(other) {}
     MutantStack& operator=(const MutantStack& other) {
         if (this != &other)
         {
-            this->operator=(other);
+            this->Stack::operator=(other);
         }
         return *this;
     }

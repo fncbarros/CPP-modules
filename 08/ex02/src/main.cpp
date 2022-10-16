@@ -14,7 +14,7 @@
 #include <iostream>
 #include <list>
 
-void	rprint(int i) {
+void	print(int i) {
 	std::cout << i << std::endl;
 }
 
@@ -41,7 +41,9 @@ int main()
 		
 		std::list<int>::iterator it = list.begin();
 		std::list<int>::iterator ite = list.end();
-		
+
+		std::cout << std::endl;
+
 		++it;
 		--it;
 		while (it != ite)
@@ -49,6 +51,10 @@ int main()
 		std::cout << *it << std::endl;
 		++it;
 		}
+
+		std::cout << std::endl;
+		std::for_each(list.rbegin(), list.rend(), print);		
+
 	}
 
 	std::cout << "\n***MutantStack output***\n";
@@ -69,6 +75,8 @@ int main()
 	mstack.push(0);
 	MutantStack<int>::iterator it = mstack.begin();
 	MutantStack<int>::iterator ite = mstack.end();
+
+	std::cout << std::endl;
 	
 	++it;
 	--it;
@@ -79,17 +87,39 @@ int main()
 	}
 
 	std::cout << std::endl;
-	std::stack<int> s(mstack);
 
-	std::cout << s.top() << " = ";	
-	std::cout << mstack.top() << std::endl;
-	std::cout << s.size() << " = ";	
-	std::cout << mstack.size() << std::endl;	
-	std::cout << std::endl;
+	std::for_each(mstack.rbegin(), mstack.rend(), print);
 
-	MutantStack<int> mstack2(mstack); // <----
+	std::cout << "\n***Copy constructing Mutant stack to mstack2***\n";
+	MutantStack<int> mstack2(mstack);
+	std::cout << "*POP*\n*POP*\n";
+	mstack2.pop();
+	mstack2.pop();
 
-	std::for_each(mstack.rbegin(), mstack.rend(), rprint);
+	std::cout << "\n**mstack2:\n";
+	
+	std::for_each(mstack2.begin(), mstack2.end(), print);
+	std::cout << "\n**mstack:\n";
+	std::for_each(mstack.begin(), mstack.end(), print);
+
+	{
+		std::cout << "\n***Constructing std::stack from MutantStack***\n" << std::endl;
+		std::stack<int> s(mstack);
+
+		std::cout << "stack top = " << s.top() << std::endl;
+		std::cout << "mstack top = " << mstack.top() << std::endl;
+		std::cout <<  "stack size = " << s.size() << std::endl;
+		std::cout << "mstack size = " <<mstack.size() << std::endl;
+		std::cout << std::endl;
+
+		s = mstack2;
+		std::cout << "Copied mstack2 to stack\nstack size now is " << s.size() << std::endl;
+	}
+
+	std::cout << "\n**Copied mstack to mstack2**\n";
+	mstack2 = mstack;
+	std::cout << "mstack2 values:\n";
+	std::for_each(mstack2.begin(), mstack2.end(), print);
 
 	return 0;
 }
