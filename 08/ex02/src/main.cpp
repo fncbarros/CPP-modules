@@ -21,7 +21,7 @@ void	print(int i) {
 int main()
 {
 	{
-		std::cout << "***std::list output***\n";
+		std::cout << "\n***std::list output***\n";
 		std::list<int>	list;
 
 		list.push_back(5);
@@ -52,7 +52,7 @@ int main()
 		++it;
 		}
 
-		std::cout << std::endl;
+		std::cout << "\nreverse printing using iterators" <<std::endl;
 		std::for_each(list.rbegin(), list.rend(), print);		
 
 	}
@@ -86,8 +86,7 @@ int main()
 	++it;
 	}
 
-	std::cout << std::endl;
-
+	std::cout << "\nreverse printing using iterators:\n"; // reverse printing from here on for better visualization
 	std::for_each(mstack.rbegin(), mstack.rend(), print);
 
 	std::cout << "\n***Copy constructing Mutant stack to mstack2***\n";
@@ -97,19 +96,17 @@ int main()
 	mstack2.pop();
 
 	std::cout << "\n**mstack2:\n";
-	
-	std::for_each(mstack2.begin(), mstack2.end(), print);
+
+	std::for_each(mstack2.rbegin(), mstack2.rend(), print);
 	std::cout << "\n**mstack:\n";
-	std::for_each(mstack.begin(), mstack.end(), print);
+	std::for_each(mstack.rbegin(), mstack.rend(), print);
 
 	{
 		std::cout << "\n***Constructing std::stack from MutantStack***\n" << std::endl;
 		std::stack<int> s(mstack);
 
-		std::cout << "stack top = " << s.top() << std::endl;
-		std::cout << "mstack top = " << mstack.top() << std::endl;
-		std::cout <<  "stack size = " << s.size() << std::endl;
-		std::cout << "mstack size = " <<mstack.size() << std::endl;
+		std::cout << "stack top = " << s.top() << "\tmstack top = " << mstack.top() << std::endl;
+		std::cout <<  "stack size = " << s.size() << "\tmstack size = " <<mstack.size() << std::endl;
 		std::cout << std::endl;
 
 		s = mstack2;
@@ -119,7 +116,9 @@ int main()
 	std::cout << "\n**Copied mstack to mstack2**\n";
 	mstack2 = mstack;
 	std::cout << "mstack2 values:\n";
-	std::for_each(mstack2.begin(), mstack2.end(), print);
+	std::for_each(mstack2.rbegin(), mstack2.rend(), print);
+	
+	std::cout << std::endl;
 
 	return 0;
 }
