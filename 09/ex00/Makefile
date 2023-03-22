@@ -9,16 +9,22 @@ SRC := src/main.cpp \
 
 HDR := inc/BitcoinExchange.hpp
 
+OBJDIR := obj/
+
+SRCDIR := src/
+
 OBJ := $(SRC:src/%.cpp=obj/%.o)
 
-obj/%.o: src/%.cpp
-	@mkdir obj
-	$(CC) $(CXXFLAGS) $(HDR) -c $< -o $@
+${OBJDIR}%.o: ${SRCDIR}%.cpp
+	$(CC) $(CXXFLAGS) -Iinc/ -c $< -o $@
 
 all: $(NAME)
 
-$(NAME): $(HDR) $(OBJ)
-	$(CC) -Iinc $(OBJ) -o $(NAME)
+$(NAME): $(HDR) $(OBJ) $(OBJDIR)
+	$(CC) $(OBJ) -o $(NAME)
+
+${OBJDIR}:
+	mkdir ${OBJDIR}
 
 clean:
 	@rm -rf obj
