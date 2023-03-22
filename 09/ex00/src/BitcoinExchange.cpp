@@ -16,9 +16,18 @@ BitcoinExchange::BitcoinExchange()
 {
 }
 
-BitcoinExchange::BitcoinExchange(const std::string &pathToFolder)
+BitcoinExchange::BitcoinExchange(const char *pathToFolder)
 {
-    
+    std::ifstream inputFile(pathToFolder);
+
+    if (!inputFile.is_open())
+    {
+        _fileCheck = false;
+    }
+    else
+    {
+
+    }
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
@@ -37,4 +46,9 @@ BitcoinExchange BitcoinExchange::operator=(const BitcoinExchange &other)
 
 BitcoinExchange::~BitcoinExchange()
 {
+}
+
+bool BitcoinExchange::checkFile()
+{
+    return _fileCheck;
 }

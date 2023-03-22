@@ -19,11 +19,13 @@
 class BitcoinExchange {
 public:
     BitcoinExchange();
-    BitcoinExchange(const std::string &pathToFolder);
+    BitcoinExchange(const char *pathToFolder);
     BitcoinExchange(const BitcoinExchange &other);
     BitcoinExchange operator=(const BitcoinExchange &other);
     ~BitcoinExchange();
 
-private:
+    bool checkFile();
 
+private:
+    bool _fileCheck;
 };

@@ -20,8 +20,14 @@ int main(int argc, char *argv[2])
 		std::cerr << "Error: could not open file.\n";
 		return 1;
 	}
+	
+	BitcoinExchange btcEx(argv[1]);
 
-
+	if (!btcEx.checkFile())
+	{
+		std::cerr << "Error: could not open file.\n";
+		return 1;
+	}
 
 	return 0;
 }
