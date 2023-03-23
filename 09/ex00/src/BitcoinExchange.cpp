@@ -11,23 +11,23 @@
 /* ************************************************************************** */
 
 #include <BitcoinExchange.hpp>
+#include <iostream>
+#include <fstream>
 
 BitcoinExchange::BitcoinExchange()
 {
-}
+    std::ifstream inputFile("./input-files/data.csv");
+    char buffer[30];
 
-BitcoinExchange::BitcoinExchange(const char *pathToFolder)
-{
-    std::ifstream inputFile(pathToFolder);
-
-    if (!inputFile.is_open())
+    _fileCheck = inputFile.is_open();
+    if (_fileCheck)
     {
-        _fileCheck = false;
+        while (inputFile.getline(buffer, 30, ',').good())
+        {
+        }
+        _fileCheck = (!inputFile.bad());
     }
-    else
-    {
-
-    }
+    inputFile.close();
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)

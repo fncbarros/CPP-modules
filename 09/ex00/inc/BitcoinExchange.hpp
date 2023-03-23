@@ -14,12 +14,11 @@
 
 #include <string>
 #include <algorithm>
-#include <fstream>
+#include <map>
 
 class BitcoinExchange {
 public:
     BitcoinExchange();
-    BitcoinExchange(const char *pathToFolder);
     BitcoinExchange(const BitcoinExchange &other);
     BitcoinExchange operator=(const BitcoinExchange &other);
     ~BitcoinExchange();
@@ -28,4 +27,5 @@ public:
 
 private:
     bool _fileCheck;
+    // std::map<std::string, float> _database;
 };
