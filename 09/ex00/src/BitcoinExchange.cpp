@@ -50,5 +50,5 @@ BitcoinExchange::~BitcoinExchange()
 
 bool BitcoinExchange::checkFile()
 {
-    return _fileCheck;
+    return _fileIsValid;
 }

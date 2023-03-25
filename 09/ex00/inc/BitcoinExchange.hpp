@@ -26,6 +26,7 @@ public:
     bool checkFile();
 
 private:
-    bool _fileCheck;
-    // std::map<std::string, float> _database;
+    bool _fileIsValid;
+    std::string _inputBuffer;
+    std::map _exchangeRateMap;
 };

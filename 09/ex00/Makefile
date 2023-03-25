@@ -20,11 +20,11 @@ ${OBJDIR}%.o: ${SRCDIR}%.cpp
 
 all: $(NAME)
 
-$(NAME): $(HDR) $(OBJDIR) $(OBJ)
+$(NAME): $(HDR) $(OBJDIR) $(OBJ) 
 	$(CC) $(OBJ) -o $(NAME)
 
 ${OBJDIR}:
-	mkdir ${OBJDIR}
+	@mkdir ${OBJDIR}
 
 clean:
 	@rm -rf obj

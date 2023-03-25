@@ -2,7 +2,7 @@ SRC := ${wildcard src/*.cpp}
 
 OBJ := ${SRC:src/%.cpp=obj/%.o}
 
-CC := c++
+CXX := c++
 
 CFLAGS := -Wall -Wextra -Werror -std=c++98
 
@@ -17,12 +17,12 @@ INC := -I ${HDIR}
 NAME := easyfind
 
 ${OBJDIR}%.o: ${SRCDIR}%.cpp
-	${CC} ${CFLAGS} ${INC} -c $< -o $@
+	${CXX} ${CFLAGS} ${INC} -c $< -o $@
 
 all: ${NAME}
 
 ${NAME}: ${OBJDIR} ${OBJ} ${HDIR}
-	${CC} ${CFLAGS} ${OBJ} -o ${NAME}
+	${CXX} ${CFLAGS} ${OBJ} -o ${NAME}
 
 ${OBJDIR}:
 	mkdir ${OBJDIR}
