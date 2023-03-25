@@ -16,6 +16,8 @@
 #include <algorithm>
 #include <map>
 
+static const u_int8_t MAXLINE = 30;
+
 class BitcoinExchange {
 public:
     BitcoinExchange();
@@ -26,7 +28,8 @@ public:
     bool checkFile();
 
 private:
+    // TODO: remove boolean and create exception instead
     bool _fileIsValid;
     std::string _inputBuffer;
-    std::map _exchangeRateMap;
+    std::map<std::string, float> _exchangeRateMap;
 };

@@ -17,15 +17,23 @@
 BitcoinExchange::BitcoinExchange()
 {
     std::ifstream inputFile("./input-files/data.csv");
-    char buffer[30];
+    char dateBuffer[MAXLINE];
+    float rateBuffer;
 
-    _fileCheck = inputFile.is_open();
-    if (_fileCheck)
+    _fileIsValid = inputFile.is_open();
+    inputFile.ignore(MAXLINE, '\n');
+    if (_fileIsValid)
     {
-        while (inputFile.getline(buffer, 30, ',').good())
+        while (inputFile.getline(dateBuffer, MAXLINE, ',').good())
         {
+            inputFile >> rateBuffer;
+            // TODO: value is defaulting to 0 on all elements
+            _exchangeRateMap.insert(std::make_pair(dateBuffer, rateBuffer));
         }
-        _fileCheck = (!inputFile.bad());
+        inputFile >> rateBuffer;
+        _exchangeRateMap.insert(std::make_pair(std::string(dateBuffer), rateBuffer));
+
+        _fileIsValid = (!inputFile.bad());
     }
     inputFile.close();
 }
