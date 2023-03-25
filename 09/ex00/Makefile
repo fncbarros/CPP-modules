@@ -20,7 +20,7 @@ ${OBJDIR}%.o: ${SRCDIR}%.cpp
 
 all: $(NAME)
 
-$(NAME): $(HDR) $(OBJ) $(OBJDIR)
+$(NAME): $(HDR) $(OBJDIR) $(OBJ)
 	$(CC) $(OBJ) -o $(NAME)
 
 ${OBJDIR}:
