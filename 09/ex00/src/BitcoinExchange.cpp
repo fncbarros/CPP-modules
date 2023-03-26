@@ -13,17 +13,22 @@
 #include <BitcoinExchange.hpp>
 #include <iostream>
 #include <fstream>
+#include <string>
 
 BitcoinExchange::BitcoinExchange()
 {
     std::ifstream inputFile("./input-files/data.csv");
-    char dateBuffer[MAXLINE];
+    char dateBuffer[MAXLINE] = {0};
     float rateBuffer;
 
-    _fileIsValid = inputFile.is_open();
-    inputFile.ignore(MAXLINE, '\n');
-    if (_fileIsValid)
+    inputFile.exceptions(std::istream::badbit);
+    if (!inputFile.is_open())
     {
+        return ;
+    }
+    inputFile.ignore(MAXLINE, '\n');
+
+    try {
         while (inputFile.getline(dateBuffer, MAXLINE, ',').good())
         {
             inputFile >> rateBuffer;
@@ -33,8 +38,18 @@ BitcoinExchange::BitcoinExchange()
         inputFile >> rateBuffer;
         _exchangeRateMap.insert(std::make_pair(std::string(dateBuffer), rateBuffer));
 
-        _fileIsValid = (!inputFile.bad());
+        for (std::map<std::string, float>::iterator it = _exchangeRateMap.begin();
+                it != _exchangeRateMap.end(); 
+                it++)
+        {
+            std::cout << it->first << " " << it->second;
+        }
+
+    } catch (const std::exception& e)
+    {
+        std::cerr << "Error: could not open file.\n";
     }
+
     inputFile.close();
 }
 
@@ -54,9 +69,4 @@ BitcoinExchange BitcoinExchange::operator=(const BitcoinExchange &other)
 
 BitcoinExchange::~BitcoinExchange()
 {
-}
-
-bool BitcoinExchange::checkFile()
-{
-    return _fileIsValid;
 }
