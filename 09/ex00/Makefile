@@ -1,6 +1,6 @@
 CXXFLAGS := -Wall -Werror -Wextra -std=c++98
 
-CC := c++
+CXX := c++
 
 NAME := btc
 
@@ -16,12 +16,12 @@ SRCDIR := src/
 OBJ := $(SRC:src/%.cpp=obj/%.o)
 
 ${OBJDIR}%.o: ${SRCDIR}%.cpp
-	$(CC) $(CXXFLAGS) -Iinc/ -c $< -o $@
+	$(CXX) $(CXXFLAGS) -Iinc/ -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(HDR) $(OBJDIR) $(OBJ) 
-	$(CC) $(OBJ) -o $(NAME)
+	$(CXX) $(OBJ) -o $(NAME)
 
 ${OBJDIR}:
 	@mkdir ${OBJDIR}
@@ -34,7 +34,8 @@ fclean: clean
 
 re: fclean all
 
-debug: CXXFLAGS += -g
+debug: CXX = clang++
+debug: CXXFLAGS += -g -fno-limit-debug-info
 debug: re
 
 .PHONY: all clean fclean re
