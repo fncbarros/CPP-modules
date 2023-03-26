@@ -15,7 +15,6 @@
 
 int main(int argc, char *argv[2])
 {
-	(void)argv;
 	BitcoinExchange btcEx;
 
 	if (argc != 2)
@@ -23,6 +22,9 @@ int main(int argc, char *argv[2])
 		std::cerr << "Error: could not open file.\n";
 		return 1;
 	}
+
+	Database inputFile(btcEx.readFile(std::string(argv[1]), '|'));
+    printDatabase(inputFile);
 
 	return 0;
 }

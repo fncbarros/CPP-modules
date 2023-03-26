@@ -15,42 +15,9 @@
 #include <fstream>
 #include <string>
 
-BitcoinExchange::BitcoinExchange()
+BitcoinExchange::BitcoinExchange() :
+_exchangeRateMap(readFile("./input-files/data.csv", ','))
 {
-    std::ifstream inputFile("./input-files/data.csv");
-    char dateBuffer[MAXLINE] = {0};
-    float rateBuffer;
-
-    inputFile.exceptions(std::istream::badbit);
-    if (!inputFile.is_open())
-    {
-        return ;
-    }
-    inputFile.ignore(MAXLINE, '\n');
-
-    try {
-        while (inputFile.getline(dateBuffer, MAXLINE, ',').good())
-        {
-            inputFile >> rateBuffer;
-            // TODO: value is defaulting to 0 on all elements
-            _exchangeRateMap.insert(std::make_pair(dateBuffer, rateBuffer));
-        }
-        inputFile >> rateBuffer;
-        _exchangeRateMap.insert(std::make_pair(std::string(dateBuffer), rateBuffer));
-
-        for (std::map<std::string, float>::iterator it = _exchangeRateMap.begin();
-                it != _exchangeRateMap.end(); 
-                it++)
-        {
-            std::cout << it->first << " " << it->second;
-        }
-
-    } catch (const std::exception& e)
-    {
-        std::cerr << "Error: could not open file.\n";
-    }
-
-    inputFile.close();
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
@@ -62,11 +29,52 @@ BitcoinExchange BitcoinExchange::operator=(const BitcoinExchange &other)
 {
     if (this != &other)
     {
-
+        _exchangeRateMap = other._exchangeRateMap;
     }
     return *this;
 }
 
 BitcoinExchange::~BitcoinExchange()
 {
+}
+
+Database BitcoinExchange::readFile(const std::string path, char delim)
+{
+    std::ifstream inputFile(path.c_str());
+    char dateBuffer[MAXLINE] = {0};
+    float rateBuffer;
+    Database mapBuffer;
+
+    // TODO: not handling wrong file name
+    inputFile.exceptions(std::istream::badbit);
+
+    try {
+        inputFile.is_open();
+        inputFile.ignore(MAXLINE, '\n');
+
+        while (inputFile.getline(dateBuffer, MAXLINE, delim).good())
+        {
+            inputFile >> rateBuffer;
+            mapBuffer.insert(std::make_pair(dateBuffer, rateBuffer));
+            inputFile.ignore(1); // jumping '\n' char
+        }
+    } 
+    catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+
+    inputFile.close();
+    return mapBuffer;
+}
+
+void printDatabase(const Database& database)
+{
+    if (database.size() == 0)
+        std::cout << "print: map is empty\n";
+    for (Database::const_iterator it = database.begin();
+        it != database.end(); 
+        it++)
+    {
+    std::cout << it->first << " " << it->second << std::endl;
+    }
 }
