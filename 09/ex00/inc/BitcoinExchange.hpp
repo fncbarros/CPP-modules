@@ -28,7 +28,7 @@ public:
     ~BitcoinExchange();
 
     Database readFile(std::string path, char delim);
-
+    void validate(const std::pair<std::string, float>& pair);
 private:
     std::string _inputBuffer;
     Database _exchangeRateMap;

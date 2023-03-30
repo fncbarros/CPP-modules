@@ -42,29 +42,41 @@ Database BitcoinExchange::readFile(const std::string path, char delim)
 {
     std::ifstream inputFile(path.c_str());
     char dateBuffer[MAXLINE] = {0};
-    float rateBuffer;
+    float valueBuffer;
     Database mapBuffer;
 
     // TODO: not handling wrong file name
     inputFile.exceptions(std::istream::badbit);
+    
+    if (inputFile.is_open())
+    {
+        try {
+            inputFile.ignore(MAXLINE, '\n');
 
-    try {
-        inputFile.is_open();
-        inputFile.ignore(MAXLINE, '\n');
-
-        while (inputFile.getline(dateBuffer, MAXLINE, delim).good())
-        {
-            inputFile >> rateBuffer;
-            mapBuffer.insert(std::make_pair(dateBuffer, rateBuffer));
-            inputFile.ignore(1); // jumping '\n' char
+            while (inputFile.getline(dateBuffer, MAXLINE, delim).good())
+            {
+                inputFile >> valueBuffer;
+                mapBuffer.insert(std::make_pair(dateBuffer, valueBuffer));
+                inputFile.ignore(1); // jumping '\n' char
+            }
+        } 
+        catch (const std::exception& e) {
+            std::cerr << "Error: " << e.what() << std::endl;
         }
-    } 
-    catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-    }
 
-    inputFile.close();
+        inputFile.close();
+    }
+    
     return mapBuffer;
+}
+
+void BitcoinExchange::validate(const std::pair<std::string, float>& pair)
+{
+    (void)pair;
+    // const std::string date(pair.first);
+    // const float value(pair.second);
+
+
 }
 
 void printDatabase(const Database& database)
