@@ -12,10 +12,12 @@
 
 #include <BitcoinExchange.hpp>
 #include <iostream>
+#include <fstream>
 
 int main(int argc, char *argv[2])
 {
 	BitcoinExchange btcEx;
+	(void)argv;
 
 	if (argc != 2)
 	{
@@ -23,8 +25,22 @@ int main(int argc, char *argv[2])
 		return 1;
 	}
 
-	Database inputFile(btcEx.readFile(std::string(argv[1]), '|'));
-    printDatabase(inputFile);
+	std::ifstream inputFile(argv[1]);
+    char buffer[MAXLINE] = {0};
+    BitcoinExchange::Database mapBuffer;
 
-	return 0;
+    // TODO: not handling wrong file name
+    inputFile.exceptions(std::istream::badbit);
+
+    if (inputFile.is_open())
+    {
+            while (inputFile.getline(buffer, MAXLINE).good())
+            {
+                BitcoinExchange::Entry element = btcEx.readLine(buffer, '|');
+                if (element.first != "")
+                {
+					std::cout << element.first << " " << element.second << std::endl;
+				}
+			}
+	}
 }

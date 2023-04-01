@@ -15,12 +15,16 @@
 #include <string>
 #include <algorithm>
 #include <map>
+#include <sstream>
 
-typedef std::map<std::string, float> Database;
 
-static const u_int8_t MAXLINE = 50;
+static const unsigned short MAXLINE = 50;
 
 class BitcoinExchange {
+public:
+    typedef std::map<std::string, float> Database;
+    typedef std::pair<std::string, float> Entry;
+
 public:
     BitcoinExchange();
     BitcoinExchange(const BitcoinExchange &other);
@@ -28,10 +32,12 @@ public:
     ~BitcoinExchange();
 
     Database readFile(std::string path, char delim);
-    void validate(const std::pair<std::string, float>& pair);
+    std::pair<std::string, float> readLine(const std::string& inputline, char delim);
+    void validate(const Entry& entry);
+
 private:
-    std::string _inputBuffer;
     Database _exchangeRateMap;
+
 };
 
-void printDatabase(const Database& database);
+void printDatabase(const BitcoinExchange::Database& database);

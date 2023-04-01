@@ -14,6 +14,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <map>
+#include <utility>
 
 BitcoinExchange::BitcoinExchange() :
 _exchangeRateMap(readFile("./input-files/data.csv", ','))
@@ -38,36 +40,57 @@ BitcoinExchange::~BitcoinExchange()
 {
 }
 
-Database BitcoinExchange::readFile(const std::string path, char delim)
+BitcoinExchange::Database BitcoinExchange::readFile(const std::string path, char delim)
 {
     std::ifstream inputFile(path.c_str());
-    char dateBuffer[MAXLINE] = {0};
-    float valueBuffer;
+    char buffer[MAXLINE] = {0};
     Database mapBuffer;
 
     // TODO: not handling wrong file name
     inputFile.exceptions(std::istream::badbit);
-    
+
+    try {
     if (inputFile.is_open())
     {
-        try {
-            inputFile.ignore(MAXLINE, '\n');
-
-            while (inputFile.getline(dateBuffer, MAXLINE, delim).good())
+            while (inputFile.getline(buffer, MAXLINE).good())
             {
-                inputFile >> valueBuffer;
-                mapBuffer.insert(std::make_pair(dateBuffer, valueBuffer));
-                inputFile.ignore(1); // jumping '\n' char
+                Entry element = readLine(buffer, delim);
+                if (element.first == "")
+                {
+                    continue ;
+                }
+                mapBuffer.insert(element);
             }
         } 
-        catch (const std::exception& e) {
-            std::cerr << "Error: " << e.what() << std::endl;
-        }
 
         inputFile.close();
     }
-    
+    catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+
     return mapBuffer;
+}
+
+std::pair<std::string, float> BitcoinExchange::readLine(const std::string& inputline, char delim)
+{
+    std::stringstream ss(inputline);
+    char dateBuffer[MAXLINE];
+    float valueBuffer(0);
+
+    if (!ss.getline(dateBuffer, MAXLINE, delim).good())
+    {
+        return std::make_pair("", float(0));
+    }
+
+    if (std::string(dateBuffer) == "date")
+    {
+        return std::make_pair("", float(0));
+    }
+
+    ss >> valueBuffer;
+
+    return std::make_pair(dateBuffer, valueBuffer);
 }
 
 void BitcoinExchange::validate(const std::pair<std::string, float>& pair)
@@ -79,11 +102,11 @@ void BitcoinExchange::validate(const std::pair<std::string, float>& pair)
 
 }
 
-void printDatabase(const Database& database)
+void printDatabase(const BitcoinExchange::Database& database)
 {
     if (database.size() == 0)
         std::cout << "print: map is empty\n";
-    for (Database::const_iterator it = database.begin();
+    for (BitcoinExchange::Database::const_iterator it = database.begin();
         it != database.end(); 
         it++)
     {
