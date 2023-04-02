@@ -81,10 +81,23 @@ std::pair<std::string, float> BitcoinExchange::readLine(const std::string& input
 
     if (!ss.getline(dateBuffer, MAXLINE, delim).good())
     {
+        if (!std::string(dateBuffer).find(delim))
+        {
+            std::cerr << dateBuffer << "Error: Wrong format" << std::endl;
+        }
+        else if (ss.eof())
+        {
+            std::cerr << dateBuffer << "Error: Missing value" << std::endl;
+        }
         return std::make_pair("", float(0));
     }
 
     if (!std::string(dateBuffer).find(headLine, 0, 4))
+    {
+        return std::make_pair("", float(0));
+    }
+
+    if (ss.eof())
     {
         return std::make_pair("", float(0));
     }
@@ -94,24 +107,27 @@ std::pair<std::string, float> BitcoinExchange::readLine(const std::string& input
     return std::make_pair(dateBuffer, valueBuffer);
 }
 
+// 
 bool BitcoinExchange::validate(const std::string date, const float value)
 {
     size_t start = 0;
     size_t end = date.find('-');
     std::stringstream ss;
-    
-    if (!date.empty())
+
+    if (date.empty())
     {
-        ss << date.substr(start, end);
-        start = end + 1;
-        end = date.find('-', start);
-        ss << date.substr(start, end);
-        ss << date.substr(end + 1);
+        return false;
     }
+    
+    ss << date.substr(start, end);
+    start = end + 1;
+    end = date.find('-', start);
+    ss << date.substr(start, end);
+    ss << date.at(end + 1);
 
     std::cout << std::string(ss.str()) << std::endl;
     std::cout << date << ": " << _exchangeRateMap[date] << " * " << value << " = " << _exchangeRateMap[date] * value << std::endl;
-    return false;
+    return true;
 }
 
 void printDatabase(const BitcoinExchange::Database& database)
