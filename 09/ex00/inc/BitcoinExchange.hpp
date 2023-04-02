@@ -33,7 +33,7 @@ public:
 
     Database readFile(std::string path, char delim);
     std::pair<std::string, float> readLine(const std::string& inputline, char delim);
-    void validate(const Entry& entry);
+    bool validate(const std::string date, const float value);
 
 private:
     Database _exchangeRateMap;

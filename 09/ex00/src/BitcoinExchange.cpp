@@ -94,12 +94,24 @@ std::pair<std::string, float> BitcoinExchange::readLine(const std::string& input
     return std::make_pair(dateBuffer, valueBuffer);
 }
 
-void BitcoinExchange::validate(const Entry& pair)
+bool BitcoinExchange::validate(const std::string date, const float value)
 {
-    (void)pair;
+    size_t start = 0;
+    size_t end = date.find('-');
+    std::stringstream ss;
+    
+    if (!date.empty())
+    {
+        ss << date.substr(start, end);
+        start = end + 1;
+        end = date.find('-', start);
+        ss << date.substr(start, end);
+        ss << date.substr(end + 1);
+    }
 
-
-
+    std::cout << std::string(ss.str()) << std::endl;
+    std::cout << date << ": " << _exchangeRateMap[date] << " * " << value << " = " << _exchangeRateMap[date] * value << std::endl;
+    return false;
 }
 
 void printDatabase(const BitcoinExchange::Database& database)
