@@ -114,6 +114,22 @@ std::pair<BitcoinExchange::Entry, bool> BitcoinExchange::readLine(const std::str
 // 
 bool BitcoinExchange::validate(const std::string date, const float value)
 {
+    if (!validDate(date))
+    {
+        std::cerr << "Error: Invalid date" << std::endl;
+        return false;
+    }
+
+    if (value > static_cast<float>(INT32_MAX))
+    {
+        std::cerr << "Error: Value too big" << std::endl;
+    }
+
+    return true;
+}
+
+bool validDate(const std::string date)
+{
     size_t start = 0;
     size_t end = date.find('-');
     std::stringstream ss;
@@ -123,18 +139,41 @@ bool BitcoinExchange::validate(const std::string date, const float value)
         return false;
     }
     
-    ss << date.substr(start, end);
-    start = end + 1;
-    end = date.find('-', start);
-    ss << date.substr(start, end);
-    ss << date.at(end + 1);
+    ss << date.substr(0u, 4u); // year
+    ss << date.substr(5u, 2u); // month
+    ss << date.substr(8u, 2u); // day
 
-    std::cout << std::string(ss.str()) << std::endl;
-    std::cout << date << ": " << _exchangeRateMap[date] << " * " << value << " = " << _exchangeRateMap[date] * value << std::endl;
-    return true;
+    // check for non-numerics
+
+    bool valid = true;
+    unsigned int year = 0u;
+    ss >> year;
+    valid = year > 9999u;
+
+    unsigned short month = 0u;
+    ss >> month;
+    valid = valid && (month > 12u || month < 1u);
+
+    unsigned short day = 0u;
+    ss >> day;
+    valid = valid && (day >= 1u || day <= 31u);
+    if (valid && month == 2u)
+    {
+        valid = (year % 4u == 0u) ? (day <=29u) : (day <= 28u); // checking for leap years, because yes
+    }
+    else if (valid && month <= 7)
+    {
+        valid = (month % 2) ? (month <= 30u) : (month <= 31u);
+    }
+    else if (valid)
+    {
+        valid = (month % 2) ? (month <= 31u) : (month <= 30u);
+    }
+
+    return valid;
 }
 
-void printDatabase(const BitcoinExchange::Database& database)
+void BitcoinExchange::printDatabase(const BitcoinExchange::Database& database)
 {
     if (database.size() == 0)
         std::cout << "print: map is empty\n";

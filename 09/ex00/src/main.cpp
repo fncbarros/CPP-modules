@@ -14,10 +14,12 @@
 #include <iostream>
 #include <fstream>
 
-int main(int argc, char *argv[2])
+int main(int argc, char *argv[])
 {
 	BitcoinExchange btcEx;
-	(void)argv;
+	std::ifstream inputFile;
+	char inputBuffer[MAXLINE];
+	// BitcoinExchange::Entry entry;
 
 	if (argc != 2)
 	{
@@ -25,22 +27,29 @@ int main(int argc, char *argv[2])
 		return 1;
 	}
 
-	std::ifstream inputFile(argv[1]);
-    char buffer[MAXLINE] = {0};
-    BitcoinExchange::Database mapBuffer;
+	try {
+		inputFile.open(argv[1]);
 
-    // TODO: not handling wrong file name
-    inputFile.exceptions(std::istream::badbit);
-
-    if (inputFile.is_open())
-    {
-            while (inputFile.getline(buffer, MAXLINE).good())
-            {
-                BitcoinExchange::Entry element = btcEx.readLine(buffer, '|');
-                if (element.first != "")
-                {
-					std::cout << element.first << " " << element.second << std::endl;
-				}
+		if (!inputFile.is_open())
+		{
+			std::cerr << "Error: could not open file.\n";
+			return 1;
+		}
+		while (inputFile.getline(inputBuffer, MAXLINE))
+		{
+			std::pair<BitcoinExchange::Entry, bool> entry;
+			
+			entry = btcEx.readLine(inputBuffer, '|');
+			if (entry.second == false)
+			{
+				continue ;
 			}
-	}
+
+			if (btcEx.validate(entry.first.first, entry.first.second))
+			{
+				// btcEx.compute(entry.first);
+			}
+		}
+	} catch (const std::exception& e) { std::cerr << e.what() << std::endl;}
+
 }
