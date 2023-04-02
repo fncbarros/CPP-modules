@@ -54,12 +54,11 @@ BitcoinExchange::Database BitcoinExchange::readFile(const std::string path, char
         {
             while (inputFile.getline(buffer, MAXLINE).good())
             {
-                Entry element = readLine(buffer, delim);
-                if (element.first == "")
+                std::pair<Entry, bool> element = readLine(buffer, delim);
+                if (element.second == true)
                 {
-                    continue ;
+                    mapBuffer.insert(element.first);
                 }
-                mapBuffer.insert(element);
             }
         } 
 
@@ -72,12 +71,13 @@ BitcoinExchange::Database BitcoinExchange::readFile(const std::string path, char
     return mapBuffer;
 }
 
-std::pair<std::string, float> BitcoinExchange::readLine(const std::string& inputline, char delim)
+std::pair<BitcoinExchange::Entry, bool> BitcoinExchange::readLine(const std::string& inputline, char delim)
 {
     std::stringstream ss(inputline);
     char dateBuffer[MAXLINE];
     float valueBuffer(0);
     const char *headLine("date");
+    std::pair<Entry, bool> returnVal(std::make_pair("", float(0)), false);
 
     if (!ss.getline(dateBuffer, MAXLINE, delim).good())
     {
@@ -89,22 +89,26 @@ std::pair<std::string, float> BitcoinExchange::readLine(const std::string& input
         {
             std::cerr << dateBuffer << "Error: Missing value" << std::endl;
         }
-        return std::make_pair("", float(0));
+        return returnVal;
     }
 
     if (!std::string(dateBuffer).find(headLine, 0, 4))
     {
-        return std::make_pair("", float(0));
+        return returnVal;
     }
 
     if (ss.eof())
     {
-        return std::make_pair("", float(0));
+        return returnVal;
     }
 
     ss >> valueBuffer;
 
-    return std::make_pair(dateBuffer, valueBuffer);
+    returnVal.first.first = dateBuffer;
+    returnVal.first.second = valueBuffer;
+    returnVal.second = true;
+
+    return returnVal;
 }
 
 // 
@@ -156,10 +160,10 @@ void printDatabase(const char *path)
     {
             while (inputFile.getline(buffer, MAXLINE).good())
             {
-                BitcoinExchange::Entry element = btcEx.readLine(buffer, '|');
-                if (element.first != "")
+                std::pair<BitcoinExchange::Entry, bool> element = btcEx.readLine(buffer, '|');
+                if (element.second)
                 {
-					std::cout << element.first << " " << element.second << std::endl;
+					std::cout << element.first.first << " " << element.first.second << std::endl;
 				}
 			}
 	}
