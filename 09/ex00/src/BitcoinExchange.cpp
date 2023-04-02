@@ -50,8 +50,8 @@ BitcoinExchange::Database BitcoinExchange::readFile(const std::string path, char
     inputFile.exceptions(std::istream::badbit);
 
     try {
-    if (inputFile.is_open())
-    {
+        if (inputFile.is_open())
+        {
             while (inputFile.getline(buffer, MAXLINE).good())
             {
                 Entry element = readLine(buffer, delim);
@@ -77,13 +77,14 @@ std::pair<std::string, float> BitcoinExchange::readLine(const std::string& input
     std::stringstream ss(inputline);
     char dateBuffer[MAXLINE];
     float valueBuffer(0);
+    const char *headLine("date");
 
     if (!ss.getline(dateBuffer, MAXLINE, delim).good())
     {
         return std::make_pair("", float(0));
     }
 
-    if (std::string(dateBuffer) == "date")
+    if (!std::string(dateBuffer).find(headLine, 0, 4))
     {
         return std::make_pair("", float(0));
     }
@@ -93,11 +94,10 @@ std::pair<std::string, float> BitcoinExchange::readLine(const std::string& input
     return std::make_pair(dateBuffer, valueBuffer);
 }
 
-void BitcoinExchange::validate(const std::pair<std::string, float>& pair)
+void BitcoinExchange::validate(const Entry& pair)
 {
     (void)pair;
-    // const std::string date(pair.first);
-    // const float value(pair.second);
+
 
 
 }
@@ -111,5 +111,32 @@ void printDatabase(const BitcoinExchange::Database& database)
         it++)
     {
     std::cout << it->first << " " << it->second << std::endl;
+    }
+}
+
+void printDatabase(const char *path)
+{
+	std::ifstream inputFile;
+    char buffer[MAXLINE] = {0};
+    BitcoinExchange btcEx;
+
+    inputFile.open(path);
+    // TODO: not handling wrong file name
+    inputFile.exceptions(std::istream::badbit);
+
+    if (inputFile.is_open())
+    {
+            while (inputFile.getline(buffer, MAXLINE).good())
+            {
+                BitcoinExchange::Entry element = btcEx.readLine(buffer, '|');
+                if (element.first != "")
+                {
+					std::cout << element.first << " " << element.second << std::endl;
+				}
+			}
+	}
+    else
+    {
+		std::cerr << "Error: could not open file.\n";
     }
 }

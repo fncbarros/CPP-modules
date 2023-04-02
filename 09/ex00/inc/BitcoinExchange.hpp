@@ -41,3 +41,4 @@ private:
 };
 
 void printDatabase(const BitcoinExchange::Database& database);
+void printDatabase(const char *path);
