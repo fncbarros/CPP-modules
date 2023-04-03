@@ -31,11 +31,14 @@ public:
     BitcoinExchange operator=(const BitcoinExchange &other);
     ~BitcoinExchange();
 
-    Database readFile(std::string path, char delim);
     // std::pair<std::string, float> readLine(const std::string& inputline, char delim);
     std::pair<Entry, bool> readLine(const std::string& inputline, char delim);
     
     bool validate(const std::string date, const float value);
+
+private:
+    Database readFile(std::string path, char delim);
+    bool validDate(const std::string date);
 
 private:
     Database _exchangeRateMap;

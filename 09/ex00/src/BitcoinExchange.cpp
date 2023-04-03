@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <utility>
+#include <stdint.h>
 
 BitcoinExchange::BitcoinExchange() :
 _exchangeRateMap(readFile("./input-files/data.csv", ','))
@@ -81,15 +82,10 @@ std::pair<BitcoinExchange::Entry, bool> BitcoinExchange::readLine(const std::str
 
     if (!ss.getline(dateBuffer, MAXLINE, delim).good())
     {
-        if (!std::string(dateBuffer).find(delim))
+        if (!std::string(dateBuffer).find(delim) || ss.eof())
         {
-            std::cerr << dateBuffer << "Error: Wrong format" << std::endl;
+            std::cerr << dateBuffer << "Error: bad input => " << inputline << std::endl;
         }
-        else if (ss.eof())
-        {
-            std::cerr << dateBuffer << "Error: Missing value" << std::endl;
-        }
-        return returnVal;
     }
 
     if (!std::string(dateBuffer).find(headLine, 0, 4))
@@ -116,22 +112,29 @@ bool BitcoinExchange::validate(const std::string date, const float value)
 {
     if (!validDate(date))
     {
-        std::cerr << "Error: Invalid date" << std::endl;
+        std::cerr << "Error: bad input => " << date << std::endl;
         return false;
     }
 
-    if (value > static_cast<float>(INT32_MAX))
+    if (value >= static_cast<float>(INT32_MAX))
     {
-        std::cerr << "Error: Value too big" << std::endl;
+        std::cerr << "Error: too large a number." << std::endl;
+        return false;
+    }
+
+    if (value < 0)
+    {
+        std::cerr << "Error: not a positive number." << std::endl;
+        return false;
     }
 
     return true;
 }
 
-bool validDate(const std::string date)
+bool BitcoinExchange::validDate(const std::string date)
 {
-    size_t start = 0;
-    size_t end = date.find('-');
+
+    bool valid = true;
     std::stringstream ss;
 
     if (date.empty())
@@ -139,13 +142,14 @@ bool validDate(const std::string date)
         return false;
     }
     
-    ss << date.substr(0u, 4u); // year
-    ss << date.substr(5u, 2u); // month
-    ss << date.substr(8u, 2u); // day
+    std::string s_year = date.substr(0u, 4u); // year
+    std::string s_month =  date.substr(5u, 2u); // month
+    std::string s_day = date.substr(8u, 2u); // day
 
     // check for non-numerics
 
-    bool valid = true;
+    ss << s_year << s_month << s_day << std::endl;
+
     unsigned int year = 0u;
     ss >> year;
     valid = year > 9999u;
@@ -159,7 +163,7 @@ bool validDate(const std::string date)
     valid = valid && (day >= 1u || day <= 31u);
     if (valid && month == 2u)
     {
-        valid = (year % 4u == 0u) ? (day <=29u) : (day <= 28u); // checking for leap years, because yes
+        valid = (year % 4u == 0u) ? (day <=29u) : (day <= 28u); // checking leap years, because yes
     }
     else if (valid && month <= 7)
     {
@@ -173,7 +177,7 @@ bool validDate(const std::string date)
     return valid;
 }
 
-void BitcoinExchange::printDatabase(const BitcoinExchange::Database& database)
+void printDatabase(const BitcoinExchange::Database& database)
 {
     if (database.size() == 0)
         std::cout << "print: map is empty\n";
