@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 
 			if (btcEx.validate(entry.first.first, entry.first.second))
 			{
-				// btcEx.compute(entry.first);
+				btcEx.compute(entry.first);
 			}
 		}
 	} catch (const std::exception& e) { std::cerr << e.what() << std::endl;}

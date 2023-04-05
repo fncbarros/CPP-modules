@@ -84,7 +84,7 @@ std::pair<BitcoinExchange::Entry, bool> BitcoinExchange::readLine(const std::str
     {
         if (!std::string(dateBuffer).find(delim) || ss.eof())
         {
-            std::cerr << dateBuffer << "Error: bad input => " << inputline << std::endl;
+            std::cerr << "Error: bad input => " << inputline << std::endl;
         }
     }
 
@@ -131,6 +131,45 @@ bool BitcoinExchange::validate(const std::string date, const float value)
     return true;
 }
 
+bool BitcoinExchange::compute(const Entry& entry)
+{
+    float result = 0;
+    
+    try {
+        result = _exchangeRateMap.at(entry.first) * entry.second;
+    }
+    catch (const std::exception& e)
+    {
+        // Inserting new element and finding previous value
+        const std::string newDate = entry.first;
+        std::pair<Database::iterator, bool> newElem = _exchangeRateMap.insert(Entry(newDate, 0));
+        const bool was_inserted = newElem.second;
+        Database::iterator itr = newElem.first;
+        
+
+        if (itr != _exchangeRateMap.begin())
+        {
+            float& newValue = itr->second;
+            newValue = (--itr)->second;
+        }
+        else
+        {
+            itr->second = 0;
+        }
+
+        if (was_inserted)
+        {
+            result = itr->second * entry.second;
+        }
+    }
+
+    std::cout << entry.first << " => ";
+    std::cout << entry.second << " = ";
+    std::cout << /* std::fixed << */ result << std::endl;
+
+    return true;
+}
+
 bool BitcoinExchange::validDate(const std::string date)
 {
 
@@ -148,30 +187,34 @@ bool BitcoinExchange::validDate(const std::string date)
 
     // check for non-numerics
 
-    ss << s_year << s_month << s_day << std::endl;
+    ss << s_year << " " << s_month << " " << s_day;
 
+    // Valid year
     unsigned int year = 0u;
     ss >> year;
-    valid = year > 9999u;
+    valid = year < 9999u;
 
+    // Valid month
     unsigned short month = 0u;
     ss >> month;
-    valid = valid && (month > 12u || month < 1u);
+    valid = valid && (month <= 12u && month >= 1u);
 
+    // Valid day
     unsigned short day = 0u;
     ss >> day;
-    valid = valid && (day >= 1u || day <= 31u);
+    valid = valid && (day >= 1u && day <= 31u);
+    // Checking if day of particular month exists
     if (valid && month == 2u)
     {
         valid = (year % 4u == 0u) ? (day <=29u) : (day <= 28u); // checking leap years, because yes
     }
     else if (valid && month <= 7)
     {
-        valid = (month % 2) ? (month <= 30u) : (month <= 31u);
+        valid = (month % 2) ? (day <= 30u) : (day <= 31u);
     }
     else if (valid)
     {
-        valid = (month % 2) ? (month <= 31u) : (month <= 30u);
+        valid = (month % 2) ? (day <= 31u) : (day <= 30u);
     }
 
     return valid;

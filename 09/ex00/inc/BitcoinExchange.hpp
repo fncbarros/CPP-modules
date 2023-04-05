@@ -35,6 +35,7 @@ public:
     std::pair<Entry, bool> readLine(const std::string& inputline, char delim);
     
     bool validate(const std::string date, const float value);
+    bool compute(const Entry& entry);
 
 private:
     Database readFile(std::string path, char delim);
