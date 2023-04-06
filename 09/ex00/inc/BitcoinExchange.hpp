@@ -15,8 +15,8 @@
 #include <string>
 #include <algorithm>
 #include <map>
-#include <sstream>
-
+#include <iostream>
+#include <fstream>
 
 static const unsigned short MAXLINE = 50;
 
@@ -31,14 +31,12 @@ public:
     BitcoinExchange operator=(const BitcoinExchange &other);
     ~BitcoinExchange();
 
-    // std::pair<std::string, float> readLine(const std::string& inputline, char delim);
     std::pair<Entry, bool> readLine(const std::string& inputline, char delim);
-    
     bool validate(const std::string date, const float value);
-    bool compute(const Entry& entry);
+    void compute(const Entry& entry);
 
 private:
-    Database readFile(std::string path, char delim);
+    Database readFile(const char *path, const char delim);
     bool validDate(const std::string date);
 
 private:
@@ -46,5 +44,8 @@ private:
 
 };
 
+/**
+ * Auxiliary functions
+ */
 void printDatabase(const BitcoinExchange::Database& database);
 void printDatabase(const char *path);

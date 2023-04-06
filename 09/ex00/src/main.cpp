@@ -11,15 +11,12 @@
 /* ************************************************************************** */
 
 #include <BitcoinExchange.hpp>
-#include <iostream>
-#include <fstream>
 
 int main(int argc, char *argv[])
 {
 	BitcoinExchange btcEx;
 	std::ifstream inputFile;
 	char inputBuffer[MAXLINE];
-	// BitcoinExchange::Entry entry;
 
 	if (argc != 2)
 	{

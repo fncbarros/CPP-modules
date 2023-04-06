@@ -11,16 +11,12 @@
 /* ************************************************************************** */
 
 #include <BitcoinExchange.hpp>
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <map>
-#include <utility>
-#include <stdint.h>
+#include <sstream>
 
-BitcoinExchange::BitcoinExchange() :
-_exchangeRateMap(readFile("./input-files/data.csv", ','))
+BitcoinExchange::BitcoinExchange()
+    : _exchangeRateMap(readFile("./input-files/data.csv", ','))
 {
+
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
@@ -41,13 +37,12 @@ BitcoinExchange::~BitcoinExchange()
 {
 }
 
-BitcoinExchange::Database BitcoinExchange::readFile(const std::string path, char delim)
+BitcoinExchange::Database BitcoinExchange::readFile(const char *path, const char delim)
 {
-    std::ifstream inputFile(path.c_str());
+    std::ifstream inputFile(path);
     char buffer[MAXLINE] = {0};
     Database mapBuffer;
 
-    // TODO: not handling wrong file name
     inputFile.exceptions(std::istream::badbit);
 
     try {
@@ -61,7 +56,11 @@ BitcoinExchange::Database BitcoinExchange::readFile(const std::string path, char
                     mapBuffer.insert(element.first);
                 }
             }
-        } 
+        }
+        else
+        {
+            std::cerr << "Error: Could not open " << path << std::endl;
+        }
 
         inputFile.close();
     }
@@ -116,7 +115,7 @@ bool BitcoinExchange::validate(const std::string date, const float value)
         return false;
     }
 
-    if (value >= static_cast<float>(INT32_MAX))
+    if (value >= static_cast<float>(1000))
     {
         std::cerr << "Error: too large a number." << std::endl;
         return false;
@@ -131,43 +130,36 @@ bool BitcoinExchange::validate(const std::string date, const float value)
     return true;
 }
 
-bool BitcoinExchange::compute(const Entry& entry)
+void BitcoinExchange::compute(const Entry& entry)
 {
-    float result = 0;
-    
-    try {
-        result = _exchangeRateMap.at(entry.first) * entry.second;
-    }
-    catch (const std::exception& e)
+    const std::string inputDate(entry.first);
+    const float inputValue(entry.second);
+    Database::iterator itr(_exchangeRateMap.find(entry.first));
+
+    if (itr == _exchangeRateMap.end()) // entry does not exist
     {
         // Inserting new element and finding previous value
-        const std::string newDate = entry.first;
-        std::pair<Database::iterator, bool> newElem = _exchangeRateMap.insert(Entry(newDate, 0));
+        std::pair<Database::iterator, bool> newElem = _exchangeRateMap.insert(Entry(inputDate, 0));
         const bool was_inserted = newElem.second;
-        Database::iterator itr = newElem.first;
+        itr = newElem.first;
         
-
-        if (itr != _exchangeRateMap.begin())
-        {
-            float& newValue = itr->second;
-            newValue = (--itr)->second;
-        }
-        else
-        {
-            itr->second = 0;
-        }
-
         if (was_inserted)
         {
-            result = itr->second * entry.second;
+            // if there is a previous element (i.e. older date)
+            if (itr != _exchangeRateMap.begin())
+            {
+                // copy previous element value to new one through a reference
+                float& newValue = itr->second;
+                newValue = (--itr)->second;
+            }
         }
     }
+
+    float result = itr->second * inputValue;
 
     std::cout << entry.first << " => ";
     std::cout << entry.second << " = ";
-    std::cout << /* std::fixed << */ result << std::endl;
-
-    return true;
+    std::cout << result << std::endl;
 }
 
 bool BitcoinExchange::validDate(const std::string date)
@@ -185,8 +177,6 @@ bool BitcoinExchange::validDate(const std::string date)
     std::string s_month =  date.substr(5u, 2u); // month
     std::string s_day = date.substr(8u, 2u); // day
 
-    // check for non-numerics
-
     ss << s_year << " " << s_month << " " << s_day;
 
     // Valid year
@@ -203,16 +193,15 @@ bool BitcoinExchange::validDate(const std::string date)
     unsigned short day = 0u;
     ss >> day;
     valid = valid && (day >= 1u && day <= 31u);
-    // Checking if day of particular month exists
-    if (valid && month == 2u)
+    if (valid && month == 2u) // February
     {
         valid = (year % 4u == 0u) ? (day <=29u) : (day <= 28u); // checking leap years, because yes
     }
-    else if (valid && month <= 7)
+    else if (valid && month <= 7) // January - July
     {
         valid = (month % 2) ? (day <= 30u) : (day <= 31u);
     }
-    else if (valid)
+    else if (valid) // August - December
     {
         valid = (month % 2) ? (day <= 31u) : (day <= 30u);
     }
@@ -220,6 +209,9 @@ bool BitcoinExchange::validDate(const std::string date)
     return valid;
 }
 
+/**
+ * Auxiliary functions
+ */
 void printDatabase(const BitcoinExchange::Database& database)
 {
     if (database.size() == 0)
@@ -239,7 +231,6 @@ void printDatabase(const char *path)
     BitcoinExchange btcEx;
 
     inputFile.open(path);
-    // TODO: not handling wrong file name
     inputFile.exceptions(std::istream::badbit);
 
     if (inputFile.is_open())
