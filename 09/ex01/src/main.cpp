@@ -28,6 +28,13 @@ int main(int argc, char *argv[])
         ss << std::string(argv[i]);
     }
 
-    RPN rpn(ss);
-    std::cout << rpn.getResult() << std::endl;
+    RPN rpn;
+
+    if (rpn.setStack(ss))
+    {
+        // std::cout << rpn.getResult() << std::endl;
+        return 0;
+    }
+
+    return 1;
 }

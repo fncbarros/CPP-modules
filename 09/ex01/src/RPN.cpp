@@ -13,7 +13,7 @@
 #include <RPN.hpp>
 #include <iostream>
 #include <ctype.h>
-#include <string>
+#include <cstdlib>
 
 RPN::RPN()
 {
@@ -38,28 +38,46 @@ RPN RPN::operator=(const RPN& other)
     return *this;
 }
 
-void RPN::setStack(std::stringstream& ss)
+bool RPN::setStack(std::stringstream& ss)
 {
-    std::string s;
+    char c;
 
-    while (!ss.eof())
+    while (true)
     {
-        ss >> s;
-        if (!validate(s))
+        c = ss.get();
+        if (ss.eof())
+            break ;
+        
+        if (std::isspace(c))
         {
-            return ;
+            continue ;
+        }
+        
+        if (!std::isdigit(c) && !isOperator(c))
+        {
+            std::cout << "Error" << std::endl;
+            return false;
         }
 
-        if (isOperator(s[0]))
+        if (isOperator(c))
         {
-            const unsigned char c(s[0]);
+            if (_stack.size() < 2)
+            {
+                std::cout << "Error" << std::endl;
+                return false;
+            }
             compute(c);
         }
         else
         {
-            _stack.push(s);
+            int param = static_cast<int>(c - TO_NUM);
+            _stack.push(param);
         }
     }
+
+    std::cout << _stack.top() << std::endl;
+
+    return true;
 }
 
 bool RPN::isOperator(const unsigned char& c)
@@ -67,43 +85,14 @@ bool RPN::isOperator(const unsigned char& c)
     return (c == '+') || (c == '-') || (c == '*') || (c == '/');
 }
 
-bool RPN::validate(const std::string& s)
-{
-    bool valid = true;
-
-    if (s.size() > 1)
-    {
-        for (size_t i = 0; i < s.size(); i++)
-        {
-            valid &= std::isdigit(s[i]);
-        }
-    }
-    else
-    {
-        char c = s[0];
-        valid = (std::isdigit(c)) || (isOperator(c));
-    }
-
-    if (!valid)
-    {
-        std::cerr << "Error" << std::endl;
-    }
-    return valid;
-}
-
 void RPN::compute(const unsigned char& operation)
 {
-    short a, b, result = {0};
-    std::stringstream ss;
+    int a, b, result = {0};
 
-    ss << _stack.top();
+    b = _stack.top();
     _stack.pop();
-    ss << _stack.top();
+    a = _stack.top();
     _stack.pop();
-
-    ss >> a;
-    ss >> b;
-    std::string s;
 
     switch(operation)
     {
@@ -119,13 +108,6 @@ void RPN::compute(const unsigned char& operation)
         case '/':
             result = a / b;
     }
-    ss << result;
-    ss >> s;
-    _stack.push(s);
-}
 
-std::string RPN::getResult()
-{
-
-    return _stack.top();
+    _stack.push(result);
 }

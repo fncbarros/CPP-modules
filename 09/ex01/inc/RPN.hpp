@@ -27,15 +27,14 @@ public:
     RPN(const RPN& other);
     RPN operator=(const RPN& other);
 
-    void setStack(std::stringstream& ss);
+    bool setStack(std::stringstream& ss);
     void setStack(std::string& s);
     std::string getResult();
 
 private:
-    bool validate(const std::string& s);
     bool isOperator(const unsigned char& c);
     void compute(const unsigned char& operation);
 
-    std::stack<std::string> _stack;
+    std::stack<int> _stack;
 
 };
