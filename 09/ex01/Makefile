@@ -4,17 +4,23 @@ CXX := c++
 
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98
 
-SRCS := src/main.cpp \
+SRC := src/main.cpp \
 		src/RPN.cpp
 
 INCLUDES := inc/
 
+OBJ := $(SRC:%.cpp=%.o)
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -Iinc/ -c $< -o $@
+
 all: $(NAME)
 
-$(NAME):
-	$(CXX) $(CXXFLAGS) -I$(INCLUDES) $(SRCS)  -o $(NAME)
+$(NAME): $(HDR) $(OBJ)
+	$(CXX) $(OBJ) -o $(NAME)
 
 clean:
+	rm src/*.o
 fclean: clean
 	rm $(NAME)
 re: fclean all
