@@ -1,11 +1,11 @@
-NAME := RPN
+NAME := PmergeMe
 
 CXX := c++
 
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98
 
 SRC := src/main.cpp \
-		src/RPN.cpp
+		src/PmergeMe.cpp
 
 INCLUDES := inc/
 
