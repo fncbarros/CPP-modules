@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef BITCOIN_EXCHANGE_HPP
+#define BITCOIN_EXCHANGE_HPP
 
 #include <string>
 #include <algorithm>
@@ -49,3 +50,5 @@ private:
  */
 void printDatabase(const BitcoinExchange::Database& database);
 void printDatabase(const char *path);
+
+#endif

@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef RPN_HPP
+#define RPN_HPP
 
 #include <sstream>
 #include <stack>
@@ -38,3 +39,5 @@ private:
     std::stack<int> _stack;
 
 };
+
+#endif
