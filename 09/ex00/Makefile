@@ -27,7 +27,7 @@ ${OBJDIR}:
 	@mkdir ${OBJDIR}
 
 clean:
-	@rm -rf obj
+	@rm -r obj
 
 fclean: clean
 	@rm -rf $(NAME) *.dSYM

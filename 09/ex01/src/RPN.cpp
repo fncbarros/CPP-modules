@@ -13,7 +13,6 @@
 #include <RPN.hpp>
 #include <iostream>
 #include <ctype.h>
-#include <cstdlib>
 
 RPN::RPN()
 {
@@ -70,8 +69,8 @@ bool RPN::setStack(std::stringstream& ss)
         }
         else
         {
-            int param = static_cast<int>(c - TO_NUM);
-            _stack.push(param);
+            int num = static_cast<int>(c - TO_NUM);
+            _stack.push(num);
         }
     }
 
@@ -85,7 +84,7 @@ bool RPN::isOperator(const unsigned char& c)
     return (c == '+') || (c == '-') || (c == '*') || (c == '/');
 }
 
-void RPN::compute(const unsigned char& operation)
+void RPN::compute(const unsigned char& token)
 {
     int a, b, result = {0};
 
@@ -94,7 +93,7 @@ void RPN::compute(const unsigned char& operation)
     a = _stack.top();
     _stack.pop();
 
-    switch(operation)
+    switch(token)
     {
         case '+':
             result = a + b;

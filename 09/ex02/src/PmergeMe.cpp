@@ -62,15 +62,15 @@ void PmergeMe::runVector()
     merge_insertion_sort(_vector, 0u, (_vector.size() / 2) + 1);
 }
 
-// void PmergeMe::runSet()
-// {
-//     merge_insertion_sort(_set, 0u, (_vector.size() / 2) + 1);
-// }
+void PmergeMe::runSet()
+{
+    merge_insertion_sort(_set, 0u, (_vector.size() / 2) + 1);
+}
 
 void PmergeMe::runBoth()
 {
     runVector();
-    // runSet();
+    runSet();
 
     std::cout << "After: ";
     for (size_t i = 0; i < _vector.size(); i++)
