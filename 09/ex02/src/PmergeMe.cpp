@@ -20,16 +20,20 @@ PmergeMe::PmergeMe(std::stringstream& ss)
 {
     int num;
 
-    while (!ss.eof())
+    while (true)
     {
         ss >> num;
-        if (num < 0)
+        if (ss.eof())
         {
-            std::cout << "Error: Negative number found => " << num << std::endl;
+            break ;
+        }
+        if (num < 0 || ss.fail())
+        {
+            std::cout << "Error." << std::endl;
             return ;
         }
         _vector.push_back(static_cast<unsigned int>(num));
-        _set.insert(static_cast<unsigned int>(num));
+        _deque.insert(_deque.end(), static_cast<unsigned int>(num));
     }
     std::cout << "Before: ";
     for (size_t i = 0; i < _vector.size(); i++)
@@ -47,7 +51,7 @@ PmergeMe PmergeMe::operator=(const PmergeMe& other)
     if (this != &other)
     {
         this->_vector = other._vector;
-        this->_set = other._set;
+        this->_deque = other._deque;
     }
 
     return *this;
@@ -64,7 +68,7 @@ void PmergeMe::runVector()
 
 void PmergeMe::runSet()
 {
-    merge_insertion_sort(_set, 0u, (_vector.size() / 2) + 1);
+    merge_insertion_sort(_deque, 0u, (_vector.size() / 2) + 1);
 }
 
 void PmergeMe::runBoth()
@@ -76,9 +80,9 @@ void PmergeMe::runBoth()
     for (size_t i = 0; i < _vector.size(); i++)
         std::cout << _vector[i] << " ";
     std::cout << std::endl;
-    // for (size_t i = 0; i < _vector.size(); i++)
-    //     std::cout << _set.find(i) << " ";
-    // std::cout << std::endl;
+    for (size_t i = 0; i < _vector.size(); i++)
+        std::cout << _deque[i] << " ";
+    std::cout << std::endl;
 }
 
 template<class T>

@@ -14,7 +14,7 @@
 #define PMERGEME_HPP
 
 #include <vector>
-#include <set>
+#include <deque>
 #include <sstream>
 #include <iostream>
 
@@ -33,7 +33,7 @@ public:
 
 private:
     std::vector<unsigned int> _vector;
-    std::set<unsigned int> _set;
+    std::deque<unsigned int> _deque;
 
 };
 
