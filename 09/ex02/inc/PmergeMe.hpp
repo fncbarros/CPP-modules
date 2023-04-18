@@ -17,6 +17,8 @@
 #include <deque>
 #include <sstream>
 #include <iostream>
+#include <ctime>
+
 
 class PmergeMe
 {
@@ -32,8 +34,12 @@ public:
     void runBoth();
 
 private:
+    void printOrderedSequence();
+
     std::vector<unsigned int> _vector;
     std::deque<unsigned int> _deque;
+    double vectorTime;
+    double dequeTime;
 
 };
 

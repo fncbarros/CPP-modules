@@ -73,16 +73,47 @@ void PmergeMe::runSet()
 
 void PmergeMe::runBoth()
 {
+    // get initial time
+    std::clock_t vectorStart = std::clock();
+    
     runVector();
-    runSet();
+    std::clock_t vectorEnd = std::clock();
 
-    std::cout << "After: ";
-    for (size_t i = 0; i < _vector.size(); i++)
-        std::cout << _vector[i] << " ";
-    std::cout << std::endl;
-    for (size_t i = 0; i < _vector.size(); i++)
-        std::cout << _deque[i] << " ";
-    std::cout << std::endl;
+    std::clock_t dequeStart = std::clock();
+    runSet();
+    std::clock_t dequeEnd = std::clock();
+
+    // compute delta time
+    vectorTime = static_cast<double>(vectorEnd - vectorStart) / CLOCKS_PER_SEC;
+    dequeTime = static_cast<double>(dequeEnd - dequeStart) / CLOCKS_PER_SEC;
+
+    printOrderedSequence();
+    std::cout << "Time to process a range of 3000 elements with std::vector : " << vectorTime << " us" << std::endl;
+    std::cout << "Time to process a range of 3000 elements with std::deque : " << dequeTime << " us" << std::endl;
+}
+
+void PmergeMe::printOrderedSequence()
+{
+    size_t size = _vector.size();
+
+    if (_deque.size() == size)
+    {
+        std::cout << "After: ";
+        for (size_t i = 0; i < size; i++)
+        {
+            if (_vector[i] == _deque[i])
+            {
+                std::cout << _vector[i] << " ";
+            }
+            else
+            {
+                break ;
+            }
+        }
+        std::cout << std::endl;
+        return ;
+    }
+    std::cerr << "Error: containers don't match" << std::endl;
 }
 
 template<class T>
@@ -146,4 +177,3 @@ void merge_insertion_sort(T& data, size_t left, size_t right)
         merge(data, left, mid, right);
     }
 }
-
