@@ -29,9 +29,6 @@ int main(int argc, char *argv[])
         ss << " ";
     }
 
-    merge_insertion_sort(vec, 0U, (vec.size() / 2) + 1);
-
     PmergeMe pm(ss);
     pm.runBoth();
-
 }

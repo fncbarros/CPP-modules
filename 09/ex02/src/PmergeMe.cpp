@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <PmergeMe.hpp>
+#include <iomanip>
 
 PmergeMe::PmergeMe()
 {
@@ -63,33 +64,34 @@ PmergeMe::~PmergeMe()
 
 void PmergeMe::runVector()
 {
+    std::clock_t start = std::clock();  // get initial time
     merge_insertion_sort(_vector, 0u, (_vector.size() / 2) + 1);
+    std::clock_t end = std::clock();  // get finish time
+    
+    // calculate time difference
+    _vectorTime = static_cast<double>(end - start) /* / CLOCKS_PER_SEC */;
 }
 
-void PmergeMe::runSet()
+void PmergeMe::runDeque()
 {
+    std::clock_t start = std::clock();  // get initial time
     merge_insertion_sort(_deque, 0u, (_vector.size() / 2) + 1);
+    std::clock_t end = std::clock();  // get finish time
+
+    // compute delta time
+    _dequeTime = static_cast<double>(end - start) /* / CLOCKS_PER_SEC */;
 }
 
 void PmergeMe::runBoth()
 {
-    // get initial time
-    std::clock_t vectorStart = std::clock();
-    
     runVector();
-    std::clock_t vectorEnd = std::clock();
-
-    std::clock_t dequeStart = std::clock();
-    runSet();
-    std::clock_t dequeEnd = std::clock();
-
-    // compute delta time
-    vectorTime = static_cast<double>(vectorEnd - vectorStart) / CLOCKS_PER_SEC;
-    dequeTime = static_cast<double>(dequeEnd - dequeStart) / CLOCKS_PER_SEC;
+    runDeque();
 
     printOrderedSequence();
-    std::cout << "Time to process a range of 3000 elements with std::vector : " << vectorTime << " us" << std::endl;
-    std::cout << "Time to process a range of 3000 elements with std::deque : " << dequeTime << " us" << std::endl;
+    std::cout << "Time to process a range of " << _vector.size() << " elements with std::vector : ";
+    std::cout << _vectorTime << std::fixed /* << std::setprecision(5) */ << " us" << std::endl;
+    std::cout << "Time to process a range of " << _deque.size() << " elements with std::deque : ";
+    std::cout << _dequeTime << std::fixed /* << std::setprecision(5) */ << " us" << std::endl;
 }
 
 void PmergeMe::printOrderedSequence()

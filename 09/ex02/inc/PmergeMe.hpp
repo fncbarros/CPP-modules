@@ -30,7 +30,7 @@ public:
     ~PmergeMe();
 
     void runVector();
-    void runSet();
+    void runDeque();
     void runBoth();
 
 private:
@@ -38,8 +38,8 @@ private:
 
     std::vector<unsigned int> _vector;
     std::deque<unsigned int> _deque;
-    double vectorTime;
-    double dequeTime;
+    double _vectorTime;
+    double _dequeTime;
 
 };
 

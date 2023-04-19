@@ -16,16 +16,18 @@ OBJ := $(SRC:%.cpp=%.o)
 
 all: $(NAME)
 
-$(NAME): $(HDR) $(OBJ)
+$(NAME):$(OBJ) $(HDR) 
 	$(CXX) $(OBJ) -o $(NAME)
 
 clean:
-	rm src/*.o
+	@rm src/*.o
+
 fclean: clean
-	rm $(NAME)
+	@rm $(NAME)
+
 re: fclean all
 
 debug: CXXFLAGS += -g
-debug: re
+debug: $(NAME)
 
 .PHONY: all clean re debug
