@@ -199,11 +199,11 @@ bool BitcoinExchange::validDate(const std::string date)
     }
     else if (valid && month <= 7) // January - July
     {
-        valid = (month % 2) ? (day <= 30u) : (day <= 31u);
+        valid = ((month % 2) == 0) ? (day <= 30u) : (day <= 31u);
     }
     else if (valid) // August - December
     {
-        valid = (month % 2) ? (day <= 31u) : (day <= 30u);
+        valid = ((month % 2) == 0) ? (day <= 31u) : (day <= 30u);
     }
 
     return valid;
