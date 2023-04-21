@@ -80,13 +80,16 @@ std::pair<BitcoinExchange::Entry, bool> BitcoinExchange::readLine(const std::str
         }
     }
 
-    if (!std::string(dateBuffer).find(headLine, 0, 4))
+    // if it is the headline(date[','/'|']value)
+    if (!dateBuffer.find(headLine, 0, 4))
     {
+        // return a pair with an empty Entry and a boolean evaluated to false
         return returnVal;
     }
 
     if (ss.eof())
     {
+        // return a pair with an empty Entry and a boolean evaluated to false
         return returnVal;
     }
 
@@ -99,7 +102,6 @@ std::pair<BitcoinExchange::Entry, bool> BitcoinExchange::readLine(const std::str
     return returnVal;
 }
 
-// 
 bool BitcoinExchange::validate(const std::string date, const float value)
 {
     if (!dateIsValid(date))
@@ -162,14 +164,14 @@ bool BitcoinExchange::dateIsValid(const std::string date)
     bool valid = true;
     std::stringstream ss;
 
-    if (date.empty())
+    if (date.empty() || date.size() != 10u) // <----- Needs attention [!]
     {
         return false;
     }
-    
-    std::string s_year = date.substr(0u, 4u); // year
-    std::string s_month =  date.substr(5u, 2u); // month
-    std::string s_day = date.substr(8u, 2u); // day
+
+    std::string s_year = date.substr(0u, 4u);
+    std::string s_month =  date.substr(5u, 2u);
+    std::string s_day = date.substr(8u, 2u);
 
     ss << s_year << " " << s_month << " " << s_day;
 
