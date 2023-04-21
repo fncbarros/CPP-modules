@@ -19,8 +19,6 @@
 #include <iostream>
 #include <fstream>
 
-static const unsigned short MAXLINE = 50;
-
 class BitcoinExchange {
 public:
     typedef std::map<std::string, float> Database;
@@ -37,7 +35,7 @@ public:
     void compute(const Entry& entry);
 
 private:
-    Database readFile(const char *path, const char delim);
+    Database readCSVFile(const char *path, const char delim);
     bool dateIsValid(const std::string date);
 
 private:

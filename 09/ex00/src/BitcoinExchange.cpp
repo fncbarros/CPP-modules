@@ -14,7 +14,7 @@
 #include <sstream>
 
 BitcoinExchange::BitcoinExchange()
-    : _exchangeRateMap(readFile("./input-files/data.csv", ','))
+    : _exchangeRateMap(readCSVFile("./input-files/data.csv", ','))
 {
 
 }
@@ -37,36 +37,29 @@ BitcoinExchange::~BitcoinExchange()
 {
 }
 
-BitcoinExchange::Database BitcoinExchange::readFile(const char *path, const char delim)
+BitcoinExchange::Database BitcoinExchange::readCSVFile(const char *path, const char delim)
 {
     std::ifstream inputFile(path);
-    char buffer[MAXLINE] = {0};
+    std::string buffer;
     Database mapBuffer;
 
-    inputFile.exceptions(std::istream::badbit);
-
-    try {
-        if (inputFile.is_open())
+    if (inputFile.is_open())
+    {
+        while (std::getline(inputFile, buffer).good())
         {
-            while (inputFile.getline(buffer, MAXLINE).good())
+            std::pair<Entry, bool> element = readLine(buffer, delim);
+            if (element.second == true)
             {
-                std::pair<Entry, bool> element = readLine(buffer, delim);
-                if (element.second == true)
-                {
-                    mapBuffer.insert(element.first);
-                }
+                mapBuffer.insert(element.first);
             }
         }
-        else
-        {
-            std::cerr << "Error: Could not open " << path << std::endl;
-        }
+    }
+    else
+    {
+        std::cerr << "Error: Could not open " << path << std::endl;
+    }
 
-        inputFile.close();
-    }
-    catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-    }
+    inputFile.close();
 
     return mapBuffer;
 }
@@ -74,12 +67,12 @@ BitcoinExchange::Database BitcoinExchange::readFile(const char *path, const char
 std::pair<BitcoinExchange::Entry, bool> BitcoinExchange::readLine(const std::string& inputline, char delim)
 {
     std::stringstream ss(inputline);
-    char dateBuffer[MAXLINE];
+    std::string dateBuffer;
     float valueBuffer(0);
     const char *headLine("date");
     std::pair<Entry, bool> returnVal(std::make_pair("", float(0)), false);
 
-    if (!ss.getline(dateBuffer, MAXLINE, delim).good())
+    if (!std::getline(ss, dateBuffer, delim).good())
     {
         if (!std::string(dateBuffer).find(delim) || ss.eof())
         {
@@ -228,7 +221,7 @@ void printDatabase(const BitcoinExchange::Database& database)
 void printDatabase(const char *path)
 {
 	std::ifstream inputFile;
-    char buffer[MAXLINE] = {0};
+    char buffer[50] = {0};
     BitcoinExchange btcEx;
 
     inputFile.open(path);
@@ -236,7 +229,7 @@ void printDatabase(const char *path)
 
     if (inputFile.is_open())
     {
-            while (inputFile.getline(buffer, MAXLINE).good())
+            while (inputFile.getline(buffer, 50u).good())
             {
                 std::pair<BitcoinExchange::Entry, bool> element = btcEx.readLine(buffer, '|');
                 if (element.second)
