@@ -109,7 +109,7 @@ std::pair<BitcoinExchange::Entry, bool> BitcoinExchange::readLine(const std::str
 // 
 bool BitcoinExchange::validate(const std::string date, const float value)
 {
-    if (!validDate(date))
+    if (!dateIsValid(date))
     {
         std::cerr << "Error: bad input => " << date << std::endl;
         return false;
@@ -162,7 +162,8 @@ void BitcoinExchange::compute(const Entry& entry)
     std::cout << result << std::endl;
 }
 
-bool BitcoinExchange::validDate(const std::string date)
+
+bool BitcoinExchange::dateIsValid(const std::string date)
 {
 
     bool valid = true;

@@ -141,7 +141,7 @@ void merge(T& data, size_t left, size_t mid, size_t right)
     T left_half(data.begin() + left, data.begin() + mid + 1);
     T right_half(data.begin() + mid, data.begin() + right + 1);
 
-    size_t i, j = {0};
+    size_t i = 0, j = 0;
     size_t k = left;
 
     while (i < left_half.size() && j < right_half.size())

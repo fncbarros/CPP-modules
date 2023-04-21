@@ -12,11 +12,27 @@
 
 #include <BitcoinExchange.hpp>
 
+bool checkIfEmpty(std::ifstream& file)
+{
+	// Checking if file is empty
+	file.get();
+	if (file.eof())
+	{
+		std::cerr << "Error: file is empty.\n";
+		return true;
+	}
+	else
+	{
+		file.unget();
+		return false;
+	}
+}
+
 int main(int argc, char *argv[])
 {
 	BitcoinExchange btcEx;
 	std::ifstream inputFile;
-	char inputBuffer[MAXLINE];
+	std::string inputBuffer;
 
 	if (argc != 2)
 	{
@@ -24,29 +40,32 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	try {
-		inputFile.open(argv[1]);
+	inputFile.open(argv[1]);
 
-		if (!inputFile.is_open())
+	if (!inputFile.is_open())
+	{
+		std::cerr << "Error: could not open file.\n";
+		return 1;
+	}
+
+	if (checkIfEmpty(inputFile))
+	{
+		return 1;
+	}
+
+	while (std::getline(inputFile, inputBuffer))
+	{
+		std::pair<BitcoinExchange::Entry, bool> entry;
+
+		entry = btcEx.readLine(inputBuffer, '|');
+		if (entry.second == false)
 		{
-			std::cerr << "Error: could not open file.\n";
-			return 1;
+			continue ;
 		}
-		while (inputFile.getline(inputBuffer, MAXLINE))
+
+		if (btcEx.validate(entry.first.first, entry.first.second))
 		{
-			std::pair<BitcoinExchange::Entry, bool> entry;
-			
-			entry = btcEx.readLine(inputBuffer, '|');
-			if (entry.second == false)
-			{
-				continue ;
-			}
-
-			if (btcEx.validate(entry.first.first, entry.first.second))
-			{
-				btcEx.compute(entry.first);
-			}
+			btcEx.compute(entry.first);
 		}
-	} catch (const std::exception& e) { std::cerr << e.what() << std::endl;}
-
+	}
 }

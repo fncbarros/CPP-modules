@@ -38,7 +38,7 @@ public:
 
 private:
     Database readFile(const char *path, const char delim);
-    bool validDate(const std::string date);
+    bool dateIsValid(const std::string date);
 
 private:
     Database _exchangeRateMap;
