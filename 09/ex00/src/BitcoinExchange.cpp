@@ -48,6 +48,7 @@ BitcoinExchange::Database BitcoinExchange::readCSVFile(const char *path, const c
         while (std::getline(inputFile, buffer).good())
         {
             std::pair<Entry, bool> element = readLine(buffer, delim);
+            // check if headline is there more than once
             if (element.second == true)
             {
                 mapBuffer.insert(element.first);
@@ -74,7 +75,7 @@ std::pair<BitcoinExchange::Entry, bool> BitcoinExchange::readLine(const std::str
 
     if (!std::getline(ss, dateBuffer, delim).good())
     {
-        if (!std::string(dateBuffer).find(delim) || ss.eof())
+        if (!dateBuffer.find(delim) || ss.eof())
         {
             std::cerr << "Error: bad input => " << inputline << std::endl;
         }
@@ -94,6 +95,13 @@ std::pair<BitcoinExchange::Entry, bool> BitcoinExchange::readLine(const std::str
     }
 
     ss >> valueBuffer;
+
+    // check if it really is a number
+    if (ss.fail())
+    {
+        std::cerr << "Error: bad input => " << inputline << std::endl;
+        return returnVal;
+    }
 
     returnVal.first.first = dateBuffer;
     returnVal.first.second = valueBuffer;
@@ -160,11 +168,10 @@ void BitcoinExchange::compute(const Entry& entry)
 
 bool BitcoinExchange::dateIsValid(const std::string date)
 {
-
     bool valid = true;
     std::stringstream ss;
 
-    if (date.empty() || date.size() != 10u) // <----- Needs attention [!]
+    if (date.empty() || date.size() < 10u) // <----- Needs attention [!]
     {
         return false;
     }

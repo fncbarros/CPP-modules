@@ -21,8 +21,6 @@ int main(int argc, char *argv[])
     }
 
     std::stringstream ss;
-    std::vector<unsigned int> vec;
-    std::list<unsigned int> lst;
 
     for (int i = 1; i < argc; i++)
     {
