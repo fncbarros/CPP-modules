@@ -16,7 +16,6 @@
 BitcoinExchange::BitcoinExchange()
     : _exchangeRateMap(readCSVFile("./input-files/data.csv", ','))
 {
-
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
@@ -75,7 +74,8 @@ std::pair<BitcoinExchange::Entry, bool> BitcoinExchange::readLine(const std::str
 
     if (!std::getline(ss, dateBuffer, delim).good())
     {
-        if (!dateBuffer.find(delim) || ss.eof())
+        // if date is not separated by delimiter or has no relevant content (unless it's a \n)
+        if (!dateBuffer.find(delim) || (ss.eof() && !inputline.empty()))
         {
             std::cerr << "Error: bad input => " << inputline << std::endl;
         }
@@ -94,16 +94,29 @@ std::pair<BitcoinExchange::Entry, bool> BitcoinExchange::readLine(const std::str
         return returnVal;
     }
 
+    if (dateBuffer.size() > 10u)
+    {
+        // only whitespace is allowed between date and delimiter
+        for (std::string::iterator it = (dateBuffer.begin() + 10); it != dateBuffer.end(); it++)
+        {
+            if (!std::isspace(*it))
+            {
+                std::cerr << "Error: bad input => " << inputline << std::endl;
+                return returnVal;
+            }
+        }
+    }
+    
     ss >> valueBuffer;
 
-    // check if it really is a number
+    // check if it really is a valid float
     if (ss.fail())
     {
         std::cerr << "Error: bad input => " << inputline << std::endl;
         return returnVal;
     }
 
-    returnVal.first.first = dateBuffer;
+    returnVal.first.first = dateBuffer.substr(0, 10u);
     returnVal.first.second = valueBuffer;
     returnVal.second = true;
 
