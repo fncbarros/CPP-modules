@@ -21,8 +21,12 @@
 
 class BitcoinExchange {
 public:
+    // type definitions
     typedef std::map<std::string, float> Database;
     typedef std::pair<std::string, float> Entry;
+
+    // const data
+    static const size_t s_dateLenght = 10u;
 
 public:
     BitcoinExchange();
@@ -35,6 +39,7 @@ public:
     void compute(const Entry& entry);
 
 private:
+    // internal auxiliary functions
     Database readCSVFile(const char *path, const char delim);
     bool dateIsValid(const std::string date);
 

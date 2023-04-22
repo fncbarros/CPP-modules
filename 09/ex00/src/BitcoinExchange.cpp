@@ -81,23 +81,17 @@ std::pair<BitcoinExchange::Entry, bool> BitcoinExchange::readLine(const std::str
         }
     }
 
-    // if it is the headline(date[','/'|']value)
-    if (!dateBuffer.find(headLine, 0, 4))
+    // if it is the headline(date[','/'|']value) or eof has been reached without error
+    if (!dateBuffer.find(headLine, 0, 4) || ss.eof())
     {
         // return a pair with an empty Entry and a boolean evaluated to false
         return returnVal;
     }
 
-    if (ss.eof())
-    {
-        // return a pair with an empty Entry and a boolean evaluated to false
-        return returnVal;
-    }
-
-    if (dateBuffer.size() > 10u)
+    if (dateBuffer.size() > s_dateLenght)
     {
         // only whitespace is allowed between date and delimiter
-        for (std::string::iterator it = (dateBuffer.begin() + 10); it != dateBuffer.end(); it++)
+        for (std::string::iterator it = (dateBuffer.begin() + s_dateLenght); it != dateBuffer.end(); it++)
         {
             if (!std::isspace(*it))
             {
