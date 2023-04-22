@@ -65,7 +65,7 @@ PmergeMe::~PmergeMe()
 void PmergeMe::runVector()
 {
     std::clock_t start = std::clock();  // get initial time
-    merge_insertion_sort(_vector, 0u, (_vector.size() / 2) + 1);
+    merge_insertion_sort(_vector, 0u, (_vector.size()));
     std::clock_t end = std::clock();  // get finish time
     
     // calculate time difference
@@ -75,7 +75,7 @@ void PmergeMe::runVector()
 void PmergeMe::runDeque()
 {
     std::clock_t start = std::clock();  // get initial time
-    merge_insertion_sort(_deque, 0u, (_vector.size() / 2) + 1);
+    merge_insertion_sort(_deque, 0u, (_deque.size()));
     std::clock_t end = std::clock();  // get finish time
 
     // compute delta time
@@ -121,7 +121,7 @@ void PmergeMe::printOrderedSequence()
 template<class T>
 void insertion_sort(T& data, size_t left, size_t right)
 {
-    for (size_t i = left + 1; i < right; i++)
+    for (size_t i = left; i < right; i++)
     {
         unsigned int key = data[i];
         size_t j = i - 1;
