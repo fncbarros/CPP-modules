@@ -32,7 +32,6 @@ int main(int argc, char *argv[])
 
     if (rpn.setStack(ss))
     {
-        // std::cout << rpn.getResult() << std::endl;
         return 0;
     }
 

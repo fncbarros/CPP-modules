@@ -17,7 +17,6 @@
 #include <stack>
 #include <list>
 
-
 class RPN {
 public:
     static const short TO_NUM = 0x30;
@@ -36,7 +35,7 @@ private:
     bool isOperator(const unsigned char& c);
     void compute(const unsigned char& operation);
 
-    std::stack<int> _stack;
+    std::stack<int, std::list<int> > _stack;
 
 };
 
