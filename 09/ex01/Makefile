@@ -25,7 +25,8 @@ fclean: clean
 	rm $(NAME)
 re: fclean all
 
-debug: CXXFLAGS += -g
+debug: CXX = clang++
+debug: CXXFLAGS += -g -fno-limit-debug-info
 debug: re
 
 .PHONY: all clean re debug

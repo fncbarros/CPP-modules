@@ -28,6 +28,6 @@ fclean: clean
 re: fclean all
 
 debug: CXXFLAGS += -g
-debug: $(NAME)
+debug: re
 
 .PHONY: all clean re debug
