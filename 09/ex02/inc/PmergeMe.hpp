@@ -44,12 +44,12 @@ private:
 };
 
 template<class T>
-void insertion_sort(T& data, size_t left, size_t right);
+void insertion_sort(T& data);
 
-template<class T>
-void merge(T& data, size_t left, size_t mid, size_t right);
+// template<class T>
+// void merge(T& data, size_t left, size_t mid, size_t right);
 
-template<class T>
-void merge_insertion_sort(T& data, size_t left, size_t right);
+// template<class T>
+// void merge_insertion_sort(T& data, size_t left, size_t right);
 
 #endif

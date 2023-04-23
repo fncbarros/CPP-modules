@@ -38,7 +38,9 @@ PmergeMe::PmergeMe(std::stringstream& ss)
     }
     std::cout << "Before: ";
     for (size_t i = 0; i < _vector.size(); i++)
+    {
         std::cout << _vector[i] << " ";
+    }
     std::cout << std::endl;
 }
 
@@ -65,7 +67,7 @@ PmergeMe::~PmergeMe()
 void PmergeMe::runVector()
 {
     std::clock_t start = std::clock();  // get initial time
-    merge_insertion_sort(_vector, 0u, (_vector.size()));
+    insertion_sort(_vector);
     std::clock_t end = std::clock();  // get finish time
     
     // calculate time difference
@@ -75,10 +77,10 @@ void PmergeMe::runVector()
 void PmergeMe::runDeque()
 {
     std::clock_t start = std::clock();  // get initial time
-    merge_insertion_sort(_deque, 0u, (_deque.size()));
+    insertion_sort(_deque);
     std::clock_t end = std::clock();  // get finish time
 
-    // compute delta time
+    // calculate time difference
     _dequeTime = static_cast<double>(end - start) /* / CLOCKS_PER_SEC */;
 }
 
@@ -119,63 +121,66 @@ void PmergeMe::printOrderedSequence()
 }
 
 template<class T>
-void insertion_sort(T& data, size_t left, size_t right)
+void insertion_sort(T& data)
 {
-    for (size_t i = left; i < right; i++)
-    {
-        unsigned int key = data[i];
-        size_t j = i - 1;
+    typename T::iterator left = data.begin();
+    typename T::iterator right = data.end() - 1;
 
-        while (j >= left && data[j] > key)
+    for (typename T::iterator it = left; it != right; it++)
+    {
+        unsigned int key = *it;
+        typename T::iterator j = it - 1;
+
+        while (j >= left && *j > key)
         {
-            data[j + 1] = data[j];
+            *(j + 1) = *j;
             j--;
         }
-        data[j + 1] = key;
+        *(j + 1) = key;
     }
 }
 
-template<class T>
-void merge(T& data, size_t left, size_t mid, size_t right)
-{
-    T left_half(data.begin() + left, data.begin() + mid + 1);
-    T right_half(data.begin() + mid, data.begin() + right + 1);
+// template<class T>
+// void merge(T& data, size_t left, size_t mid, size_t right)
+// {
+//     T left_half(data.begin() + left, data.begin() + mid + 1);
+//     T right_half(data.begin() + mid, data.begin() + right + 1);
 
-    size_t i = 0, j = 0;
-    size_t k = left;
+//     size_t it = 0, j = 0;
+//     size_t k = left;
 
-    while (i < left_half.size() && j < right_half.size())
-    {
-        if (left_half[i] <= right_half[j])
-        {
-            data[k++] = left_half[i++];
-        }
-        else
-        {
-            data[k++] = right_half[j++];
-        }
-    }
+//     while (i < left_half.size() && j < right_half.size())
+//     {
+//         if (left_half[i] <= right_half[j])
+//         {
+//             data[k++] = left_half[i++];
+//         }
+//         else
+//         {
+//             data[k++] = right_half[j++];
+//         }
+//     }
 
-    while (i < left_half.size())
-    {
-        data[k++] = right_half[j++];
-    }
-}
+//     while (k < left_half.size())
+//     {
+//         data[k++] = right_half[j++];
+//     }
+// }
 
-template<class T>
-void merge_insertion_sort(T& data, size_t left, size_t right)
-{
-    if ((right - left) < 20)
-    {
-        insertion_sort(data, left, right);
-        return ;
-    }
+// template<class T>
+// void merge_insertion_sort(T& data, size_t left, size_t right)
+// {
+//     if ((right - left) < 20)
+//     {
+//         insertion_sort(data, left, right);
+//         return ;
+//     }
 
-    if (left < right)
-    {
-        size_t mid = left + (right - left) / 2;
-        merge_insertion_sort(data, left, mid);
-        merge_insertion_sort(data, mid + 1, right);
-        merge(data, left, mid, right);
-    }
-}
+//     if (left < right)
+//     {
+//         size_t mid = left + (right - left) / 2;
+//         merge_insertion_sort(data, left, mid);
+//         merge_insertion_sort(data, mid + 1, right);
+//         merge(data, left, mid, right);
+//     }
+// }
