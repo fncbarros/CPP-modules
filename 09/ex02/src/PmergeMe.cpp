@@ -72,6 +72,7 @@ void PmergeMe::runVector()
     
     // calculate time difference
     _vectorTime = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+    _vectorTime *= 1000u; // to miliseconds
 }
 
 void PmergeMe::runDeque()
@@ -82,6 +83,7 @@ void PmergeMe::runDeque()
 
     // calculate time difference
     _dequeTime = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+    _dequeTime *= 1000u; // to miliseconds
 }
 
 void PmergeMe::runBoth()
@@ -91,9 +93,9 @@ void PmergeMe::runBoth()
 
     printOrderedSequence();
     std::cout << "Time to process a range of " << _vector.size() << " elements with std::vector : ";
-    std::cout << _vectorTime << std::fixed << std::setprecision(5) << " us" << std::endl;
+    std::cout << _vectorTime << std::setprecision(10) << " us" << std::endl;
     std::cout << "Time to process a range of " << _deque.size() << " elements with std::deque : ";
-    std::cout << _dequeTime << std::fixed << std::setprecision(5) << " us" << std::endl;
+    std::cout << _dequeTime << std::setprecision(10) << " us" << std::endl;
 }
 
 void PmergeMe::printOrderedSequence()
@@ -126,7 +128,7 @@ void insertion_sort(T& data)
     typename T::iterator left = data.begin();
     typename T::iterator right = data.end() - 1;
 
-    for (typename T::iterator it = left; it != right; it++)
+    for (typename T::iterator it = left; it <= right; it++)
     {
         unsigned int key = *it;
         typename T::iterator j = it - 1;
