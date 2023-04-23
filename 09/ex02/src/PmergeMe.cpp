@@ -71,7 +71,7 @@ void PmergeMe::runVector()
     std::clock_t end = std::clock();  // get finish time
     
     // calculate time difference
-    _vectorTime = static_cast<double>(end - start) /* / CLOCKS_PER_SEC */;
+    _vectorTime = static_cast<double>(end - start) / CLOCKS_PER_SEC;
 }
 
 void PmergeMe::runDeque()
@@ -81,7 +81,7 @@ void PmergeMe::runDeque()
     std::clock_t end = std::clock();  // get finish time
 
     // calculate time difference
-    _dequeTime = static_cast<double>(end - start) /* / CLOCKS_PER_SEC */;
+    _dequeTime = static_cast<double>(end - start) / CLOCKS_PER_SEC;
 }
 
 void PmergeMe::runBoth()
@@ -91,9 +91,9 @@ void PmergeMe::runBoth()
 
     printOrderedSequence();
     std::cout << "Time to process a range of " << _vector.size() << " elements with std::vector : ";
-    std::cout << _vectorTime << std::fixed /* << std::setprecision(5) */ << " us" << std::endl;
+    std::cout << _vectorTime << std::fixed << std::setprecision(5) << " us" << std::endl;
     std::cout << "Time to process a range of " << _deque.size() << " elements with std::deque : ";
-    std::cout << _dequeTime << std::fixed /* << std::setprecision(5) */ << " us" << std::endl;
+    std::cout << _dequeTime << std::fixed << std::setprecision(5) << " us" << std::endl;
 }
 
 void PmergeMe::printOrderedSequence()
