@@ -32,6 +32,7 @@ public:
     void runVector();
     void runDeque();
     void runBoth();
+    bool containersSet();
 
 private:
     void printOrderedSequence();

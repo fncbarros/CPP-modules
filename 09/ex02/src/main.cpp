@@ -29,5 +29,13 @@ int main(int argc, char *argv[])
     }
 
     PmergeMe pm(ss);
-    pm.runBoth();
+    if (pm.containersSet())
+    {
+        pm.runBoth();
+    }
+    else
+    {
+        std::cout << "Error." << std::endl;
+        return 1;
+    }
 }

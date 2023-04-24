@@ -30,7 +30,8 @@ PmergeMe::PmergeMe(std::stringstream& ss)
         }
         if (num < 0 || ss.fail())
         {
-            std::cout << "Error." << std::endl;
+            _vector.clear();
+            _deque.clear();
             return ;
         }
         _vector.push_back(static_cast<unsigned int>(num));
@@ -98,6 +99,12 @@ void PmergeMe::runBoth()
     std::cout << _dequeTime << std::setprecision(10) << " us" << std::endl;
 }
 
+bool PmergeMe::containersSet()
+{
+    return (!_vector.empty() && !_deque.empty());
+}
+
+
 void PmergeMe::printOrderedSequence()
 {
     size_t size = _vector.size();
@@ -128,7 +135,7 @@ void insertion_sort(T& data)
     typename T::iterator left = data.begin();
     typename T::iterator right = data.end() - 1;
 
-    for (typename T::iterator it = left; it <= right; it++)
+    for (typename T::iterator it = left; (it <= right && it != data.end()); it++)
     {
         unsigned int key = *it;
         typename T::iterator j = it - 1;
