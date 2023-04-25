@@ -68,8 +68,9 @@ PmergeMe::~PmergeMe()
 
 void PmergeMe::runVector()
 {
+    size_t chunk = (_vector.size() <= 10u) ? 10u : _vector.size();
     std::clock_t start = std::clock();  // get initial time
-    merge_insert_sort(_vector.begin(), _vector.end(), 10u);
+    merge_insert_sort(_vector.begin(), _vector.end() - 1u, chunk);
     std::clock_t end = std::clock();  // get finish time
     
     // calculate time difference
@@ -79,8 +80,9 @@ void PmergeMe::runVector()
 
 void PmergeMe::runDeque()
 {
+    size_t chunk = (_vector.size() <= 10u) ? 10u : _vector.size();
     std::clock_t start = std::clock();  // get initial time
-    merge_insert_sort(_deque.begin(), _deque.end(), 10u);
+    merge_insert_sort(_deque.begin(), _deque.end() - 1u, chunk);
     std::clock_t end = std::clock();  // get finish time
 
     // calculate time difference
@@ -121,7 +123,8 @@ void PmergeMe::printOrderedSequence()
             }
             else
             {
-                break ;
+                std::cerr << "Error: containers don't match" << std::endl;
+                return ;
             }
         }
         std::cout << std::endl;
