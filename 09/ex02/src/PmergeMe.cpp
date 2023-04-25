@@ -158,7 +158,7 @@ void merge_insert_sort(Iterator first, Iterator last, size_t chunk_size)
     Iterator current = first;
     while (current != last)
     {
-        Iterator chunk_end = std::min(current + chunk_size, last);
+        Iterator chunk_end = ((current + chunk_size) > last) ? last : (current + chunk_size);
         insertion_sort(current, chunk_end);
         current = chunk_end;
     }
@@ -169,8 +169,8 @@ void merge_insert_sort(Iterator first, Iterator last, size_t chunk_size)
         Iterator left = first;
         while (left != last)
         {
-            Iterator middle = std::min(left + size, last);
-            Iterator right = std::min(middle + size, last);
+            Iterator middle = ((left + size) > last) ? last : (middle + size);
+            Iterator right = ((middle + size) > last) ? last : (middle + size);
             std::inplace_merge(left, middle, right);
             left = right;
         }
