@@ -12,6 +12,7 @@
 
 #include <PmergeMe.hpp>
 #include <iomanip>
+#include <algorithm>
 
 PmergeMe::PmergeMe()
 {
@@ -68,7 +69,7 @@ PmergeMe::~PmergeMe()
 void PmergeMe::runVector()
 {
     std::clock_t start = std::clock();  // get initial time
-    insertion_sort(_vector);
+    merge_insert_sort(_vector.begin(), _vector.end(), 10u);
     std::clock_t end = std::clock();  // get finish time
     
     // calculate time difference
@@ -79,7 +80,7 @@ void PmergeMe::runVector()
 void PmergeMe::runDeque()
 {
     std::clock_t start = std::clock();  // get initial time
-    insertion_sort(_deque);
+    merge_insert_sort(_deque.begin(), _deque.end(), 10u);
     std::clock_t end = std::clock();  // get finish time
 
     // calculate time difference
@@ -129,16 +130,13 @@ void PmergeMe::printOrderedSequence()
     std::cerr << "Error: containers don't match" << std::endl;
 }
 
-template<class T>
-void insertion_sort(T& data)
+template<typename Iterator>
+void insertion_sort(Iterator left, Iterator right)
 {
-    typename T::iterator left = data.begin();
-    typename T::iterator right = data.end() - 1;
-
-    for (typename T::iterator it = left; (it <= right && it != data.end()); it++)
+    for (Iterator it = left; it <= right; it++)
     {
         unsigned int key = *it;
-        typename T::iterator j = it - 1;
+        Iterator j = it - 1;
 
         while (j >= left && *j > key)
         {
@@ -149,47 +147,29 @@ void insertion_sort(T& data)
     }
 }
 
-// template<class T>
-// void merge(T& data, size_t left, size_t mid, size_t right)
-// {
-//     T left_half(data.begin() + left, data.begin() + mid + 1);
-//     T right_half(data.begin() + mid, data.begin() + right + 1);
+// Merge-insert sort using iterators
+template<typename Iterator>
+void merge_insert_sort(Iterator first, Iterator last, size_t chunk_size)
+{
+    // Sort each chunk using insertion sort
+    Iterator current = first;
+    while (current != last)
+    {
+        Iterator chunk_end = std::min(current + chunk_size, last);
+        insertion_sort(current, chunk_end);
+        current = chunk_end;
+    }
 
-//     size_t it = 0, j = 0;
-//     size_t k = left;
-
-//     while (i < left_half.size() && j < right_half.size())
-//     {
-//         if (left_half[i] <= right_half[j])
-//         {
-//             data[k++] = left_half[i++];
-//         }
-//         else
-//         {
-//             data[k++] = right_half[j++];
-//         }
-//     }
-
-//     while (k < left_half.size())
-//     {
-//         data[k++] = right_half[j++];
-//     }
-// }
-
-// template<class T>
-// void merge_insertion_sort(T& data, size_t left, size_t right)
-// {
-//     if ((right - left) < 20)
-//     {
-//         insertion_sort(data, left, right);
-//         return ;
-//     }
-
-//     if (left < right)
-//     {
-//         size_t mid = left + (right - left) / 2;
-//         merge_insertion_sort(data, left, mid);
-//         merge_insertion_sort(data, mid + 1, right);
-//         merge(data, left, mid, right);
-//     }
-// }
+    // Merge sorted chunks using merge sort
+    for (size_t size = chunk_size; size < static_cast<size_t>(last - first); size *= 2)
+    {
+        Iterator left = first;
+        while (left != last)
+        {
+            Iterator middle = std::min(left + size, last);
+            Iterator right = std::min(middle + size, last);
+            std::inplace_merge(left, middle, right);
+            left = right;
+        }
+    }
+}

@@ -44,13 +44,10 @@ private:
 
 };
 
-template<class T>
-void insertion_sort(T& data);
+template<typename Iterator>
+void insertion_sort(Iterator left, Iterator right);
 
-// template<class T>
-// void merge(T& data, size_t left, size_t mid, size_t right);
-
-// template<class T>
-// void merge_insertion_sort(T& data, size_t left, size_t right);
+template<typename Iterator>
+void merge_insert_sort(Iterator first, Iterator last, size_t chunk_size);
 
 #endif
