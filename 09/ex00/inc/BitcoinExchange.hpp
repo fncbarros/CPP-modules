@@ -14,7 +14,6 @@
 #define BITCOIN_EXCHANGE_HPP
 
 #include <string>
-#include <algorithm>
 #include <map>
 #include <iostream>
 #include <fstream>
@@ -47,11 +46,5 @@ private:
     Database _exchangeRateMap;
 
 };
-
-/**
- * Auxiliary functions
- */
-void printDatabase(const BitcoinExchange::Database& database);
-void printDatabase(const char *path);
 
 #endif

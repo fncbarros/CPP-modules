@@ -15,6 +15,7 @@
 
 #include <vector>
 #include <deque>
+#include <list>
 #include <sstream>
 #include <iostream>
 #include <ctime>
@@ -43,11 +44,5 @@ private:
     double _dequeTime;
 
 };
-
-template<typename Iterator>
-void insertion_sort(Iterator left, Iterator right);
-
-template<typename Iterator>
-void merge_insert_sort(Iterator first, Iterator last, size_t chunk_size);
 
 #endif

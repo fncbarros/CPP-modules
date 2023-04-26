@@ -14,6 +14,13 @@
 #include <iomanip>
 #include <algorithm>
 
+
+template<typename Iterator>
+void insertion_sort(Iterator left, Iterator right);
+
+template<typename Iterator>
+void merge_insert_sort(Iterator first, Iterator last);
+
 PmergeMe::PmergeMe()
 {
 }
@@ -68,9 +75,9 @@ PmergeMe::~PmergeMe()
 
 void PmergeMe::runVector()
 {
-    size_t chunk = (_vector.size() <= 10u) ? 10u : _vector.size();
+    // size_t chunk = (_vector.size() <= 10u) ? 10u : _vector.size();
     std::clock_t start = std::clock();  // get initial time
-    merge_insert_sort(_vector.begin(), _vector.end() - 1u, chunk);
+    merge_insert_sort(_vector.begin(), _vector.end() - 1u);
     std::clock_t end = std::clock();  // get finish time
     
     // calculate time difference
@@ -80,9 +87,9 @@ void PmergeMe::runVector()
 
 void PmergeMe::runDeque()
 {
-    size_t chunk = (_vector.size() <= 10u) ? 10u : _vector.size();
+    // size_t chunk = (_vector.size() <= 10u) ? 10u : _vector.size();
     std::clock_t start = std::clock();  // get initial time
-    merge_insert_sort(_deque.begin(), _deque.end() - 1u, chunk);
+    merge_insert_sort(_deque.begin(), _deque.end() - 1u);
     std::clock_t end = std::clock();  // get finish time
 
     // calculate time difference
@@ -152,27 +159,28 @@ void insertion_sort(Iterator left, Iterator right)
 
 // Merge-insert sort using iterators
 template<typename Iterator>
-void merge_insert_sort(Iterator first, Iterator last, size_t chunk_size)
+void merge_insert_sort(Iterator first, Iterator last)
 {
-    // Sort each chunk using insertion sort
-    Iterator current = first;
-    while (current != last)
+    const size_t chunk_size = 10u;
+    size_t size = std::distance(first, last);
+
+    if (size <= 1u)
     {
-        Iterator chunk_end = ((current + chunk_size) > last) ? last : (current + chunk_size);
-        insertion_sort(current, chunk_end);
-        current = chunk_end;
+        return ;
     }
 
-    // Merge sorted chunks using merge sort
-    for (size_t size = chunk_size; size < static_cast<size_t>(last - first); size *= 2)
+    Iterator middle = first + size / 2;
+
+    // Sort each chunk using insertion sort
+    if (chunk_size >= size)
     {
-        Iterator left = first;
-        while (left != last)
-        {
-            Iterator middle = ((left + size) > last) ? last : (middle + size);
-            Iterator right = ((middle + size) > last) ? last : (middle + size);
-            std::inplace_merge(left, middle, right);
-            left = right;
-        }
+        insertion_sort(first, last);
+    }
+    else
+    {
+        merge_insert_sort(first, middle);
+        merge_insert_sort(middle, last);
+        // Merge sorted chunks using merge sort
+        std::inplace_merge(first, middle, last);
     }
 }

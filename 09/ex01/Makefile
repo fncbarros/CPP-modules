@@ -11,18 +11,25 @@ INCLUDES := inc/
 
 OBJ := $(SRC:%.cpp=%.o)
 
+OBJDIR := obj/
+
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -Iinc/ -c $< -o $@
 
 all: $(NAME)
 
-$(NAME): $(HDR) $(OBJ)
+$(NAME): $(OBJDIR) $(HDR) $(OBJ) 
 	$(CXX) $(OBJ) -o $(NAME)
 
+$(OBJDIR):
+	@mkdir $(OBJDIR)
+
 clean:
-	rm src/*.o
+	@rm -r $(OBJDIR)
+
 fclean: clean
-	rm $(NAME)
+	@rm -rf $(NAME) *.dSYM
+
 re: fclean all
 
 debug: CXX = clang++

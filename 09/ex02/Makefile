@@ -7,23 +7,28 @@ CXXFLAGS := -Wall -Wextra -Werror -std=c++98
 SRC := src/main.cpp \
 		src/PmergeMe.cpp
 
-INCLUDES := inc/
+SRCDIR := src/
 
-OBJ := $(SRC:%.cpp=%.o)
+OBJDIR := obj/
 
-%.o: %.cpp
+OBJ := $(SRC:src/%.cpp=obj/%.o)
+
+$(OBJDIR)%.o: ${SRCDIR}%.cpp
 	$(CXX) $(CXXFLAGS) -Iinc/ -c $< -o $@
 
 all: $(NAME)
 
-$(NAME):$(OBJ) $(HDR) 
+$(NAME): $(OBJDIR) $(HDR) $(OBJ) 
 	$(CXX) $(OBJ) -o $(NAME)
 
+$(OBJDIR):
+	@mkdir $(OBJDIR)
+
 clean:
-	@rm src/*.o
+	@rm -r $(OBJDIR)
 
 fclean: clean
-	@rm $(NAME)
+	@rm -rf $(NAME) *.dSYM
 
 re: fclean all
 
